@@ -19,7 +19,7 @@ const ProductListView = () => {
     
 
     return (
-        <div>
+        <div className='container mx-auto'>
             <h2>Product List</h2>
             <ProductList products={products} />
         </div>

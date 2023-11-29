@@ -4,7 +4,7 @@ import React from 'react';
 const ProductCard = ({ product }) => {
   return (
     <div className="max-w-sm mx-4 my-4 bg-white rounded overflow-hidden shadow-lg" key={product.id}>
-        <h2 class="text-xl font-bold p-4 bg-gray-800 text-white">{product.name}</h2>
+      <h2 className="text-xl text-center font-bold p-4 bg-gray-800 text-white">{product.name}</h2>
       <div className="px-6 py-4">
         <p className="text-gray-700"><strong>Reference:</strong> {product.reference}</p>
         <p className="text-gray-700"><strong>Price:</strong> {product.price}</p>
