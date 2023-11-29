@@ -7,6 +7,7 @@ import Navbar from "./components/layouts/Navbar";
 import { selectIsLogged, signIn } from "./redux-store/authenticationSlice";
 import Routes from "./routes/Routes";
 import { getToken } from "./services/tokenServices";
+import Footer from "./components/layouts/Footer";
 
 const contextClass = {
   success: "bg-green-600",
@@ -42,6 +43,7 @@ const App = () => {
         <main className="mt-24 grow">
           <Routes />
         </main>
+        <Footer />
         <ToastContainer
           toastClassName={({ type }) =>
             contextClass[type || "default"] +
