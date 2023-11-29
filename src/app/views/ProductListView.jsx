@@ -8,7 +8,7 @@ const ProductListView = () => {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        apiBackEnd.get('/products/')
+        apiBackEnd.get('/products/backoffice/')
             .then(response => {
                 setProducts(response.data);
             })
