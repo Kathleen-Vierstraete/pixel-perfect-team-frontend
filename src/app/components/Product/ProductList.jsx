@@ -2,11 +2,12 @@ import React from 'react';
 import ProductListItem from './ProductListItem';
 
 
+
 const ProductList = ({ products }) => {
     return (
-        <div className='grid lg:grid-cols-4'>
+        <div className='grid lg:grid-cols-4 mt-10'>
             {products.map((product) => (
-                <ProductListItem key={product.id} product={product} />
+                <ProductListItem  key={product.id} product={product} />
             ))}
         </div>
     );
