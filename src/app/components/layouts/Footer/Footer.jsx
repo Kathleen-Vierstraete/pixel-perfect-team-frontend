@@ -1,4 +1,5 @@
-import { footers1, footers2, footers3 } from "../../constants/footer/footerConstant";
+import { footers1, footers2, footers3 } from "../../../constants/footer/footerConstant";
+import { FooterLinks } from "./FooterLinks";
 
 /**
  * View/Page Login
@@ -16,39 +17,21 @@ return (
           <h6 className="mb-4 flex justify-center font-semibold md:justify-start">
             A propos      
           </h6>          
-            {footers1.map((footer1) => (              
-              <p key={footer1.id} className="mb-4">
-                <a href={footer1.url} className="text-neutral-600 ">  
-                  {footer1.name}
-                </a>    
-              </p>     
-            ))}         
+            <FooterLinks links={footers1} />        
         </div>
               
         <div className="">
           <h6 className="mb-4 flex justify-center font-semibold md:justify-start">
             Aide, SAV & Services       
           </h6>            
-            {footers2.map((footer2) => (    
-              <p key={footer2.id} className="mb-4">
-                <a href={footer2.url} className="text-neutral-600">
-                    {footer2.name}
-                </a>
-              </p> 
-            ))}      
+            <FooterLinks links={footers2} />   
         </div>          
                      
         <div className="">          
           <h6 className="mb-4 flex justify-center font-semibold md:justify-start">
             Suivez nous      
           </h6>          
-            {footers3.map((footer3) => (
-              <p key={footer3.id} className="mb-4">  
-                <a href={footer3.url} className="text-neutral-600">
-                  {footer3.name}
-                </a>          
-              </p> 
-            ))}      
+            <FooterLinks links={footers3} />    
         </div>
                     
         <div className="">
@@ -63,10 +46,9 @@ return (
                 Subscribe    
               </button>       
             </div>        
-            
-          </div>
         </div>
-      </div>         
+      </div>
+    </div>         
                         
       <div className="bg-neutral-300 p-6 text-center">    
         <span>© 2023 Copyright : </span>    

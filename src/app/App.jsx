@@ -7,7 +7,7 @@ import Navbar from "./components/layouts/Navbar";
 import { selectIsLogged, signIn } from "./redux-store/authenticationSlice";
 import Routes from "./routes/Routes";
 import { getToken } from "./services/tokenServices";
-import Footer from "./components/layouts/Footer";
+import Footer from "./components/layouts/Footer/Footer";
 
 const contextClass = {
   success: "bg-green-600",
