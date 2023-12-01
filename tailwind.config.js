@@ -16,6 +16,9 @@ export default {
         },
       },
     },
+    fontFamily : {
+      numito : ['Nunito', "sans-serif"]
+    }
   },
   plugins: [require("@tailwindcss/forms")],
 };

@@ -12,7 +12,5 @@ export const NewsletterInput = () => (
     <button className="absolute right-0 top-0.5">
       <IoIosArrowDropright size={35} style={{ marginRight: 10, color: 'black'}} />
     </button>
-
-
 </div> 
   );
