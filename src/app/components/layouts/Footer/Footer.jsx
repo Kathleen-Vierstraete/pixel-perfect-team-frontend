@@ -1,4 +1,6 @@
 import { footers1, footers2, footers3 } from "../../../constants/footer/footerConstant";
+import { NewsletterInput } from "./NewsletterInput";
+
 import { FooterLinks } from "./FooterLinks";
 
 /**
@@ -10,11 +12,11 @@ const Footer = () => {
 
 return (
 
-  <footer className="bg-neutral-200 text-center text-neutral-600 lg:text-left mt-5">
+  <footer className="bg-blue-600 text-center text-white lg:text-left mt-5">
     <div className="mx-6 py-10 text-center md:text-left ">      
       <div className="grid-1 grid gap-8 md:grid-cols-2 lg:grid-cols-4"> 
         <div className=""> 
-          <h6 className="mb-4 flex justify-center font-semibold md:justify-start">
+          <h6 className="mb-4 flex justify-center font-semibold md:justify-start text-white">
             A propos      
           </h6>          
             <FooterLinks links={footers1} />        
@@ -37,22 +39,19 @@ return (
         <div className="">
           <h6 className="mb-4 flex justify-center font-semibold md:justify-start">
             Newsletter      
-          </h6>             
+          </h6>
+          <p className="mb-4 "> Ne manquez aucun bon plan et inscrivez vous à notre newsletter !
+          </p>             
             <div>
-              <input type="text" id="small-input" className=" mb-4 block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-xs focus:ring-blue-500 focus:border-blue-500" placeholder="Saisissez votre email"/>                        
-            </div>       
-            <div>
-              <button type="button" className="inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium  leading-normal text-white">
-                Subscribe    
-              </button>       
+              <NewsletterInput />
             </div>        
         </div>
       </div>
     </div>         
                         
-      <div className="bg-neutral-300 p-6 text-center">    
+      <div className="bg-blue-600 p-6 text-center">    
         <span>© 2023 Copyright : </span>    
-            <a className="font-semibold text-neutral-600" href="#">
+            <a className="font-semibold text-white" href="#">
               Pixel Perfect  
             </a>  
       </div>        
