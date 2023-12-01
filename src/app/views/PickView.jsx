@@ -1,10 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
-import { addItem, clearCart, selectItems, selectTotalCost } from "../redux-store/cartSlice";
+import { addItem, clearCart, selectItems, selectTotalCost, selectTotalQuantity } from "../redux-store/cartSlice";
 
 export const PickView = () => {
   const dispatch = useDispatch();
   const paniers = useSelector(selectItems);
-  const quantityTotal = useSelector(selectTotalCost);
+  const totalPrice = useSelector(selectTotalCost);
+  const totalQuantity = useSelector(selectTotalQuantity);
 
   return (
     <div>
@@ -16,7 +17,8 @@ export const PickView = () => {
           </li>
         ))}
       </ul>
-      <p>Quantité total {quantityTotal}</p>
+      <p>Prix total {totalPrice}</p>
+      <p>quantity total {totalQuantity}</p>
       <button onClick={() => dispatch(addItem({ id: 1, price:1218, quantity: 1 }))}>Add Product 1</button>
       <button onClick={() => dispatch(addItem({ id: 2, price:123142, quantity: 1 }))}>Add Product 2</button>
       <button onClick={() => dispatch(clearCart())}>Clear Cart</button>
