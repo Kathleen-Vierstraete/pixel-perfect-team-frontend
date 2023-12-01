@@ -8,7 +8,7 @@ import HomeView from "../views/HomeView";
 import LoginView from "../views/LoginView";
 import { PrivateRoute } from "./PrivateRoute";
 import ProductListView from './../views/ProductListView';
-import ProductSingle from "../components/Product/ProductSingle";
+import ProductSingleView from './../views/ProductSingleView';
 
 /**
  * Routes of the application
@@ -44,7 +44,7 @@ const Routes = () => {
       <Route
         path={URL.URL_PRODUCT_BY_ID()}
         element={
-          <ProductSingle />
+          <ProductSingleView />
         }
       />
       <Route path={URL.URL_LOGIN} element={<LoginView />} />
