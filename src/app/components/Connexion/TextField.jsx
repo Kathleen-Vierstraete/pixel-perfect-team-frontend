@@ -9,10 +9,11 @@ const TextField = ({label, ...props}) => {
 
     return (
         <div className='flex flex-col pb-5 place-items-start'>
-            <label className='block text-gray-700 text-sm font-bold mb-2"' htmlFor={field.name}> {label} </label>
+            <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor={field.name}> {label} </label>
             <input 
-            className=
-            'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' 
+
+            className= "w-full h-10 rounded-full border border-blue-gray-500 bg-white  placeholder-shown:border placeholder-shown:border-blue-gray-200 text-black placeholder-shown:border-t-blue-gray-500`"
+
             
             autoComplete='off' />
 

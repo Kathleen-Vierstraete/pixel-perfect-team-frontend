@@ -17,8 +17,8 @@ return (
                 <div className="w-2/3 max-w-xs">
 
                         <Form>
-                            <TextField  label="Email" name="email" type="email"/>
-                            <TextField  label="Password" name="password" type="password"/>
+                            <TextField  label="Adresse e-mail" name="email" type="email"/>
+                            <TextField  label="Mot de passe" name="password" type="password"/>
 
                             <button className='px-4 py-2 bg-green-400 text-white text-xs font-bold uppercase rounded hover:bg-green-700 focus:outline-none focus:bg-green-700' type='submit'>Log in</button>
                         </Form>
