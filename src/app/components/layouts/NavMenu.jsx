@@ -2,7 +2,7 @@ import React from 'react'
 
 const NavMenu = () => {
   return (
-    <ul className='bg-gray-200  p-2 flex flex-col w-full lg:flex-row justify-evenly'>
+    <ul className='bg-gray-200 p-2 flex flex-col w-full lg:flex-row justify-evenly'>
         <li>Catégorie 1</li>
         <li>Catégorie 2</li>
         <li>Catégorie 3</li>
