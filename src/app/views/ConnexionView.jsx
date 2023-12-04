@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Formik, Form } from 'formik';
 import TextField from '../components/Connexion/TextField';
 import ReusableButton from '../components/Connexion/ReusableButton';
 import axios from 'axios';
 import * as Yup from 'yup';
+import apiBackEnd from './../api/backend/api.Backend';
+import { URL_BACK_LOGIN_CHECK } from '../constants/urls/urlBackEnd';
 
 const Connexion = () => {
   const validate = Yup.object({
@@ -17,7 +19,7 @@ const Connexion = () => {
   const [errorMessage, setErrorMessage] = useState('');
 
   const onSubmit = (values) => {
-    axios.post('http://localhost:8000/api/login_check', values)
+    apiBackEnd.post(URL_BACK_LOGIN_CHECK, values)
       .then((response) => {
         console.log('Login successful:', response.data);
         setShowAlert(true);
