@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getCart, removeCart, setCart } from '../services/cartServices';
+import { getCart, removeCart, removeCartItem, setCart } from '../services/cartServices';
 
 /**
  * Initial state: {
@@ -30,6 +30,7 @@ export const cartSlice = createSlice({
         },
         removeItem: (state, action) => {
             state.items = state.items.filter(item => item.id !== action.payload.id);
+            removeCartItem(action.payload.id)
         },
         updateQuantity: (state, action) => {
             const item = state.items.find(item => item.id === action.payload.id);

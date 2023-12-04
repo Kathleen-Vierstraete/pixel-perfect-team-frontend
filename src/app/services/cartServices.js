@@ -10,13 +10,13 @@ const CART_NAME = 'cart';
 export function setCart(cart) {
     let cartSaved = getCart();
     let existingCart = cartSaved.find(product => product.id === cart.id);
-    
+
     if (existingCart) {
         existingCart.quantity += cart.quantity;
     } else {
         cartSaved.push(cart);
     }
-    
+
     localStorage.setItem(CART_NAME, JSON.stringify(cartSaved));
 }
 
@@ -37,4 +37,18 @@ export function getCart() {
  */
 export function removeCart() {
     localStorage.removeItem(CART_NAME);
+}
+
+/**
+ * Remove specific item of cart
+ *
+ * @param {int} id
+ * @author Eric Sergueev
+ */
+export function removeCartItem(id) {
+    let cartSaved = getCart();
+    
+    let result = cartSaved.filter(item => item.id !== id)
+    console.log("res",result);
+    localStorage.setItem(CART_NAME, JSON.stringify(result));
 }

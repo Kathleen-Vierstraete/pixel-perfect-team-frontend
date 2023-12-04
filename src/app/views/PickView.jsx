@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { addItem, clearCart, selectItems, selectTotalCost, selectTotalQuantity } from "../redux-store/cartSlice";
+import { addItem, clearCart, removeItem, selectItems, selectTotalCost, selectTotalQuantity } from "../redux-store/cartSlice";
 
 export const PickView = () => {
   const dispatch = useDispatch();
@@ -14,7 +14,7 @@ export const PickView = () => {
       <ul>
         {paniers.map((item) => (
           <li key={item.id}>
-            <img src={item.image} />{item.name} - {item.id} - Quantity: {item.quantity}
+            <img src={item.image} />{item.name} - {item.id} - Quantity: {item.quantity} - <button onClick={() => dispatch(removeItem({id:item.id}))} >REMOVE</button>
           </li>
         ))}
       </ul>
