@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { getCart, removeCart, setCart } from '../services/cartServices';
 
 /**
  * Initial state: {
@@ -25,6 +26,7 @@ export const cartSlice = createSlice({
                     quantity: 1,
                 });
             }
+            setCart(product);
         },
         removeItem: (state, action) => {
             state.items = state.items.filter(item => item.id !== action.payload.id);
@@ -37,17 +39,18 @@ export const cartSlice = createSlice({
         },
         clearCart: (state) => {
             state.items = [];
+            removeCart()
         },
     },
 });
 
 export const { addItem, removeItem, updateQuantity, clearCart } = cartSlice.actions;
 
-const selectItems = (state) => state.cart.items;
-const selectTotalQuantity = (state) => state.cart.items.reduce((acc, item) => acc + item.quantity, 0);
+const selectItems = (state) => state.cart.items == 0 ? getCart() : state.cart.items;
+const selectTotalQuantity = (state) => selectItems(state).reduce((acc, item) => acc + item.quantity, 0);
 const selectTotalCost = (state) => {
     let totalCost = 0;
-    for (const item of state.cart.items) {
+    for (const item of selectItems(state)) {
         totalCost += item.quantity * item.price;
     }
     return totalCost;
