@@ -30,7 +30,7 @@ const Connexion = () => {
 
   const Alert = ({ message }) => {
     return (
-      <div className="alert alert-success font-bold">
+      <div className="alert alert-success font-bold text-center ">
         {message}
       </div>
     );
@@ -61,12 +61,12 @@ const Connexion = () => {
                   <p className='m-3 text-center'>
                     Pas encore de compte Pixel Perfect? Inscrivez-vous!
                   </p>
-                  <ReusableButton>S'inscire</ReusableButton>
+                  <ReusableButton>S'inscrire</ReusableButton>
 
                   <p className='m-3 text-center'>
                     Pour en savoir plus sur la gestion de vos données personnelles
-                    et pour exercer vos droits, consultez notre{' '}
-                    <a href="#" className='underline'>Politique de protection des données.</a>
+                    et pour exercer vos droits, consultez notre <a href="#" className='underline'>Politique de protection des données.</a>
+                    
                   </p>
 
                   {showAlert && <Alert message="Connexion réussie !" />}
