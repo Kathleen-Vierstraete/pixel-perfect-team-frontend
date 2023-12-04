@@ -38,9 +38,6 @@ const CreateAccount= () => {
                                     En cliquant sur Créer mon compte, je certifie avoir lu et accepter nos <a href="#" className="underline">Conditions d’Utilisations</a> et notre <a href="#" className="underline">notre Politique de protections de données</a>.  
                                 </span>
                             }/>
-
-
-
                             <ReusableButton>Créer mon compte</ReusableButton>
                         </Form>
                 </div>
