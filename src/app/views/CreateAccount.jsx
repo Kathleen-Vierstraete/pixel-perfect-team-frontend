@@ -8,7 +8,8 @@ const CreateAccount= () => {
     return (
 
         <div className='bg-white'>
-        <h1 className='text-2xl font-bold mt-10 text-center mb-10'>Création de compte</h1>
+        <h1 className='text-2xl font-bold mt-10 text-center mb-5'>Création de compte</h1>
+        <p className='text-sm text-center mb-5'>Déjà inscrit? <a href="#" className="underline">Se connecter</a> </p>
         <Formik>
         
             {formik => 
