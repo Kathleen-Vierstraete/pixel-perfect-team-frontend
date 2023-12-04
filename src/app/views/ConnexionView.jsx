@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Formik, Form } from 'formik';
-import TextField from './../components/Connexion/TextField';
+import TextField from '../components/Connexion/TextField';
 import ReusableButton from '../components/Connexion/ReusableButton';
 import axios from 'axios';
 import * as Yup from 'yup';

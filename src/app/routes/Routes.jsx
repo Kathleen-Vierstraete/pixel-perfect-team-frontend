@@ -6,8 +6,8 @@ import * as URL from "../constants/urls/urlFrontEnd";
 import AdminHomeView from "../views/AdminHomeView";
 import HomeView from "../views/HomeView";
 import LoginView from "../views/LoginView";
-import Connexion from "../views/Connexion";
-import CreateAccount from "../views/CreateAccount";
+import Connexion from "../views/ConnexionView";
+import CreateAccount from "../views/CreateAccountView";
 
 import { PrivateRoute } from "./PrivateRoute";
 

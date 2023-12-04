@@ -1,6 +1,6 @@
 import React from "react";
 import {Formik, Form} from 'formik'; 
-import  TextField  from './../components/Connexion/TextField'
+import  TextField  from '../components/Connexion/TextField'
 import ReusableButton from '../components/Connexion/ReusableButton';
 import Checkbox from "../components/Connexion/Checkbox";
 
