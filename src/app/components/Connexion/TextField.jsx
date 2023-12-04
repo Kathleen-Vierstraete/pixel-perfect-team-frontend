@@ -12,7 +12,7 @@ const TextField = ({label, ...props}) => {
             <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor={field.name}> {label} </label>
             <input 
 
-            className= "w-full h-10 rounded-full border border-blue-gray-500 bg-white  placeholder-shown:border placeholder-shown:border-blue-gray-200 text-black placeholder-shown:border-t-blue-gray-500`"
+            className= "block w-full p-2 text-gray-900 border border-gray-300 rounded-xl sm:text-md  "
 
             
             autoComplete='off' />

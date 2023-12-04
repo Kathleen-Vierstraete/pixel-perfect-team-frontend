@@ -1,6 +1,7 @@
 import React from 'react';
 import {Formik, Form} from 'formik'; 
 import  TextField  from './../components/Connexion/TextField'
+import ReusableButton from '../components/Connexion/ReusableButton';
 
 const Connexion= () => {
 
@@ -8,19 +9,32 @@ const Connexion= () => {
 return (
 
     <div>
-        <h1 className='text-2xl font-bold mt-10 text-center mb-10'>Connexion </h1>
+        <h1 className='text-2xl font-bold mt-10 text-center mb-10'>Connexion</h1>
         <Formik>
         
             {formik => 
         <div className='flex justify-center' >
-            <div className='flex flex-col items-center pb-5 pt-5 mb-10 w-2/3  '>
+            <div className='flex flex-col items-center pb-5 pt-5 mb-10 w-full '>
                 <div className="w-2/3 max-w-xs">
 
                         <Form>
                             <TextField  label="Adresse e-mail" name="email" type="email"/>
                             <TextField  label="Mot de passe" name="password" type="password"/>
 
-                            <button className='px-4 py-2 bg-green-400 text-white text-xs font-bold uppercase rounded hover:bg-green-700 focus:outline-none focus:bg-green-700' type='submit'>Log in</button>
+                            <ReusableButton>Connexion</ReusableButton>
+                            <p className='m-3'>Mot de passe oublié? 
+                                <a href= "#" > Réinitialiser</a>
+                            </p>
+
+                            <p className='m-3'>Pas encore de compte Pixel Perfect? Inscrivez-vous !
+                            </p>
+                            <ReusableButton>S'inscire</ReusableButton>
+
+                            <p className='m-3'>Pour en savoir plus sur la gestion de vos données personnelles et pour exercer vos droits, consultez notre 
+                                <a href= "#" > Politique de protection des données.
+                                </a>
+                            </p>
+      
                         </Form>
                     
                 </div>
@@ -34,3 +48,8 @@ return (
 };
 
 export default Connexion;
+
+
+{/* <button className="relative z-10 w-full h-10 flex items-center justify-center rounded-full bg-white border font-bold ">
+Connexion
+</button> */}
