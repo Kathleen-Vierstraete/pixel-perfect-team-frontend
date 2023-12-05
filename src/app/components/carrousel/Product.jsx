@@ -14,7 +14,7 @@ const ProductForCarrousel = ({ product }) => {
                     <span className="text-xl font-medium">{product.price / 100}€</span>
                     <span className="text-xl">{product.name}</span>
                 </div>
-                <div onClick={() => dispatch(addItem({ id: product.id, quantity: 1, name: product.name, image: product.image, price:product.price }))} 
+                <div onClick={() => dispatch(addItem({ id: product.id, quantity: 1, name: product.name, image: product.pictures[0].url, price:product.price }))} 
                 className="p-2 rounded-full bg-secondary hover:cursor-pointer">
                     <LiaShoppingCartSolid size={35} />
                 </div>
