@@ -4,7 +4,8 @@ import  TextField  from '../components/Connexion/TextField'
 import ReusableButton from '../components/Connexion/ReusableButton';
 import Checkbox from "../components/Connexion/Checkbox";
 import * as Yup from 'yup';
-import axios from 'axios';
+import { URL_BACK_CREATE_ACCOUNT } from "../constants/urls/urlBackEnd";
+import apiBackEnd from "../api/backend/api.Backend";
 
 const CreateAccount= () => {
     
@@ -32,20 +33,13 @@ const CreateAccount= () => {
                     .required("Required"),
     })
 
-    const onSubmit = (values) => {
-        axios.post('http://localhost:8000/api/user/add', {
-          firstName: values.firstName,
-          lastName: values.lastName,
-          phone: values.phone,
-          email: values.email,
-          password: values.password,
-        })
-        .then(response => {
-          console.log('User created successfully:', response.data);
-        })
-        .catch(error => {
-          console.error('User creation error:', error);
-        });
+    const onSubmit = async (values) => {
+        try {
+            const response = await apiBackEnd.post(URL_BACK_CREATE_ACCOUNT, values);
+            console.log('User created successfully:', response.data);
+          } catch (error) {
+            console.error('User creation error:', error);
+          }
       }
 
 
