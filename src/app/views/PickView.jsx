@@ -1,14 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
-import { addItem, clearCart, removeItem, selectItems, selectTotalCost, selectTotalQuantity, updateQuantity } from "../redux-store/cartSlice";
+import { addItem, removeItem, selectItems, selectTotalCost, selectTotalQuantity} from "../redux-store/cartSlice";
 import { RiRestartLine } from "react-icons/ri";
-
+import ProductCarousel from "../components/layouts/ProductCarrousel";
 
 export const PickView = () => {
   const dispatch = useDispatch();
   const paniers = useSelector(selectItems);
   const totalPrice = useSelector(selectTotalCost);
   const totalQuantity = useSelector(selectTotalQuantity);
-  const balise = "RiRestartLine";
 
   return (
     <div className="flex flex-col mx-2 mt-9 md:mt-0">
@@ -69,12 +68,10 @@ export const PickView = () => {
                   <a className="btn-primary-outline self-center w-11/12 text-xl ">Continuer pour payer</a>
                   <span className="text-center">Pour une meilleur experience, <a className="underline">créer un compte.</a></span>
                 </div>
-              </> 
+              </>
             }
           </div>
-        </div>
-<img src="" alt="" />
-
+        </div>     
       </div>
     </div>
   );
