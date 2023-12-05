@@ -7,7 +7,7 @@ import { getCart, removeCart, removeCartItem, setCart } from '../services/cartSe
  * }
  */
 const initialState = {
-    items: [],
+    items: getCart(),
 };
 
 export const cartSlice = createSlice({
@@ -46,7 +46,7 @@ export const cartSlice = createSlice({
 
 export const { addItem, removeItem, updateQuantity, clearCart } = cartSlice.actions;
 
-const selectItems = (state) => state.cart.items == 0 ? getCart() : state.cart.items;
+const selectItems = (state) => state.cart.items;
 const selectTotalQuantity = (state) => selectItems(state).reduce((acc, item) => acc + item.quantity, 0);
 const selectTotalCost = (state) => {
     let totalCost = 0;
