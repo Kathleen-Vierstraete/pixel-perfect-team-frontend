@@ -91,7 +91,7 @@ export const PickView = () => {
                       <span onClick={() => dispatch(addItem({ id: item.id, quantity: 1 }))}>+</span>
                     </div>
                     <span className="border-r border-black h-full"></span>
-                    <a onClick={() => dispatch(removeItem())} className="hover:underline">Supprimer</a>
+                    <a onClick={() => dispatch(removeItem({id:item.id}))} className="hover:underline">Supprimer</a>
                     <span className="border-r border-black h-full"></span>
                     <a className="hover:underline" >Mettre de côté</a>
                   </div>
@@ -99,7 +99,7 @@ export const PickView = () => {
 
               </div>
               <div className="flex justify-between items-center sm:justify-around lg:hidden">
-                <a onClick={() => dispatch(removeItem())} className="hover:underline">Supprimer</a>
+                <a onClick={() => dispatch(removeItem({id:item.id}))} className="hover:underline">Supprimer</a>
                 <a className="hover:underline" >Mettre de côté</a>
                 <div className="flex gap-3 rounded-2xl p-2 bg-primary text-white">
                   <span onClick={() => dispatch(addItem({ id: item.id, quantity: -1 }))}>-</span>
