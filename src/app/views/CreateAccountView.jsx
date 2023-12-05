@@ -27,9 +27,9 @@ const CreateAccount= () => {
                     .matches(/[a-z]/, "Password must have one lowercase character")
                     .matches(/[A-Z]/, "Password must have one uppercase character")
                     .required("Required"),
-        // passwordconfirm: Yup.string()
-        //             .oneOf([Yup.ref('password'), undefined], "Passwords must match")
-        //             .required("Required"),
+        passwordconfirm: Yup.string()
+                    .oneOf([Yup.ref('password'), undefined], "Passwords must match")
+                    .required("Required"),
     })
 
     const onSubmit = (values) => {
@@ -62,7 +62,7 @@ const CreateAccount= () => {
                 email: '',
                 phone: '',
                 password: '',
-                // passwordconfirm: '',
+                passwordconfirm: '',
             }}
             validationSchema={validate}
             onSubmit={onSubmit}
@@ -85,24 +85,21 @@ const CreateAccount= () => {
                             <p className=''>Au moins une majuscule et une minuscule</p>
                             <p className='mb-3'>Un caractère spécial</p>
 
-                            {/* <TextField  label="Confirmation de mot de passe" name="passwordconfirm" type="password"/> */}
+                            <TextField  label="Confirmation de mot de passe" name="passwordconfirm" type="password"/>
 
-                            {console.log(formik.values)}
+                            {/* {console.log(formik.values)} */}
 
-                            {/* <Checkbox labelText="J’accepte de recevoir des promotions de la part de Pixel Perfect"/> */}
+                            <Checkbox labelText="J’accepte de recevoir des promotions de la part de Pixel Perfect"/> 
 
-                            {/* <Checkbox labelText="Je m'inscris à la Newsletter"/>
+                            <Checkbox labelText="Je m'inscris à la Newsletter"/>
 
                             <Checkbox labelText={
                                 <span>
                                     En cliquant sur Créer mon compte, je certifie avoir lu et accepter nos <a href="#" className="underline">Conditions d’Utilisations</a> et notre <a href="#" className="underline">notre Politique de protections de données</a>.  
                                 </span>
-                            }/> */}
+                            }/>
                             <ReusableButton type="submit">Créer mon compte</ReusableButton>
 
-
-{/*
-                            <button className='px-4 py-2 bg-green-400 text-white text-xs font-bold uppercase rounded hover:bg-green-700 focus:outline-none focus:bg-green-700' type='submit'>Sign in</button> */}
                         </Form>
                 </div>
             </div>
@@ -111,7 +108,6 @@ const CreateAccount= () => {
         </Formik>
     </div>
     )
-
 };
 
 export default CreateAccount;
