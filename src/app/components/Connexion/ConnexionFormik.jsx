@@ -5,6 +5,7 @@ import ReusableButton from './ReusableButton';
 import * as Yup from 'yup';
 import apiBackEnd from './../../api/backend/api.Backend';
 import { URL_BACK_LOGIN_CHECK } from '../../constants/urls/urlBackEnd';
+import { Link } from "react-router-dom";
 
 const ConnexionFormik  = () => {
 
@@ -62,7 +63,9 @@ const ConnexionFormik  = () => {
                     <p className='m-3 text-center'>
                     Pas encore de compte Pixel Perfect? Inscrivez-vous!
                     </p>
+                    <Link to="/create-account" >
                     <ReusableButton>S'inscrire</ReusableButton>
+                    </Link>
 
                     <p className='m-3 text-center'>
                     Pour en savoir plus sur la gestion de vos données personnelles
