@@ -49,6 +49,5 @@ export function removeCartItem(id) {
     let cartSaved = getCart();
     
     let result = cartSaved.filter(item => item.id !== id)
-    console.log("res",result);
     localStorage.setItem(CART_NAME, JSON.stringify(result));
 }
