@@ -7,7 +7,7 @@ const ProductForCarrousel = ({ product }) => {
     return (
         <div className="p-4 flex flex-col gap-4 ">
             <div className="drop-shadow-lg  rounded-xl h-1/3 w-full flex items-center justify-center">
-                <img src={product.image} alt={product.name} className="w-full" />
+                <img src={product.pictures[0].url} alt={product.name} className="w-full" />
             </div>
             <div className="flex justify-between items-center">
                 <div className="flex flex-col">
