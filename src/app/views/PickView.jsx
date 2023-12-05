@@ -13,42 +13,57 @@ export const PickView = () => {
     {
       id: 1,
       name: "Product 1",
-      price: 209200
+      price: 209200,
+      image:"https://img.freepik.com/vecteurs-premium/vecteur-icone-image-par-defaut-page-image-manquante-pour-conception-site-web-application-mobile-aucune-photo-disponible_87543-11093.jpg"
     },
     {
       id: 2,
       name: "Product 2",
-      price: 2090009
+      price: 2090009,
+      image:"https://img.freepik.com/vecteurs-premium/vecteur-icone-image-par-defaut-page-image-manquante-pour-conception-site-web-application-mobile-aucune-photo-disponible_87543-11093.jpg"
+
     },
     {
       id: 3,
       name: "Product 3",
-      price: 3900
+      price: 3900,
+      image:"https://img.freepik.com/vecteurs-premium/vecteur-icone-image-par-defaut-page-image-manquante-pour-conception-site-web-application-mobile-aucune-photo-disponible_87543-11093.jpg"
+
     },
     {
       id: 4,
       name: "Product 4",
-      price: 900
+      price: 900,
+      image:"https://img.freepik.com/vecteurs-premium/vecteur-icone-image-par-defaut-page-image-manquante-pour-conception-site-web-application-mobile-aucune-photo-disponible_87543-11093.jpg"
+
     },
     {
       id: 5,
       name: "Product 5",
-      price: 55099
+      price: 55099,
+      image:"https://img.freepik.com/vecteurs-premium/vecteur-icone-image-par-defaut-page-image-manquante-pour-conception-site-web-application-mobile-aucune-photo-disponible_87543-11093.jpg"
+
     },
     {
       id: 6,
       name: "Product 6",
-      price: 55099
+      price: 55099,
+      image:"https://img.freepik.com/vecteurs-premium/vecteur-icone-image-par-defaut-page-image-manquante-pour-conception-site-web-application-mobile-aucune-photo-disponible_87543-11093.jpg"
+
     },
     {
       id: 7,
       name: "Product 7",
-      price: 55099
+      price: 55099,
+      image:"https://img.freepik.com/vecteurs-premium/vecteur-icone-image-par-defaut-page-image-manquante-pour-conception-site-web-application-mobile-aucune-photo-disponible_87543-11093.jpg"
+
     },
     {
       id: 8,
       name: "Product 8",
-      price: 55099
+      price: 55099,
+      image:"https://img.freepik.com/vecteurs-premium/vecteur-icone-image-par-defaut-page-image-manquante-pour-conception-site-web-application-mobile-aucune-photo-disponible_87543-11093.jpg"
+
     }
   ];
 

@@ -1,9 +1,8 @@
 import React from 'react';
 import Slider from 'react-slick';
-import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
+import { IoIosArrowForward,IoIosArrowBack  } from "react-icons/io";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import 'tailwindcss/tailwind.css';
 import ProductForCarrousel from './Product';
 
 
@@ -14,15 +13,15 @@ const ProductCarousel = ({ products }) => {
     infinite: true,
     speed: 500,
     slidesToShow: 6,
-    slidesToScroll: 2,
+    slidesToScroll: 4,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
     responsive: [
       {
-        breakpoint: 1281,
+        breakpoint: 1279,
         settings: {
           slidesToShow: 5,
-          slidesToScroll: 2,
+          slidesToScroll: 3,
         },
       },
       {
@@ -47,7 +46,7 @@ const ProductCarousel = ({ products }) => {
       <Slider {...settings}>
         {
           products.map(product => (
-            <ProductForCarrousel key={product.id} name={product.name} price={product.price} />
+            <ProductForCarrousel key={product.id} product={product} />
           ))
         }
       </Slider>
@@ -59,10 +58,10 @@ const SampleNextArrow = (props) => {
   const { onClick } = props;
   return (
     <div
-      className="absolute top-1/2 right-4 transform -translate-y-1/2 cursor-pointer text-4xl text-gray-500 z-10"
+      className="absolute top-24 right-4 transform -translate-y-1/2 cursor-pointer text-4xl text-gray-500 z-10"
       onClick={onClick}
     >
-      <FaArrowRight />
+      <IoIosArrowForward />
     </div>
   );
 };
@@ -71,10 +70,10 @@ const SamplePrevArrow = (props) => {
   const { onClick } = props;
   return (
     <div
-      className="absolute top-1/2 left-4 transform -translate-y-1/2 cursor-pointer text-4xl text-gray-500 z-10"
+      className="absolute top-24 left-4 transform -translate-y-1/2 cursor-pointer text-4xl text-gray-500 z-10"
       onClick={onClick}
     >
-      <FaArrowLeft />
+      <IoIosArrowBack  />
     </div>
   );
 };
