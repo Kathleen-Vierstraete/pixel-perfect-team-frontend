@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
-import { addItem, removeItem, selectItems, selectTotalCost, selectTotalQuantity} from "../redux-store/cartSlice";
+import { addItem, removeItem, selectItems, selectTotalCost, selectTotalQuantity } from "../redux-store/cartSlice";
 import { RiRestartLine } from "react-icons/ri";
-import ProductCarousel from "../components/layouts/ProductCarrousel";
+import ProductCarousel from "../components/carrousel/ProductCarrousel";
 
 export const PickView = () => {
   const dispatch = useDispatch();
@@ -9,14 +9,57 @@ export const PickView = () => {
   const totalPrice = useSelector(selectTotalCost);
   const totalQuantity = useSelector(selectTotalQuantity);
 
+  const products = [
+    {
+      id: 1,
+      name: "Product 1",
+      price: 209200
+    },
+    {
+      id: 2,
+      name: "Product 2",
+      price: 2090009
+    },
+    {
+      id: 3,
+      name: "Product 3",
+      price: 3900
+    },
+    {
+      id: 4,
+      name: "Product 4",
+      price: 900
+    },
+    {
+      id: 5,
+      name: "Product 5",
+      price: 55099
+    },
+    {
+      id: 6,
+      name: "Product 6",
+      price: 55099
+    },
+    {
+      id: 7,
+      name: "Product 7",
+      price: 55099
+    },
+    {
+      id: 8,
+      name: "Product 8",
+      price: 55099
+    }
+  ];
+
   return (
     <div className="flex flex-col mx-2 mt-9 md:mt-0">
-      <h2>Panier ({totalQuantity} article)</h2>
+      <h2 className="text-5xl">Panier ({totalQuantity} article)</h2>
       <div className="flex flex-col justify-around lg:flex-row lg:mt-7 lg:gap-10 lg:px-10">
 
         <div className="flex flex-col grow gap-6 mt-6 lg:mt-0">
-          {totalQuantity === 0 ? (<h3 className="mt-6">Votre panier est vide</h3>) : paniers.map((item) => (
-            <div className="drop-shadow-lg bg-white rounded-xl p-4 flex flex-col ">
+          {totalQuantity === 0 ? (<h3 className="mt-6 text-4xl">Votre panier est vide</h3>) : paniers.map((item) => (
+            <div key={item.id} className="drop-shadow-lg bg-white rounded-xl p-4 flex flex-col ">
               <div className="flex gap-4">
                 <img className="w-[100px] lg:w-[200px]" src={item.image} alt={item.name} />
                 <div className="flex flex-col justify-between self-stretch lg:w-full">
@@ -56,22 +99,30 @@ export const PickView = () => {
         <div>
 
 
-          <div className="flex flex-col rounded-2xl lg:border lg:border-primary lg:p-4">
-            {totalQuantity === 0 ? <></> :
+          {totalQuantity === 0 ? <></> :
+            <div className="flex flex-col rounded-2xl lg:border lg:border-primary lg:p-4">
               <>
                 <div className="flex justify-between mt-6"><span className="font-bold ">Prix total ({totalQuantity} article)</span> <span>{totalPrice / 100}€</span></div>
                 <div className="flex justify-between mt-2"><span className="">Frais de livraison</span> <span>Gratuit</span></div>
                 <div className="flex justify-between mt-2"><span className="">Taxe</span> <span>29€</span></div>
                 <div className="flex justify-between mt-2"><span className="font-bold">Prix TTC</span><span>{parseFloat(totalPrice + 2900) / 100}€</span></div>
+                <div className="flex flex-col my-6 gap-2 lg:hidden">
+                  <h4 className="text-2xl font-medium">ARTICLES SIMILAIRES</h4>
+                  <ProductCarousel products={products} />
+                </div>
                 <hr className="h-px  my-8 border-1 border-slate-600 lg:hidden" />
                 <div className="flex flex-col lg:order-first">
                   <a className="btn-primary-outline self-center w-11/12 text-xl ">Continuer pour payer</a>
                   <span className="text-center">Pour une meilleur experience, <a className="underline">créer un compte.</a></span>
                 </div>
               </>
-            }
-          </div>
-        </div>     
+            </div>
+          }
+        </div>
+      </div>
+      <div className="hidden flex-col my-6 gap-2 lg:flex">
+        <h4 className="text-2xl font-medium">ARTICLES SIMILAIRES</h4>
+        <ProductCarousel  products={products} />
       </div>
     </div>
   );

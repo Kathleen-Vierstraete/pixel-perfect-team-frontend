@@ -11,7 +11,7 @@ export default {
         },
         secondary: {
           light: "#f39e58",
-          DEFAULT: "#F3S849",
+          DEFAULT: "#F3D849",
           dark: "#bf5d0d",
         },
         grey: {
