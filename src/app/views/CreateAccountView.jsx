@@ -23,7 +23,7 @@ const CreateAccount= () => {
                     .email("Invalid email")
                     .required("Required"),
         password: Yup.string()
-                    .min(8, "Password must be at least 8 characters")
+                    .min(12, "Password must be at least 12 characters")
                     .matches(/[0-9]/, "Password must have one digit")
                     .matches(/[a-z]/, "Password must have one lowercase character")
                     .matches(/[A-Z]/, "Password must have one uppercase character")
@@ -41,8 +41,6 @@ const CreateAccount= () => {
             console.error('User creation error:', error);
           }
       }
-
-
 
     return (
 
