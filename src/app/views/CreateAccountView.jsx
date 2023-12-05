@@ -4,6 +4,7 @@ import  TextField  from '../components/Connexion/TextField'
 import ReusableButton from '../components/Connexion/ReusableButton';
 import Checkbox from "../components/Connexion/Checkbox";
 import * as Yup from 'yup';
+import axios from 'axios';
 
 const CreateAccount= () => {
     
@@ -14,6 +15,9 @@ const CreateAccount= () => {
         lastName: Yup.string()
                     .max(20, "Must be 20 characters or less")
                     .required("Required"),
+        phone: Yup.string()
+                    .max(10, "Must be 10 characters or less")
+                    .required("Required"),
         email: Yup.string()
                     .email("Invalid email")
                     .required("Required"),
@@ -23,10 +27,26 @@ const CreateAccount= () => {
                     .matches(/[a-z]/, "Password must have one lowercase character")
                     .matches(/[A-Z]/, "Password must have one uppercase character")
                     .required("Required"),
-        passwordconfirm: Yup.string()
-                    .oneOf([Yup.ref('password'), undefined], "Passwords must match")
-                    .required("Required"),
+        // passwordconfirm: Yup.string()
+        //             .oneOf([Yup.ref('password'), undefined], "Passwords must match")
+        //             .required("Required"),
     })
+
+    const onSubmit = (values) => {
+        axios.post('http://localhost:8000/api/user/add', {
+          firstName: values.firstName,
+          lastName: values.lastName,
+          phone: values.phone,
+          email: values.email,
+          password: values.password,
+        })
+        .then(response => {
+          console.log('User created successfully:', response.data);
+        })
+        .catch(error => {
+          console.error('User creation error:', error);
+        });
+      }
 
 
 
@@ -37,16 +57,15 @@ const CreateAccount= () => {
         <p className='text-sm text-center mb-5'>Déjà inscrit? <a href="#" className="underline">Se connecter</a> </p>
         <Formik 
             initialValues = {{
-                firstname: '', 
-                lastname: '', 
+                firstName: '', 
+                lastName: '', 
                 email: '',
+                phone: '',
                 password: '',
-                passwordconfirm: '',
+                // passwordconfirm: '',
             }}
             validationSchema={validate}
-            onSubmit={values => {
-                console.log(values)
-            }}
+            onSubmit={onSubmit}
         >
         
             {formik => 
@@ -55,8 +74,9 @@ const CreateAccount= () => {
                 <div className="w-full max-w-xs">
 
                         <Form>
-                            <TextField  label="Prénom" name="firstname" type="text"/>
-                            <TextField  label="Nom" name="lastname" type="text"/>
+                            <TextField  label="Prénom" name="firstName" type="text"/>
+                            <TextField  label="Nom" name="lastName" type="text"/>
+                            <TextField  label="Téléphone" name="phone" type="text"/>
                             <TextField  label="Adresse e-mail" name="email" type="email"/>
                             <TextField  label="Mot de passe" name="password" type="password"/>
 
@@ -65,20 +85,24 @@ const CreateAccount= () => {
                             <p className=''>Au moins une majuscule et une minuscule</p>
                             <p className='mb-3'>Un caractère spécial</p>
 
-                            <TextField  label="Confirmation de mot de passe" name="passwordconfirm" type="password"/>
+                            {/* <TextField  label="Confirmation de mot de passe" name="passwordconfirm" type="password"/> */}
 
                             {console.log(formik.values)}
 
-                            <Checkbox labelText="J’accepte de recevoir des promotions de la part de Pixel Perfect"/>
+                            {/* <Checkbox labelText="J’accepte de recevoir des promotions de la part de Pixel Perfect"/> */}
 
-                            <Checkbox labelText="Je m'inscris à la Newsletter"/>
+                            {/* <Checkbox labelText="Je m'inscris à la Newsletter"/>
 
                             <Checkbox labelText={
                                 <span>
                                     En cliquant sur Créer mon compte, je certifie avoir lu et accepter nos <a href="#" className="underline">Conditions d’Utilisations</a> et notre <a href="#" className="underline">notre Politique de protections de données</a>.  
                                 </span>
-                            }/>
-                            <ReusableButton>Créer mon compte</ReusableButton>
+                            }/> */}
+                            <ReusableButton type="submit">Créer mon compte</ReusableButton>
+
+
+{/*
+                            <button className='px-4 py-2 bg-green-400 text-white text-xs font-bold uppercase rounded hover:bg-green-700 focus:outline-none focus:bg-green-700' type='submit'>Sign in</button> */}
                         </Form>
                 </div>
             </div>
