@@ -11,6 +11,10 @@
     @apply text-white bg-primary hover:bg-primary-dark hover:text-white active:ring-primary ;
 }
 
+.btn-primary-outline{
+    @apply text-primary text-center font-bold bg-white border border-primary rounded-xl py-1 hover:bg-primary hover:text-white ;
+}
+
 .btn-secondary{
     @apply text-white bg-secondary hover:bg-secondary-dark hover:text-white active:ring-secondary-light ;
 }
