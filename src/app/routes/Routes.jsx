@@ -8,6 +8,7 @@ import HomeView from "../views/HomeView";
 import LoginView from "../views/LoginView";
 import { PrivateRoute } from "./PrivateRoute";
 import ProductListView from './../views/ProductListView';
+import CategoryLinks from "../components/CategoryLinks";
 
 /**
  * Routes of the application
@@ -41,6 +42,7 @@ const Routes = () => {
         }
       />
       <Route path={URL.URL_LOGIN} element={<LoginView />} />
+      <Route path={URL.URL_PRODUCTS_BY_CATEGORY} element={<CategoryLinks />} />
     </RoutesContainer>
   );
 };
