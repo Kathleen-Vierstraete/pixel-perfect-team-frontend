@@ -14,6 +14,12 @@ export default {
           DEFAULT: "#f3d849",
           dark: "#bf5d0d",
         },
+        grey: {
+          DEFAULT: "#E0E5E9",
+        },
+        black: {
+          DEFAULT: "#191617",
+        },
       },
     },
   },
