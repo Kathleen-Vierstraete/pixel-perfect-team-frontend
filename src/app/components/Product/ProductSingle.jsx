@@ -1,20 +1,14 @@
 import React from 'react'
-import Aside from '../layouts/Aside'
-import AsideMenu from '../layouts/AsideMenu';
+import Aside from '../layouts/Product/Aside'
+import AsideMenu from '../layouts/Product/AsideMenu';
 
-
-const ProductSingle = (props) => {
-  const { product } = props.product || {};
-
+const ProductSingle = ({product}) => {
   return (
-    <div className=''>
+    <div className='w-full'>
         {product && <Aside key={product.id} product={product} />}
         <AsideMenu />
     </div>
-
-
   )
 }
-
 
 export default ProductSingle

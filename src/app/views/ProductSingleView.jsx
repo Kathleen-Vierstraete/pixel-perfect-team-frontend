@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import ProductSingle from './../components/Product/ProductSingle';
 import apiBackEnd from './../api/backend/api.Backend';
 import { URL_PRODUCT_BY_ID } from '../constants/urls/urlBackEnd';
-import ProductDetaille from '../components/layouts/ProductDetaille';
+import DetailProduct from '../components/layouts/Product/DetailProduct';
 
 const ProductSingleView = () => {
     const { id } = useParams();
@@ -27,16 +27,16 @@ const ProductSingleView = () => {
                 <p>Loading...</p>
             ) : (
                 <div>
-                    <div className='justify-around items-center mt-10 flex flex-col lg:flex-row'>
-                        <img src={product.product.pictures[0].url} alt="" />
-                        <ProductSingle product={product} />
+                    <div className='justify-around items-center mt-10 px-10 flex flex-col lg:flex-row'>
+                        <img className='w-full  border rounded-3xl' src={product.product.pictures[0].url} alt={product.product.name} />
+                        <ProductSingle product={product.product} />
                     </div>
                     <div className='lg:hidden'>
                         <br />
                         <hr />
                         <br />
                     </div>
-                    <ProductDetaille product={product} />
+                    <DetailProduct product={product.product} />
                 </div>
             )}
         </div>

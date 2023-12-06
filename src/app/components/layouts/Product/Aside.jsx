@@ -7,7 +7,7 @@ function Aside({ product }) {
     const prixEnEuros = centimesToEuros(product.price);
     const descriptionCourte = `${product.description.slice(0, 49)}...`;
     return (
-        <div className="border-2 p-4 border-gray-300 mx-auto mt-5 mr-5 ml-5 max-w-md rounded-md shadow-md">
+        <div className="border p-4 border-black mt-5 rounded-3xl shadow-md">
             <h2 className="text-xl font-semibold mb-2">{product.name}</h2>
             <div>
                 <p className="mb-4">
