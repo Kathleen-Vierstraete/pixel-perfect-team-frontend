@@ -22,9 +22,11 @@ export default {
         },
       },
     },
-    fontFamily : {
+    fontFamily: {
+      NicoMoji: ["NicoMoji", "sans-serif"],
+      SilkScreen: ["SilkScreen", "sans-serif"],
       numito : ['Nunito', "sans-serif"]
-    }
+    },
   },
   plugins: [require("@tailwindcss/forms")],
 };

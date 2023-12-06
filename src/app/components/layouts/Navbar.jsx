@@ -22,7 +22,6 @@ const Navbar = () => {
       .get("/categories")
       .then((response) => {
         setCategories(response.data);
-        console.log(setCategories);
       })
       .catch((error) => {
         console.error("Error fetching categories:", error);
@@ -31,20 +30,20 @@ const Navbar = () => {
 
   return (
     <nav className="bg-primary">
-      <div className="max-w-screen-xl flex flex-wrap md:flex-nowrap items-center justify-evenly gap-2 mx-auto p-4">
+      <div className="max-w-screen-xl flex flex-wrap lg:flex-nowrap items-center justify-evenly gap-2 mx-auto p-4">
         <div className="flex items-center space-x-3 text-white rtl:space-x-reverse">
           <button
             data-collapse-toggle="navbar-menu"
             type="button"
-            className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-white rounded-lg md:hidden hover:bg-gray-900/25"
+            className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-white rounded-lg lg:hidden hover:bg-gray-900/25"
             aria-controls="navbar-menu"
             aria-expanded="false"
           >
             <span className="sr-only">Open main menu</span>
-            <div className="md:hidden flex items-center">
-              <button className="cursor-pointer" onClick={toggleMenuDropdown}>
+            <div className="lg:hidden flex items-center">
+              <span className="cursor-pointer" onClick={toggleMenuDropdown}>
                 <FaBars />
-              </button>
+              </span>
             </div>
             {showMenuDropdown && (
               <MenuModal
@@ -54,12 +53,12 @@ const Navbar = () => {
             )}
           </button>
           <Link to={URL_LIST}>
-            <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
+            <span className="font-SilkScreen self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
               Pixel Perfect
             </span>
           </Link>
         </div>
-        <div className="flex md:order-2 align-middle justify-center">
+        <div className="flex lg:order-2 align-middle justify-center">
           <div className="flex align-middle justify-center">
             <button
               type="button"
@@ -71,7 +70,7 @@ const Navbar = () => {
               <span className="h-full flex items-center justify-center me-2">
                 <FaRegUser />
               </span>
-              <span className="text-left w-fit hidden md:inline">
+              <span className="text-left w-fit hidden lg:inline">
                 Bonjour
                 <br />
                 Se connecter/S'inscrire
@@ -89,7 +88,7 @@ const Navbar = () => {
               <span className="h-full flex items-center justify-center me-2">
                 <FiShoppingCart />
               </span>
-              <span className="text-left w-fit h-full hidden md:flex items-center">
+              <span className="text-left w-fit h-full hidden lg:flex items-center">
                 <span>Panier</span>
               </span>
             </button>
@@ -109,7 +108,7 @@ const Navbar = () => {
           </div>
         </div>
         <div
-          className="items-center justify-between w-full flex md:w-1/2 md:order-1"
+          className="items-center justify-between w-full flex lg:w-1/2 lg:order-1"
           id="navbar-search"
         >
           <div className="relative mt-3 w-full mx-auto">
@@ -134,7 +133,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-      <div className="hidden md:flex md:bg-primary-light">
+      <div className="hidden lg:flex lg:bg-primary-light">
         <NavMenu categories={categories} />
       </div>
     </nav>
