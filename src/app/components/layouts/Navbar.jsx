@@ -134,7 +134,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-      <div className="hidden lg:flex lg:bg-purple-500">
+      <div className="hidden md:flex md:bg-primary-light">
         <NavMenu categories={categories} />
       </div>
     </nav>
