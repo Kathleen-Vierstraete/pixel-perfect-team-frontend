@@ -8,12 +8,13 @@ import ProductDetaille from '../components/layouts/ProductDetaille';
 const ProductSingleView = () => {
     const { id } = useParams();
     const [product, setProduct] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         apiBackEnd.get(URL_PRODUCT_BY_ID(id))
             .then(response => {
                 setProduct(response.data);
-                
+                setIsLoading(false);
             })
             .catch(error => {
                 console.error('Error fetching product:', error);
@@ -22,18 +23,22 @@ const ProductSingleView = () => {
 
     return (
         <div className=''>
-            <div className='justify-around items-center mt-10 flex flex-col lg:flex-row'>
-                <div className='bg-red-600 h-60 w-5/6'></div>
-                <ProductSingle product={product} />
-            </div>
-            <div className='lg:hidden'>
-                <br />
-                <hr />
-                <br />
-            </div>
-            <ProductDetaille product={product}/>
-
-
+            {isLoading ? (
+                <p>Loading...</p>
+            ) : (
+                <div>
+                    <div className='justify-around items-center mt-10 flex flex-col lg:flex-row'>
+                        <img src={product.product.pictures[0].url} alt="" />
+                        <ProductSingle product={product} />
+                    </div>
+                    <div className='lg:hidden'>
+                        <br />
+                        <hr />
+                        <br />
+                    </div>
+                    <ProductDetaille product={product} />
+                </div>
+            )}
         </div>
     );
 };
