@@ -7,6 +7,9 @@ import { useState } from "react";
 import apiBackEnd from "../api/backend/api.Backend";
 import { ProductPick } from "../components/pick/ProductPick";
 import { Spinner } from "../components/animation/Spinner";
+import { IoIosArrowBack } from "react-icons/io";
+import { Link } from "react-router-dom";
+import { URL_HOME } from "../constants/urls/urlFrontEnd";
 
 export const PickView = () => {
   const paniers = useSelector(selectItems);
@@ -31,6 +34,10 @@ export const PickView = () => {
 
   return (
     <div className="flex flex-col mx-2 mt-9 md:mt-0">
+      <Link to={URL_HOME} className="text-xl flex items-center mb-2">
+        <IoIosArrowBack />
+        <span>Poursuivre mes achats</span>
+      </Link>
       <h2 className="text-5xl">Panier ({totalQuantity} article)</h2>
       <div className="flex flex-col justify-around lg:flex-row lg:mt-7 lg:gap-10 lg:px-10">
 
@@ -61,7 +68,7 @@ export const PickView = () => {
                     </>
                   )}
                 </div>
-                <hr className="h-px  my-8 border-1 border-slate-600 lg:hidden"/>
+                <hr className="h-px  my-8 border-1 border-slate-600 lg:hidden" />
                 <div className="flex flex-col lg:order-first">
                   <a className="btn-primary-outline self-center w-11/12 text-xl ">Continuer pour payer</a>
                   <span className="text-center">Pour une meilleur experience, <a className="underline">créer un compte.</a></span>
