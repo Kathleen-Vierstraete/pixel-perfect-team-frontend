@@ -5,7 +5,6 @@ import { TbTruckDelivery } from "react-icons/tb";
 function AsideMenu() {
     return (
         <div className='flex flex-col mt-5 gap-4'>
-
             <div className="flex justify-between items-center p-5 border border-black   rounded-3xl  shadow-md">
                 <div className='flex items-center gap-6'>
                     <IoCard size={40} />
