@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import NavMenu from "../layouts/navMenu";
+import NavMenu from "../layouts/Header/navMenu";
 import { IoCloseCircle } from "react-icons/io5";
 
 const MenuModal = ({ toggleMenuDropdown, categories }) => {

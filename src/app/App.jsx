@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
-import Navbar from "./components/layouts/Navbar";
+import Navbar from "./components/layouts/Header/Navbar";
 import { selectIsLogged, signIn } from "./redux-store/authenticationSlice";
 import Routes from "./routes/Routes";
 import { getToken } from "./services/tokenServices";
