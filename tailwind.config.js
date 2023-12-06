@@ -16,6 +16,10 @@ export default {
         },
       },
     },
+    fontFamily: {
+      NicoMoji: ["NicoMoji", "sans-serif"],
+      SilkScreen: ["SilkScreen", "sans-serif"]  
+    },
   },
   plugins: [require("@tailwindcss/forms")],
 };

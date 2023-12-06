@@ -53,7 +53,7 @@ const Navbar = () => {
             )}
           </button>
           <Link to={URL_LIST}>
-            <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
+            <span className="font-SilkScreen self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
               Pixel Perfect
             </span>
           </Link>
