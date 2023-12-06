@@ -6,9 +6,13 @@ import * as URL from "../constants/urls/urlFrontEnd";
 import AdminHomeView from "../views/AdminHomeView";
 import HomeView from "../views/HomeView";
 import LoginView from "../views/LoginView";
+import Connexion from "../views/ConnexionView";
+import CreateAccount from "../views/CreateAccountView";
+
 import { PrivateRoute } from "./PrivateRoute";
 import ProductListView from './../views/ProductListView';
 import PickView from "../views/PickView";
+
 
 /**
  * Routes of the application
@@ -43,6 +47,8 @@ const Routes = () => {
       />
       <Route path={URL.URL_LOGIN} element={<LoginView />} />
       <Route path={URL.URL_PICK} element={<PickView />} />
+      <Route path={URL.URL_CONNEXION} element={<Connexion />} />
+      <Route path={URL.URL_CREATEACCOUNT} element={<CreateAccount />} />
     </RoutesContainer>
   );
 };
