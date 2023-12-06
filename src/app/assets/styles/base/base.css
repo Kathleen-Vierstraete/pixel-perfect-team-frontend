@@ -9,6 +9,10 @@
         @apply h-full
     }
 
+    p{
+        @apply font-numito
+    }
+
     
     /* TYPOGRAPHIE */
     h1{
@@ -27,6 +31,7 @@
         @apply text-2xl
     }
     h6{
-        @apply text-xl
+        @apply text-xl;
+        @apply font-numito
     }
 }
