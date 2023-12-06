@@ -21,9 +21,7 @@ function Aside({ product }) {
                 <p className="text-lg col-span-1 flex items-center justify-center text-blue-600">
                     {prixEnEuros} €
                 </p>
-                <button
-                    className="bg-blue-500 col-span-2 text-white px-4 py-2 rounded"
-                >
+                <button className="bg-blue-500 col-span-2 text-white px-4 py-2 rounded">
                     Ajouter au panier
                 </button>
             </div>

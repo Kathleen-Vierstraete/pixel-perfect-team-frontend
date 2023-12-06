@@ -10,6 +10,7 @@ const ProductListView = () => {
         apiBackEnd.get(URL_BACK_PRODUCT)
             .then(response => {
                 setProducts(response.data);
+                console.log(response)
             })
             .catch(error => {
                 console.error('Error fetching product:', error);
