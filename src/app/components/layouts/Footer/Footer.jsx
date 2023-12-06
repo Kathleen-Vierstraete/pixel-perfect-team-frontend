@@ -12,7 +12,7 @@ const Footer = () => {
 
 return (
 
-  <footer className="bg-blue-600 text-center text-white lg:text-left mt-5">
+  <footer className="bg-primary text-center text-white lg:text-left mt-5">
     <div className="mx-6 py-10 text-center md:text-left ">      
       <div className="grid-1 grid gap-8 md:grid-cols-2 lg:grid-cols-4"> 
         <div className=""> 
@@ -49,7 +49,7 @@ return (
       </div>
     </div>         
                         
-      <div className="bg-blue-600 p-6 text-center">    
+      <div className="bg-primary-dark p-6 text-center">    
         <span>© 2023 Copyright : </span>    
             <a className="font-semibold text-white" href="#">
               Pixel Perfect  
