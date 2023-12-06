@@ -7,7 +7,6 @@ import AdminHomeView from "../views/AdminHomeView";
 import HomeView from "../views/HomeView";
 import LoginView from "../views/LoginView";
 import { PrivateRoute } from "./PrivateRoute";
-import ProductListView from './../views/ProductListView';
 import ProductSingleView from './../views/ProductSingleView';
 
 /**
@@ -22,9 +21,7 @@ const Routes = () => {
       <Route
         path={URL.URL_HOME}
         element={
-          <PrivateRoute>
             <HomeView />
-          </PrivateRoute>
         }
       />
       <Route
@@ -33,12 +30,6 @@ const Routes = () => {
           <PrivateRoute roles={[ROLE_ADMIN]}>
             <AdminHomeView />
           </PrivateRoute>
-        }
-      />
-      <Route
-        path={URL.URL_LIST}
-        element={
-          <ProductListView />
         }
       />
       <Route

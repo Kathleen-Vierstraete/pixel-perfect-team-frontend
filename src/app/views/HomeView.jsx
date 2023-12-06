@@ -1,26 +1,26 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-
-import { ROLE_ADMIN } from '../constants/rolesConstant';
-import { URL_ADMIN_HOME } from '../constants/urls/urlFrontEnd';
-import { selectHasRole } from '../redux-store/authenticationSlice';
+import { useEffect, useState } from "react";
+import { URL_BACK_PRODUCT } from "../constants/urls/urlBackEnd";
+import ProductList from "../components/Product/ProductList";
+import apiBackEnd from "../api/backend/api.Backend";
 
 const HomeView = () => {
-    const isAdmin = useSelector((state) => selectHasRole(state, ROLE_ADMIN));
-    const navigate = useNavigate();
-    return (
-        <div>
-            <p className="font-extrabold text-primary">HOME</p>
+    const [products, setProducts] = useState([]);
 
-            {isAdmin && (
-                <button
-                    className="btn btn-primary"
-                    onClick={() => navigate(URL_ADMIN_HOME)}
-                >
-                    Admin
-                </button>
-            )}
+    useEffect(() => {
+        apiBackEnd.get(URL_BACK_PRODUCT)
+            .then(response => {
+                setProducts(response.data);
+                console.log(response)
+            })
+            .catch(error => {
+                console.error('Error fetching product:', error);
+            });
+    }, []);
+    
+
+    return (
+        <div className='container mx-auto'>
+            <ProductList products={products} />
         </div>
     );
 };
