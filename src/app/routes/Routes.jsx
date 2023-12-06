@@ -7,6 +7,7 @@ import AdminHomeView from "../views/AdminHomeView";
 import HomeView from "../views/HomeView";
 import LoginView from "../views/LoginView";
 import { PrivateRoute } from "./PrivateRoute";
+import ProductListView from './../views/ProductListView';
 
 /**
  * Routes of the application
@@ -31,6 +32,12 @@ const Routes = () => {
           <PrivateRoute roles={[ROLE_ADMIN]}>
             <AdminHomeView />
           </PrivateRoute>
+        }
+      />
+      <Route
+        path={URL.URL_LIST}
+        element={
+            <ProductListView />
         }
       />
       <Route path={URL.URL_LOGIN} element={<LoginView />} />
