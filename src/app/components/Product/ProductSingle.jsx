@@ -1,6 +1,6 @@
 import React from 'react'
-import Aside from '../layouts/Product/Aside'
-import AsideMenu from '../layouts/Product/AsideMenu';
+import Aside from './Aside'
+import AsideMenu from './AsideMenu';
 
 const ProductSingle = ({product}) => {
   return (

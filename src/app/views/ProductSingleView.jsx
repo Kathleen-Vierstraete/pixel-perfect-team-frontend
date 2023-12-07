@@ -3,9 +3,9 @@ import { useParams } from 'react-router-dom';
 import ProductSingle from './../components/Product/ProductSingle';
 import apiBackEnd from './../api/backend/api.Backend';
 import { URL_PRODUCT_BY_ID } from '../constants/urls/urlBackEnd';
-import DetailProduct from '../components/layouts/Product/DetailProduct';
-import Aside from '../components/layouts/Product/Aside';
-import AsideMenu from '../components/layouts/Product/AsideMenu';
+import DetailProduct from '../components/Product/DetailProduct';
+import Aside from '../components/Product/Aside';
+import AsideMenu from '../components/Product/AsideMenu';
 
 const ProductSingleView = () => {
     const { id } = useParams();

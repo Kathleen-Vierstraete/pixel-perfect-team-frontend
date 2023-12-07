@@ -36,19 +36,15 @@ export const DescriptionDetailProduct = ({product}) => {
                                     <span key={creator.id}>{creator.name} | </span>
                                 ))
                             }</div>}
-
                         </div>
-
                         <div className="bg-secondary p-4 rounded-xl flex justify-between">
                             <span >DATE DE SORTIE</span>
                             <span >{product.creationDate}</span>
                         </div>
-
                         <div className="bg-secondary-light p-4 rounded-xl flex justify-between">
                             <span >REFERENCE</span>
                             <span >{product.reference}</span>
                         </div>
-
                     </div>
                 </div>
             </div>
