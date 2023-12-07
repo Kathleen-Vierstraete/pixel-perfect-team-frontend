@@ -2,6 +2,8 @@ import { FaEye } from "react-icons/fa";
 import { LiaShoppingCartSolid } from "react-icons/lia";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
+import { addItem } from "../../redux-store/cartSlice";
+import { URL_PRODUCT_BY_ID } from "../../constants/urls/urlFrontEnd";
 
 export const FirstProduct = ({products}) => {
     const dispatch = useDispatch();
@@ -23,8 +25,8 @@ export const FirstProduct = ({products}) => {
                         <span className="gap-2 bg-slate-500 bg-opacity-40 rounded-2xl text-white text-center font-bold text-xl">
                             {product.name}
                         </span>
-                        <div className='flex justify-between hover:cursor-pointer' onClick={() => navigateProduct(product.id)} >
-                            <div className='bg-primary-light p-2 rounded-full'>
+                        <div className='flex justify-between hover:cursor-pointer'  >
+                            <div className='bg-primary-light p-2 rounded-full' onClick={() => navigateProduct(product.id)}>
                                 <FaEye size={35} color='white' />
                             </div>
                             <div onClick={() => dispatch(addItem({ id: product.id, quantity: 1, name: product.name, image: product.pictures[0].url, price: product.price }))}
