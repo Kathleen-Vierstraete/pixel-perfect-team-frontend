@@ -7,6 +7,8 @@ import MenuModal from "../../mobileLayout/MenuModal";
 
 import apiBackEnd from "../../../api/backend/api.Backend";
 import NavMenu from "./navMenu";
+import { useSelector } from "react-redux";
+import { selectIsLogged } from "../../../redux-store/authenticationSlice";
 
 const Navbar = () => {
   const [showMenuDropdown, setShowMenuDropdown] = useState(false);
@@ -15,6 +17,10 @@ const Navbar = () => {
   const toggleMenuDropdown = () => {
     setShowMenuDropdown(!showMenuDropdown);
   };
+
+  const isAuthenticated = useSelector(selectIsLogged);
+
+  console.log(isAuthenticated);
 
   /**
    * Get categories from the api endpoint categories
