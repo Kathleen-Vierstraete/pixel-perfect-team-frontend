@@ -1,12 +1,12 @@
 export const CharactDetail = ({product}) => {
-    
+
     const haveMultipleCreators = product.creators.length === 1;
 
     return (
         <div className='text-white rounded-lg'>
             <div className="text-lg font-semibold flex flex-col gap-4">
                 {product.editor.name === "none" ? (<></>) : (
-                    <div className="bg-secondary p-4 rounded-xl flex justify-between">
+                    <div className="bg-secondary-dark p-4 rounded-xl flex justify-between">
                         <span >ÉDITEUR</span>
                         <span >test</span>
                     </div>
@@ -21,7 +21,7 @@ export const CharactDetail = ({product}) => {
                         ))
                     }</div>}
                 </div>
-                <div className="bg-secondary p-4 rounded-xl flex justify-between">
+                <div className="bg-secondary-dark p-4 rounded-xl flex justify-between">
                     <span >DATE DE SORTIE</span>
                     <span >{product.creationDate}</span>
                 </div>

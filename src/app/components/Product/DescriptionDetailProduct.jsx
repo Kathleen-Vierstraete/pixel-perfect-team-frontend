@@ -18,7 +18,7 @@ export const DescriptionDetailProduct = ({ product }) => {
 
     return (
         <>
-            <div className='p-4 rounded-lg bg-secondary text-white flex gap-x-16 '>
+            <div className='p-4 rounded-lg bg-secondary-dark text-white flex gap-x-16 '>
                 <button className='hover:underline focus:underline' onClick={() => toogle("description")}>Description</button>
                 <button className='hover:underline focus:underline' onClick={() => toogle("charact")}>Caractéristiques</button>
             </div>
@@ -26,7 +26,7 @@ export const DescriptionDetailProduct = ({ product }) => {
             {descriptionIsOpen &&
                 <div className='flex flex-col gap-4'>
                     <h3 className='underline'>Description</h3>
-                    <div className='bg-secondary text-white rounded-lg p-4'>
+                    <div className='bg-secondary-dark text-white rounded-lg p-4'>
                         {product.description}
                     </div>
                 </div>}
