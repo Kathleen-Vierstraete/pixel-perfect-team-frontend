@@ -1,12 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Silkscreen&display=swap');
+
 @tailwind base;
 
 @layer base {
+
+    @font-face {
+        font-family: "Nico-Moji";   /*Can be any text*/
+        src: font-url("../../fonts/nico_moji/Nico-Moji.ttf.woff") format("woff");
+      }
 
     html{
         @apply h-full
     }
     body{
         @apply h-full
+    }
+
+    p{
+        @apply font-numito
     }
 
     
@@ -27,6 +38,10 @@
         @apply text-2xl
     }
     h6{
-        @apply text-xl
+        @apply text-xl;
+        @apply font-numito
     }
+    /* span{
+        @apply font-SilkScreen
+    } */
 }

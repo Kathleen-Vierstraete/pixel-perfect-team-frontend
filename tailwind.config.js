@@ -5,16 +5,27 @@ export default {
     extend: {
       colors: {
         primary: {
-          light: "#4da6ff",
-          DEFAULT: "#0B84FF",
-          dark: "#0066cc",
+          light: "#A855F7",
+          DEFAULT: "#5C11A2",
+          dark: "#7E22CE",
         },
         secondary: {
           light: "#f39e58",
-          DEFAULT: "#ed7410",
+          DEFAULT: "#f3d849",
           dark: "#bf5d0d",
         },
+        grey: {
+          DEFAULT: "#E0E5E9",
+        },
+        black: {
+          DEFAULT: "#191617",
+        },
       },
+    },
+    fontFamily: {
+      NicoMoji: ["NicoMoji", "sans-serif"],
+      SilkScreen: ["SilkScreen", "sans-serif"],
+      numito : ['Nunito', "sans-serif"]
     },
   },
   plugins: [require("@tailwindcss/forms")],
