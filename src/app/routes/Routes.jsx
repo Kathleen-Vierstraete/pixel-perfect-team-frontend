@@ -13,7 +13,6 @@ import { PrivateRoute } from "./PrivateRoute";
 import ProductSingleView from './../views/ProductSingleView';
 import PickView from "../views/PickView";
 import Page404 from "../views/404View";
-import ProductListView from './../views/ProductListView';
 import CategoryLinks from "../components/CategoryLinks";
 
 /**
