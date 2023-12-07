@@ -4,9 +4,14 @@ import { addItem } from '../../redux-store/cartSlice';
 import { useDispatch } from 'react-redux';
 import ProductCarousel from '../carrousel/ProductCarrousel';
 import { TbTruckDelivery } from "react-icons/tb";
+import { useNavigate } from 'react-router';
+import { URL_BACK_PRODUCT } from '../../constants/urls/urlBackEnd';
+import { URL_PRODUCT_BY_ID } from '../../constants/urls/urlFrontEnd';
+import { FaEye } from "react-icons/fa";
 
 const ProductList = ({ products }) => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const getRandomProducts = (count) => {
         const shuffledProducts = [...products].sort(() => 0.5 - Math.random());
         return shuffledProducts.slice(0, count);
@@ -16,6 +21,11 @@ const ProductList = ({ products }) => {
         const top10ExpensiveProducts = sortedProducts.slice(0, count);
         return top10ExpensiveProducts;
     };
+    const navigateProduct = (id) => {
+        navigate(URL_PRODUCT_BY_ID(id));
+    }
+
+
     const expensiveProducts = getTop10ExpensiveProducts(10);
     const randomProducts = getRandomProducts(10);
     const randomProductsBottom = getRandomProducts(5);
@@ -30,9 +40,14 @@ const ProductList = ({ products }) => {
                             <span className="gap-2 bg-slate-500 bg-opacity-40 rounded-2xl text-white text-center font-bold text-xl">
                                 {product.name}
                             </span>
-                            <div onClick={() => dispatch(addItem({ id: product.id, quantity: 1, name: product.name, image: product.pictures[0].url, price: product.price }))}
-                                className="self-end p-2 rounded-full bg-secondary hover:cursor-pointer">
-                                <LiaShoppingCartSolid size={35} />
+                            <div className='flex justify-between hover:cursor-pointer' onClick={() => navigateProduct(product.id)} >
+                                <div className='bg-primary-light p-2 rounded-full'>
+                                    <FaEye size={35} color='white'  />
+                                </div>
+                                <div onClick={() => dispatch(addItem({ id: product.id, quantity: 1, name: product.name, image: product.pictures[0].url, price: product.price }))}
+                                    className="self-end p-2 rounded-full bg-secondary hover:cursor-pointer">
+                                    <LiaShoppingCartSolid size={35} color='black' />
+                                </div>
                             </div>
                         </div>
 
@@ -72,7 +87,7 @@ const ProductList = ({ products }) => {
                 </div>
             </div>
 
-            <div className="grid grid-cols-2 grid-rows-5 gap-2 lg:grid-cols-6 lg:grid-rows-3">
+            <div className="grid grid-cols-2 grid-rows-5 gap-2 lg:grid-cols-6 lg:grid-rows-2">
                 {randomProductsBottom.map((product, index) => (
                     <div key={index} className={`relative rounded-xl ${getGridPositionBottom(index)}`}>
                         <img src={product.pictures[0].url} alt={product.name} className="w-full h-full object-cover rounded-xl" />
@@ -80,9 +95,14 @@ const ProductList = ({ products }) => {
                             <span className="gap-2 bg-slate-500 bg-opacity-40 rounded-2xl text-white text-center font-bold text-xl">
                                 {product.name}
                             </span>
-                            <div onClick={() => dispatch(addItem({ id: product.id, quantity: 1, name: product.name, image: product.pictures[0].url, price: product.price }))}
-                                className="self-end p-2 rounded-full bg-secondary hover:cursor-pointer">
-                                <LiaShoppingCartSolid size={35} />
+                            <div className='flex justify-between hover:cursor-pointer' onClick={() => navigateProduct(product.id)} >
+                                <div className='bg-primary-light p-2 rounded-full'>
+                                    <FaEye size={35} color='white'  />
+                                </div>
+                                <div onClick={() => dispatch(addItem({ id: product.id, quantity: 1, name: product.name, image: product.pictures[0].url, price: product.price }))}
+                                    className="self-end p-2 rounded-full bg-secondary hover:cursor-pointer">
+                                    <LiaShoppingCartSolid size={35} color='black' />
+                                </div>
                             </div>
                         </div>
 
