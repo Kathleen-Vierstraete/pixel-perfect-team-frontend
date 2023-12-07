@@ -10,7 +10,7 @@ import ProductForCarrousel from './Product';
 const ProductCarousel = ({ products }) => {
   const settings = {
     dots: false,
-    infinite: false,
+    infinite: true,
     speed: 500,
     slidesToShow: 6,
     slidesToScroll: 4,
