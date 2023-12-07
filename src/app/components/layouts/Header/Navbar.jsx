@@ -4,8 +4,9 @@ import { FaBars, FaSearch, FaRegUser, FaRegBell } from "react-icons/fa";
 import { FiShoppingCart } from "react-icons/fi";
 import { URL_CONNEXION, URL_HOME, URL_LIST, URL_PICK } from "../../../constants/urls/urlFrontEnd";
 import MenuModal from "../../mobileLayout/MenuModal";
-import NavMenu from "../Header/NavMenu";
+
 import apiBackEnd from "../../../api/backend/api.Backend";
+import NavMenu from "./navMenu";
 
 const Navbar = () => {
   const [showMenuDropdown, setShowMenuDropdown] = useState(false);

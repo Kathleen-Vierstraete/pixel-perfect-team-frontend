@@ -5,7 +5,6 @@ import { useDispatch } from 'react-redux';
 import ProductCarousel from '../carrousel/ProductCarrousel';
 import { TbTruckDelivery } from "react-icons/tb";
 import { useNavigate } from 'react-router';
-import { URL_BACK_PRODUCT } from '../../constants/urls/urlBackEnd';
 import { URL_PRODUCT_BY_ID } from '../../constants/urls/urlFrontEnd';
 import { FaEye } from "react-icons/fa";
 
@@ -29,12 +28,14 @@ const ProductList = ({ products }) => {
     const expensiveProducts = getTop10ExpensiveProducts(10);
     const randomProducts = getRandomProducts(10);
     const randomProductsBottom = getRandomProducts(5);
+    console.log(products)
 
     return (
         <div className='flex flex-col gap-4 px-5'>
             <div className="grid grid-cols-2 grid-rows-14 gap-2 lg:grid-cols-6 lg:grid-rows-3">
                 {randomProducts.map((product, index) => (
                     <div key={index} className={`relative rounded-xl ${getGridPosition(index)}`}>
+                        
                         <img src={product.pictures[0].url} alt={product.name} className="w-full h-full object-cover rounded-xl" />
                         <div className='absolute inset-0 p-2 m-4 flex flex-col justify-between'>
                             <span className="gap-2 bg-slate-500 bg-opacity-40 rounded-2xl text-white text-center font-bold text-xl">
