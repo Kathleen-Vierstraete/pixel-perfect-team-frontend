@@ -16,7 +16,6 @@ const ProductList = ({ products }) => {
         const top10ExpensiveProducts = sortedProducts.slice(0, count);
         return top10ExpensiveProducts;
     };
-
     const expensiveProducts = getTop10ExpensiveProducts(10);
     const randomProducts = getRandomProducts(10);
     const randomProductsBottom = getRandomProducts(5);
@@ -112,7 +111,7 @@ const getGridPosition = (index) => {
         case 7:
             return "row-start-12 lg:col-start-3 lg:row-start-3";
         case 8:
-            return "row-span-3 col-start-2 lg:col-start-4 lg:row-start-3";
+            return "row-span-3 col-start-2 lg:row-span-1 lg:col-start-4 lg:row-start-3";
         case 9:
             return "row-span-2 col-start-1 row-start-13 lg:row-span-1 lg:col-span-2 lg:col-start-5 lg:row-start-3";
         default:
