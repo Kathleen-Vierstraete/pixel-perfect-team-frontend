@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaBars, FaSearch, FaRegUser, FaRegBell } from "react-icons/fa";
 import { FiShoppingCart } from "react-icons/fi";
-import { URL_LIST } from "../../../constants/urls/urlFrontEnd";
+import { URL_CONNEXION, URL_LIST, URL_PICK } from "../../../constants/urls/urlFrontEnd";
 import MenuModal from "../../mobileLayout/MenuModal";
 import NavMenu from "./navMenu";
 import apiBackEnd from "../../../api/backend/api.Backend";
@@ -10,6 +10,7 @@ import apiBackEnd from "../../../api/backend/api.Backend";
 const Navbar = () => {
   const [showMenuDropdown, setShowMenuDropdown] = useState(false);
   const [categories, setCategories] = useState([]);
+  const navigate = useNavigate();
   const toggleMenuDropdown = () => {
     setShowMenuDropdown(!showMenuDropdown);
   };
@@ -61,6 +62,7 @@ const Navbar = () => {
         <div className="flex lg:order-2 align-middle justify-center">
           <div className="flex align-middle justify-center">
             <button
+              onClick={() => navigate(URL_CONNEXION)}
               type="button"
               data-collapse-toggle="navbar-search"
               aria-controls="navbar-search"
@@ -73,7 +75,7 @@ const Navbar = () => {
               <span className="text-left w-fit hidden lg:inline">
                 Bonjour
                 <br />
-                Se connecter/S'inscrire
+                Se connecter / S'inscrire
               </span>
             </button>
           </div>
@@ -88,8 +90,8 @@ const Navbar = () => {
               <span className="h-full flex items-center justify-center me-2">
                 <FiShoppingCart />
               </span>
-              <span className="text-left w-fit h-full hidden lg:flex items-center">
-                <span>Panier</span>
+              <span onClick={() => navigate(URL_PICK)} className="text-left w-fit h-full hidden lg:flex items-center">
+                Panier
               </span>
             </button>
           </div>
