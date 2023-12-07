@@ -7,6 +7,7 @@ import DetailProduct from '../components/Product/DetailProduct';
 import Aside from '../components/Product/Aside';
 import AsideMenu from '../components/Product/AsideMenu';
 import ProductCarousel from '../components/carrousel/ProductCarrousel';
+import { Spinner } from '../components/animation/Spinner';
 
 const ProductSingleView = () => {
     const { id } = useParams();
@@ -28,7 +29,7 @@ const ProductSingleView = () => {
     return (
         <div className=''>
             {isLoading ? (
-                <p>Loading...</p>
+                <Spinner/>
             ) : (
                 <div className='relative'>
                     <div className="grid grid-cols-1 grid-rows-3 gap-6 px-10 items-start lg:grid-cols-3 lg:grid-rows-2 px">

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaBars, FaSearch, FaRegUser, FaRegBell } from "react-icons/fa";
 import { FiShoppingCart } from "react-icons/fi";
-import { URL_CONNEXION, URL_LIST, URL_PICK } from "../../../constants/urls/urlFrontEnd";
+import { URL_CONNEXION, URL_HOME, URL_LIST, URL_PICK } from "../../../constants/urls/urlFrontEnd";
 import MenuModal from "../../mobileLayout/MenuModal";
 import NavMenu from "./navMenu";
 import apiBackEnd from "../../../api/backend/api.Backend";
@@ -53,7 +53,7 @@ const Navbar = () => {
               />
             )}
           </button>
-          <Link to={URL_LIST}>
+          <Link to={URL_HOME}>
             <span className="font-SilkScreen self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
               Pixel Perfect
             </span>
