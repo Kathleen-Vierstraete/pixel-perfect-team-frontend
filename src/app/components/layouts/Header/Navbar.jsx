@@ -33,7 +33,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className="bg-primary">
+    <nav className="bg-primary sticky top-0 z-10">
       <div className="max-w-screen-xl flex flex-wrap lg:flex-nowrap items-center justify-evenly gap-2 mx-auto p-4">
         <div className="flex items-center space-x-3 text-white rtl:space-x-reverse">
           <button
