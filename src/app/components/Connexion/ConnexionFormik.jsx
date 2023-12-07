@@ -5,7 +5,12 @@ import ReusableButton from './ReusableButton';
 import * as Yup from 'yup';
 import apiBackEnd from './../../api/backend/api.Backend';
 import { URL_BACK_LOGIN_CHECK } from '../../constants/urls/urlBackEnd';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { getPayloadToken } from '../../services/tokenServices';
+import { useDispatch } from 'react-redux';
+import { signIn } from '../../redux-store/authenticationSlice';
+import { URL_HOME } from '../../constants/urls/urlFrontEnd';
+
 
 const ConnexionFormik  = () => {
 
@@ -27,12 +32,19 @@ const ConnexionFormik  = () => {
 
     const [showAlert, setShowAlert] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
+  
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     
     const onSubmit = (values) => {
         apiBackEnd.post(URL_BACK_LOGIN_CHECK, values)
           .then((response) => {
-            console.log('Login successful:', response.data);
-            setShowAlert(true);
+            console.log(response.status);
+            console.log('Login successful:', getPayloadToken(response.data.token));
+            if (response.status === 200 && response.data.token) {
+              dispatch(signIn(response.data.token));
+              navigate(URL_HOME);
+            }
           })
           .catch((error) => {
             console.error('Login error:', error);
