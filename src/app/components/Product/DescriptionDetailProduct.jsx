@@ -2,7 +2,7 @@ import { useState } from "react";
 import { CharactDetail } from "./CharactDetail";
 
 export const DescriptionDetailProduct = ({ product }) => {
-    const [descriptionIsOpen, setDescriptionIsOpen] = useState(false);
+    const [descriptionIsOpen, setDescriptionIsOpen] = useState(true);
     const [charactIsOpen, setCharactIsOpen] = useState(false);
 
     function toogle(type) {
