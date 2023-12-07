@@ -42,7 +42,7 @@ const Routes = () => {
         }
       />
       <Route path={URL.URL_LOGIN} element={<LoginView />} />
-      <Route path={URL.URL_PRODUCTS_BY_CATEGORY} element={<CategoryLinks />} />
+      <Route path={URL.URL_PRODUCTS_BY_CATEGORY()} element={<CategoryLinks />} />
     </RoutesContainer>
   );
 };

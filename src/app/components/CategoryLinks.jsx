@@ -3,36 +3,38 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 
 const CategoryLinks = ({}) => {
-
-    //defining the param const to then retreive the info from the url, in this case the id
     const params = useParams();
-    
-    //setting the const products and setProduct via the useState
-    const [products, setProducts] = useState([])
-    
-    //getting the info/data from the API 
-        useEffect(()=> {
-            axios.get(`http://localhost:8000/api/categories/${params.id}/products`) //inserting the param id to get the right API
+    const [products, setProducts] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        axios.get(`http://localhost:8000/api/categories/${params.id}/products`)
             .then(res => {
-                console.log(res)
+                console.log(res.data[0].category.label)
                 setProducts(res.data)
+                setIsLoading(false);
             })
-            .catch(err =>{
+            .catch(err => {
                 console.log(err)
             })
-        }, [params.id])
+    }, [params.id])
 
-  return (
-    <div>
-      <div></div>
-      <ul>
-        {products.map((product) => (
-            <div><li>{product.name}</li>
-            <li>{product.category.id}</li></div>
-        ))}
-      </ul>
-    </div>
-  );
+    return (
+        isLoading ? (
+            <p>Loading...</p>
+        ) : (
+            <div>
+              <div className="text-2xl underline">{products[0].category.label}</div>
+                <ul>
+                    {products.map((product) => (
+                        <div key={product.id}>
+                            <li>{product.name}</li>
+                        </div>
+                    ))}
+                </ul>
+            </div>
+        )
+    );
 };
 
 export default CategoryLinks;
