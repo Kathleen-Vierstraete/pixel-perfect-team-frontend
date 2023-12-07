@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FaBars, FaSearch, FaRegUser, FaRegBell } from "react-icons/fa";
 import { FiShoppingCart } from "react-icons/fi";
-import { URL_LIST } from "../../constants/urls/urlFrontEnd";
-import MenuModal from "../mobileLayout/MenuModal";
+import { URL_LIST } from "../../../constants/urls/urlFrontEnd";
+import MenuModal from "../../mobileLayout/MenuModal";
 import NavMenu from "./navMenu";
-import apiBackEnd from "../../api/backend/api.Backend";
+import apiBackEnd from "../../../api/backend/api.Backend";
 
 const Navbar = () => {
   const [showMenuDropdown, setShowMenuDropdown] = useState(false);
