@@ -12,6 +12,7 @@ import CreateAccount from "../views/CreateAccountView";
 import { PrivateRoute } from "./PrivateRoute";
 import ProductSingleView from './../views/ProductSingleView';
 import PickView from "../views/PickView";
+import Page404 from "../views/404View";
 
 /**
  * Routes of the application
@@ -46,6 +47,8 @@ const Routes = () => {
       <Route path={URL.URL_PICK} element={<PickView />} />
       <Route path={URL.URL_CONNEXION} element={<Connexion />} />
       <Route path={URL.URL_CREATEACCOUNT} element={<CreateAccount />} />
+      <Route path="*" element={<Page404 />} />
+     
     </RoutesContainer>
   );
 };

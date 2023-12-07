@@ -7,3 +7,4 @@ export const URL_PRODUCT_BY_ID = (id = null) => { return id === null ? '/product
 export const URL_PICK = '/pick';
 export const URL_CONNEXION = '/connexion';
 export const URL_CREATEACCOUNT = '/create-account';
+export const URL_404_PAGE = '/404'
