@@ -24,10 +24,11 @@ const CategoryLinks = ({}) => {
 
   return (
     <div>
-      <div>CategoryLinks</div>
+      <div></div>
       <ul>
         {products.map((product) => (
-            <li>{product.name}</li>
+            <div><li>{product.name}</li>
+            <li>{product.category.id}</li></div>
         ))}
       </ul>
     </div>
