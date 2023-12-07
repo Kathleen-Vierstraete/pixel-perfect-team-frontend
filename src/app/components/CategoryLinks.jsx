@@ -10,7 +10,7 @@ const CategoryLinks = ({}) => {
     useEffect(() => {
         axios.get(`http://localhost:8000/api/categories/${params.id}/products`)
             .then(res => {
-                console.log(res.data[0].category.label)
+                // console.log(res.data)
                 setProducts(res.data)
                 setIsLoading(false);
             })
