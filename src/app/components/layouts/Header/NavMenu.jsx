@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { URL_PRODUCTS_BY_CATEGORY } from "../../constants/urls/urlFrontEnd";
+import { URL_PRODUCTS_BY_CATEGORY } from "../../../constants/urls/urlFrontEnd";
 
 const NavMenu = ({categories}) => {
   const navigate = useNavigate();
