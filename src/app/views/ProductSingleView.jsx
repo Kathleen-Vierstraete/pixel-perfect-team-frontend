@@ -4,6 +4,8 @@ import ProductSingle from './../components/Product/ProductSingle';
 import apiBackEnd from './../api/backend/api.Backend';
 import { URL_PRODUCT_BY_ID } from '../constants/urls/urlBackEnd';
 import DetailProduct from '../components/layouts/Product/DetailProduct';
+import Aside from '../components/layouts/Product/Aside';
+import AsideMenu from '../components/layouts/Product/AsideMenu';
 
 const ProductSingleView = () => {
     const { id } = useParams();
@@ -26,17 +28,16 @@ const ProductSingleView = () => {
             {isLoading ? (
                 <p>Loading...</p>
             ) : (
-                <div>
-                    <div className='justify-around items-center mt-10 px-10 flex flex-col lg:flex-row'>
-                        <img className='w-full  border rounded-3xl' src={product.product.pictures[0].url} alt={product.product.name} />
-                        <ProductSingle product={product.product} />
+                <div className='relative'>
+                    <div className=" grid grid-cols-1 grid-rows-3 gap-6 px-10 lg:grid-cols-3 lg:grid-rows-2 px">
+                        <img className='self-center w-full border rounded-3xl lg:col-span-2' src={product.product.pictures[0].url} alt={product.product.name} />
+                        <div className="lg:col-start-3 lg:row-start-1 lg:sticky lg:top-10">
+                            <ProductSingle product={product.product} />
+                        </div>
+                        <div className="lg:col-span-2 lg:col-start-1 lg:row-start-2">
+                            <DetailProduct product={product.product} />
+                        </div>
                     </div>
-                    <div className='lg:hidden'>
-                        <br />
-                        <hr />
-                        <br />
-                    </div>
-                    <DetailProduct product={product.product} />
                 </div>
             )}
         </div>
