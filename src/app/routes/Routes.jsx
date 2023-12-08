@@ -13,7 +13,7 @@ import { PrivateRoute } from "./PrivateRoute";
 import ProductSingleView from './../views/ProductSingleView';
 import PickView from "../views/PickView";
 import Page404 from "../views/404View";
-import CategoryLinks from "../components/CategoryLinks";
+import CategoryView from "../views/CategoryView";
 
 /**
  * Routes of the application
@@ -48,7 +48,7 @@ const Routes = () => {
       <Route path={URL.URL_PICK} element={<PickView />} />
       <Route path={URL.URL_CONNEXION} element={<Connexion />} />
       <Route path={URL.URL_CREATEACCOUNT} element={<CreateAccount />} />   
-      <Route path={URL.URL_PRODUCTS_BY_CATEGORY()} element={<CategoryLinks />} />
+      <Route path={URL.URL_PRODUCTS_BY_CATEGORY()} element={<CategoryView />} />
       <Route path="*" element={<Page404 />} />
     </RoutesContainer>
   );
