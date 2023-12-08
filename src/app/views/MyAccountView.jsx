@@ -19,11 +19,11 @@ const MyAccountView = () => {
     const RenderRightContent = () => {
       switch (activeBox) {
         case 'Mon compte':
-          return <RightContent content="Vos informations de compte seront affichées ici." />;
+          return <RightContent content="Mes informations de compte seront affichées ici." />;
         case 'Mes adresses':
-          return <RightContent content="Vos adresses seront affichées ici." />;
+          return <RightContent content="Mes adresses seront affichées ici." />;
         case 'Mes commentaires':
-          return <RightContent content="Vos commentaires seront affichés ici." />;
+          return <RightContent content="Mes commentaires seront affichés ici." />;
         default:
           return <RightContent content="Mes commandes seront affichées ici." />;
       }
@@ -39,31 +39,29 @@ const MyAccountView = () => {
     };
   
   return (
-    <div className='mx-auto mb-32'>
-        <div className="flex justify-center ">
-            <h5 className="mb-40 font-SilkScreen">Bonjour {user.userFirstName}</h5>
-        </div>
+    <div className='mx-auto mb-8' >
+      <div className="flex justify-center ">
+        <h5 className="mb-16 font-SilkScreen">Bonjour {user.userFirstName}</h5>
+      </div>
 
       <div className="flex flex-row justify-between">
-        <div className="flex flex-col w-1/4">
+        <div className="flex flex-col lg:w-1/4 sm:w1/2">
           <LeftBox title="Mes commandes"  onClick={() => handleBoxClick('Mes commandes')} />
           <LeftBox title="Mon compte" onClick={() => handleBoxClick('Mon compte')} />
           <LeftBox title="Mes adresses"  onClick={() => handleBoxClick('Mes adresses')} />
           <LeftBox title="Mes commentaires"  onClick={() => handleBoxClick('Mes commentaires')} />
         </div>
-        <div className="flex flex-col w-3/4">
+        
+        <div className="flex flex-col lg:w-3/4 sm:w1/2 mr-1">
           {RenderRightContent()}
         </div>
       </div>
 
-
-        <div className="flex justify-center mt-10">
-            <button className="block w-1/7 text-left py-2 px-4 rounded-lg hover:bg-primary-light" onClick={handleLogout}>
-                Me déconnecter
-            </button>
-        </div>
-
-
+      <div className="flex justify-center mt-10">
+        <button className="block w-1/7 text-left py-2 px-4 rounded-lg hover:bg-primary-light" onClick={handleLogout}>
+          Me déconnecter
+        </button>
+      </div>
     </div>
 
   );
