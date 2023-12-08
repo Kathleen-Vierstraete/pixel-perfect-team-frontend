@@ -14,6 +14,7 @@ import ProductSingleView from './../views/ProductSingleView';
 import PickView from "../views/PickView";
 import Page404 from "../views/404View";
 import CategoryLinks from "../components/CategoryLinks";
+import MyAccount from "../views/MyAccount";
 
 /**
  * Routes of the application
@@ -49,6 +50,7 @@ const Routes = () => {
       <Route path={URL.URL_CONNEXION} element={<Connexion />} />
       <Route path={URL.URL_CREATEACCOUNT} element={<CreateAccount />} />   
       <Route path={URL.URL_PRODUCTS_BY_CATEGORY()} element={<CategoryLinks />} />
+      <Route path={URL.URL_ACCOUNT} element={<MyAccount />} />
       <Route path="*" element={<Page404 />} />
     </RoutesContainer>
   );
