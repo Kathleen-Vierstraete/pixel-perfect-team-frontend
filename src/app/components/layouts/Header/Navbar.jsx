@@ -8,7 +8,7 @@ import MenuModal from "../../mobileLayout/MenuModal";
 import apiBackEnd from "../../../api/backend/api.Backend";
 import NavMenu from "./navMenu";
 import { useSelector } from "react-redux";
-import { selectIsLogged } from "../../../redux-store/authenticationSlice";
+import { selectIsLogged, selectUser } from "../../../redux-store/authenticationSlice";
 
 const Navbar = () => {
   const [showMenuDropdown, setShowMenuDropdown] = useState(false);
@@ -20,7 +20,12 @@ const Navbar = () => {
 
   const isAuthenticated = useSelector(selectIsLogged);
 
+  const user = useSelector(selectUser);
+
   console.log(isAuthenticated);
+  console.log(selectUser);
+  console.log(selectUser.id);
+  console.log(selectUser.username);
 
   /**
    * Get categories from the api endpoint categories
@@ -79,11 +84,18 @@ const Navbar = () => {
               <span className="h-full flex items-center justify-center me-2">
                 <FaRegUser />
               </span>
+              {!isAuthenticated ? 
               <span className="text-left w-fit hidden lg:inline">
                 Bonjour
                 <br />
                 Se connecter / S'inscrire
               </span>
+              :
+              <span className="text-left w-fit hidden lg:inline">
+              Se déconnecter
+              </span>
+              
+            }
             </button>
           </div>
           <div className="flex align-middle justify-center">
