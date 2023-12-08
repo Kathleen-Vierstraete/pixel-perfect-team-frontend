@@ -9,3 +9,4 @@ export const URL_CONNEXION = '/connexion';
 export const URL_CREATEACCOUNT = '/create-account';
 export const URL_404_PAGE = '/404'
 export const URL_PRODUCTS_BY_CATEGORY = (id = null) =>{return id ===null?'/:id/products':`/${id}/products`}
+export const URL_ACCOUNT = '/account'
