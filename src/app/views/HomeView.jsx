@@ -37,7 +37,7 @@ const HomeView = () => {
 
     return (
         isLoading ? (
-            <Spinner />
+            <Spinner message="Aucun produits" />
         ) : (
             <div className='container mx-auto'>
                 <div className='flex flex-col gap-4 px-5'>
