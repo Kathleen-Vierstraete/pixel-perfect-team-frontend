@@ -13,8 +13,6 @@ const ProductForCarrousel = ({ product }) => {
         navigate(URL_PRODUCT_BY_ID(id));
     }
 
-    console.log(product);
-
     if (product.pictures && product.pictures.length > 0) {
         picture = product.pictures[0].url;
     } else if (product.url){

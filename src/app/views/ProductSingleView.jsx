@@ -4,8 +4,6 @@ import ProductSingle from './../components/Product/ProductSingle';
 import apiBackEnd from './../api/backend/api.Backend';
 import { URL_PRODUCT_BY_ID } from '../constants/urls/urlBackEnd';
 import DetailProduct from '../components/Product/DetailProduct';
-import Aside from '../components/Product/Aside';
-import AsideMenu from '../components/Product/AsideMenu';
 import ProductCarousel from '../components/carrousel/ProductCarrousel';
 import { Spinner } from '../components/animation/Spinner';
 
@@ -18,7 +16,6 @@ const ProductSingleView = () => {
         apiBackEnd.get(URL_PRODUCT_BY_ID(id))
             .then(response => {
                 setProduct(response.data);
-                console.log(response.data)
                 setIsLoading(false);
             })
             .catch(error => {
