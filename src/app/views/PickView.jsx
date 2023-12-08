@@ -63,7 +63,7 @@ export const PickView = () => {
                 <div className="flex justify-between mt-2"><span className="font-bold">Prix TTC</span><span>{(totalPrice + 2900) / 100}€</span></div>
                 <div className="flex flex-col my-6 gap-2 lg:hidden">
                   {isLoading ? (
-                    <Spinner />
+                    <Spinner message="Aucun article similaire trouvé" />
                   ) : (
                     <>
                       <h4 className="text-2xl font-medium">ARTICLES SIMILAIRES</h4>
@@ -83,7 +83,7 @@ export const PickView = () => {
       </div>
       <div className="hidden flex-col my-6 gap-2 lg:flex">
         {isLoading ? (
-          <Spinner />
+          <Spinner message="Aucun article similaire trouvé" />
         ) : (
           <>
             <h4 className="text-2xl font-medium">ARTICLES SIMILAIRES</h4>
