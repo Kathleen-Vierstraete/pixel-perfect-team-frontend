@@ -1,10 +1,7 @@
-import { FaEye } from "react-icons/fa";
-import { LiaShoppingCartSolid } from "react-icons/lia";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { URL_PRODUCT_BY_ID } from "../../constants/urls/urlFrontEnd";
-import { addItem } from "../../redux-store/cartSlice";
-import { CardFirstProduct } from "./CardFirstProduct";
+import { CardProduct } from "./CardProduct";
 
 export const BottomProduct = ({ products }) => {
     const dispatch = useDispatch();
@@ -20,7 +17,7 @@ export const BottomProduct = ({ products }) => {
     return (
         <div className="grid grid-cols-2 grid-rows-5 gap-2 lg:grid-cols-6 lg:grid-rows-2">
             {randomProductsBottom.map((product, index) => (
-                <CardFirstProduct key={index} product={product} position={getGridPositionBottom(index)} />
+                <CardProduct key={index} product={product} position={getGridPositionBottom(index)} />
             ))}
         </div >
     );

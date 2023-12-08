@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { FaEye } from "react-icons/fa";
 
-export const CardFirstProduct = ({ product, position }) => {
+export const CardProduct = ({ product, position }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     let picture = "";
