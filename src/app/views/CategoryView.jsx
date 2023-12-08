@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { Spinner } from "../components/animation/Spinner";
-import ProductList from "../components/Product/ProductList";
+import ProductByCategory from "../components/ProductByCategory";
 
 const CategoryView = ({}) => {
   const params = useParams();
@@ -21,14 +21,12 @@ const CategoryView = ({}) => {
       });
   }, [params.id]);
 
-  // TODO : gérer l'erreur en cas d'ID non trouvé en BDD
-
   return isLoading ? (
     <Spinner />
   ) : (
     <div>
       <div className="text-2xl underline">{products[0].category.label}</div>
-        <ProductList products={products} />
+        <ProductByCategory products={products} />
     </div>
   );
 };
