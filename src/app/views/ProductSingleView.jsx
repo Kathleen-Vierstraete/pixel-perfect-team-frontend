@@ -34,7 +34,7 @@ const ProductSingleView = () => {
     return (
         <div className=''>
             {isLoading ? (
-                <Spinner message="Cet article n'existe pas"/>
+                <Spinner message="Cet article n'existe pas" redirect404={true}/>
             ) : (
                 <div className='relative'>
                     <div className="grid grid-cols-1 grid-rows-3 gap-6 px-10 items-start lg:grid-cols-3 lg:grid-rows-2 px">
