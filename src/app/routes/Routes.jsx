@@ -14,7 +14,8 @@ import ProductSingleView from './../views/ProductSingleView';
 import PickView from "../views/PickView";
 import Page404 from "../views/404View";
 import CategoryLinks from "../components/CategoryLinks";
-import MyAccount from "../views/MyAccount";
+import MyAccount from "../views/MyAccountView";
+
 
 /**
  * Routes of the application
