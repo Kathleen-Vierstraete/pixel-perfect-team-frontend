@@ -12,9 +12,15 @@ function Aside({ product }) {
     const descriptionCourte = `${product.description.slice(0, 49)}...`;
     const [quantity, setQuantity] = useState(1);
     const [isAdded, setIsAdded] = useState(false);
+    let picture = "";
+    if (product.pictures && product.pictures.length > 0) {
+        picture = product.pictures[0].url;
+    } else if (product.url) {
+        picture = product.url;
+    }
 
     const addProduct = () => {
-        dispatch(addItem({ id: product.id, quantity: quantity, name: product.name, image: product.pictures[0].url, price: product.price }));
+        dispatch(addItem({ id: product.id, quantity: quantity, name: product.name, image: picture, price: product.price }));
         setIsAdded(true);
     }
     const handleQuantityChange = (e) => {
