@@ -23,12 +23,9 @@ const ProductList = ({ products }) => {
     const navigateProduct = (id) => {
         navigate(URL_PRODUCT_BY_ID(id));
     }
-
-
     const expensiveProducts = getTop10ExpensiveProducts(10);
     const randomProducts = getRandomProducts(10);
     const randomProductsBottom = getRandomProducts(5);
-    console.log(products)
 
     return (
         <div className='flex flex-col gap-4 px-5'>

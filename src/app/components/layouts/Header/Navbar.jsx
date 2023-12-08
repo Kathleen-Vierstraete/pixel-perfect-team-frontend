@@ -19,15 +19,7 @@ const Navbar = () => {
   };
 
   const isAuthenticated = useSelector(selectIsLogged);
-
   const user = useSelector(selectUser);
-
-  console.log(isAuthenticated);
-  console.log(user);
-  console.log(user.id);
-  console.log(user.username);
-  console.log(user.userFirstName);
-
   /**
    * Get categories from the api endpoint categories
    */
