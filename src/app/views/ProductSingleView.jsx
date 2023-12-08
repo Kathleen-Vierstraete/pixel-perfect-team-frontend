@@ -12,22 +12,24 @@ const ProductSingleView = () => {
     const [product, setProduct] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     let picture = "";
-    if (product.pictures && product.pictures.length > 0) {
-        picture = product.pictures[0].url;
-    } else if (product.url) {
-        picture = product.url;
-    }
-
+    
     useEffect(() => {
         apiBackEnd.get(URL_PRODUCT_BY_ID(id))
             .then(response => {
                 setProduct(response.data);
                 setIsLoading(false);
+                console.log(product)
             })
             .catch(error => {
                 console.error('Error fetching product:', error);
             });
     }, [id]);
+
+    if (product.product && product.product.pictures.length > 0) {
+        picture = product.product.pictures[0].url;
+    } else if (product.url) {
+        picture = product.product.url;
+    }
 
     return (
         <div className=''>
