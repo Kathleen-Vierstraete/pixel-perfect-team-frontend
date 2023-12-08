@@ -9,11 +9,13 @@ import apiBackEnd from "../../../api/backend/api.Backend";
 import NavMenu from "./navMenu";
 import { useSelector } from "react-redux";
 import { selectIsLogged, selectUser } from "../../../redux-store/authenticationSlice";
+import { selectTotalQuantity } from "../../../redux-store/cartSlice";
 
 const Navbar = () => {
   const [showMenuDropdown, setShowMenuDropdown] = useState(false);
   const [categories, setCategories] = useState([]);
   const navigate = useNavigate();
+  const allItemPick = useSelector(selectTotalQuantity);
   const toggleMenuDropdown = () => {
     setShowMenuDropdown(!showMenuDropdown);
   };
@@ -35,7 +37,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className="bg-primary">
+    <nav className="bg-primary sticky top-0 z-10">
       <div className="max-w-screen-xl flex flex-wrap lg:flex-nowrap items-center justify-evenly gap-2 mx-auto p-4">
         <div className="flex items-center space-x-3 text-white rtl:space-x-reverse">
           <button
@@ -77,34 +79,38 @@ const Navbar = () => {
               <span className="h-full flex items-center justify-center me-2">
                 <FaRegUser />
               </span>
-              {!isAuthenticated ? 
-              <span className="text-left w-fit hidden lg:inline">
-                Bonjour
-                <br />
-                Se connecter / S'inscrire
-              </span>
-              :
-              <span className="text-left w-fit hidden lg:inline">
-                Bonjour {user.userFirstName}
-              </span>
-              
-            }
+              {!isAuthenticated ?
+                <span className="text-left w-fit hidden lg:inline">
+                  Bonjour
+                  <br />
+                  Se connecter / S'inscrire
+                </span>
+                :
+                <span className="text-left w-fit hidden lg:inline">
+                  Bonjour {user.userFirstName}
+                </span>
+
+              }
             </button>
           </div>
           <div className="flex align-middle justify-center">
             <button
+              onClick={() => navigate(URL_PICK)}
               type="button"
               data-collapse-toggle="navbar-search"
               aria-controls="navbar-search"
               aria-expanded="false"
-              className="hover:bg-gray-900/25 text-white rounded-lg text-sm p-2.5 me-1 flex flex-row justify-end cursor-pointer w-fit"
+              className="flex items-center gap-2 text-white rounded-lg text-sm p-2.5  cursor-pointer hover:bg-gray-900/25"
             >
-              <span className="h-full flex items-center justify-center me-2">
-                <FiShoppingCart />
-              </span>
-              <span onClick={() => navigate(URL_PICK)} className="text-left w-fit h-full hidden lg:flex items-center">
+              <FiShoppingCart />
+              <span className="hidden text-left w-fit h-full lg:flex items-center">
                 Panier
               </span>
+              {allItemPick === 0 ? <></> : (
+                <span className="bg-secondary-dark py-1 px-2 rounded-full">
+                  {allItemPick}
+                </span>)}
+
             </button>
           </div>
           <div className="flex align-middle justify-center">
