@@ -17,11 +17,14 @@ export const PickView = () => {
   const totalQuantity = useSelector(selectTotalQuantity);
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-
+  const productIds = () => {
+    let test = paniers.map(item => item.id).join(",");
+    return test;
+  }
+  
   useEffect(() => {
     apiBackEnd.post(URL_BACK_PRODUCTS_BY_TAGS, {
-      "tag_ids": [1931, 1957, 1910, 1942],
-      "product_ids": [2469, 2502]
+      "product_ids": [productIds()]
     })
       .then(response => {
         setProducts(response.data);
@@ -30,7 +33,7 @@ export const PickView = () => {
       .catch(error => {
         console.error("Error fetching products By tags", error);
       })
-  }, []);
+  }, [paniers]);
 
   return (
     <div className="flex flex-col mx-2 mt-9 md:mt-0">
