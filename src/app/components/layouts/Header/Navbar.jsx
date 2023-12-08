@@ -23,9 +23,10 @@ const Navbar = () => {
   const user = useSelector(selectUser);
 
   console.log(isAuthenticated);
-  console.log(selectUser);
-  console.log(selectUser.id);
-  console.log(selectUser.username);
+  console.log(user);
+  console.log(user.id);
+  console.log(user.username);
+  console.log(user.userFirstName);
 
   /**
    * Get categories from the api endpoint categories
@@ -92,7 +93,7 @@ const Navbar = () => {
               </span>
               :
               <span className="text-left w-fit hidden lg:inline">
-              Se déconnecter
+                Bonjour {user.userFirstName}
               </span>
               
             }
