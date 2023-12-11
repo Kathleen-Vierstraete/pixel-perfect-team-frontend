@@ -3,6 +3,7 @@ import { URL_PRODUCT_BY_ID } from "../../constants/urls/urlFrontEnd";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { FaEye } from "react-icons/fa";
+import{ addItem } from "../../redux-store/cartSlice"
 
 export const CardProduct = ({ product, position }) => {
     const dispatch = useDispatch();

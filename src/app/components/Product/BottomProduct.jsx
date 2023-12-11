@@ -4,15 +4,11 @@ import { URL_PRODUCT_BY_ID } from "../../constants/urls/urlFrontEnd";
 import { CardProduct } from "./CardProduct";
 
 export const BottomProduct = ({ products }) => {
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
     const getRandomProducts = (count) => {
         const shuffledProducts = [...products].sort(() => 0.5 - Math.random());
         return shuffledProducts.slice(0, count);
     };
-    const navigateProduct = (id) => {
-        navigate(URL_PRODUCT_BY_ID(id));
-    }
+
     const randomProductsBottom = getRandomProducts(5);
     return (
         <div className="grid grid-cols-2 grid-rows-5 gap-2 lg:grid-cols-6 lg:grid-rows-2">
