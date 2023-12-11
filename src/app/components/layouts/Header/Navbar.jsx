@@ -134,7 +134,7 @@ const Navbar = () => {
             className="relative flex-col items-center justify-between w-full  lg:w-1/2 lg:order-1"
             id="navbar-search"
           >
-            <SearchBar text={searchText} setText={setSearchText} />
+            <SearchBar text={searchText} setText={setSearchText} categoryName={products[0].category.label} />
             {
               searchText && <>
                 {

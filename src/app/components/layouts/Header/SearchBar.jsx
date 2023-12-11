@@ -1,14 +1,18 @@
 import { FaSearch } from "react-icons/fa";
 import { useEffect, useState } from "react";
 
-export const SearchBar = ({ text, setText }) => {
-    
+export const SearchBar = ({ text, setText, categoryName }) => {
     const [searchText, setSearchText] = useState(text);
-
     const handleChangeText = (value) => {
         setSearchText(value);
     };
-    
+    const placeholder = () => {
+        if (window.location.pathname.includes("category")) {
+            return `Rechercher dans ${categoryName}...`;
+        }
+
+        return "Rechercher...";
+    }
 
     useEffect(() => {
         const delayDebounceFn = setTimeout(() => {
@@ -36,8 +40,8 @@ export const SearchBar = ({ text, setText }) => {
                 type="text"
                 id="search-navbar"
                 className="block py-auto w-full p-2 ps-10 text-sm text-gray-900 border rounded-lg bg-gray-50 focus:ring-secondary focus:border-secondary"
-                placeholder="Search..."
-                value={searchText}
+                placeholder={placeholder()}
+                value={text}
                 onChange={(e) => handleChangeText(e.target.value)}
             />
         </div>
