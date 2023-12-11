@@ -37,7 +37,8 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className="bg-primary sticky top-0 z-10">
+    <div className="sticky top-0 z-10">
+    <nav className="bg-primary">
       <div className="max-w-screen-xl flex flex-wrap lg:flex-nowrap items-center justify-evenly gap-2 mx-auto p-4">
         <div className="flex items-center space-x-3 text-white rtl:space-x-reverse">
           <button
@@ -53,12 +54,7 @@ const Navbar = () => {
                 <FaBars />
               </span>
             </div>
-            {showMenuDropdown && (
-              <MenuModal
-                toggleMenuDropdown={toggleMenuDropdown}
-                categories={categories}
-              />
-            )}
+
           </button>
           <Link to={URL_HOME}>
             <span className="font-SilkScreen self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
@@ -157,6 +153,15 @@ const Navbar = () => {
         <NavMenu categories={categories} />
       </div>
     </nav>
+    <div>
+      {showMenuDropdown && (
+              <MenuModal
+                toggleMenuDropdown={toggleMenuDropdown}
+                categories={categories}
+              />
+            )}
+      </div>
+      </div>
   );
 };
 
