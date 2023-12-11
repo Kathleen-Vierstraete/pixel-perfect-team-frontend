@@ -4,7 +4,6 @@ import { FaBars, FaRegBell } from "react-icons/fa";
 import { FiShoppingCart } from "react-icons/fi";
 import { URL_HOME, URL_PICK, URL_PRODUCT_BY_ID } from "../../../constants/urls/urlFrontEnd";
 import MenuModal from "../../mobileLayout/MenuModal";
-
 import apiBackEnd from "../../../api/backend/api.Backend";
 import NavMenu from "./navMenu";
 import { useSelector } from "react-redux";
@@ -24,6 +23,14 @@ const Navbar = () => {
     setShowMenuDropdown(!showMenuDropdown);
   };
   const products = useSelector(getProducts);
+
+  const picture = (product) => {
+    if (product.pictures && product.pictures.length > 0) {
+      return product.pictures[0].url;
+    } else if (product.url) {
+      return product.url;
+    }
+  }
 
   const filterProducts = (text) => {
     if (!text) {
@@ -138,11 +145,11 @@ const Navbar = () => {
                   ) : (
                     <div className="absolute right-0 left-0  rounded-lg overflow-y-auto  max-h-80 bg-secondary text-dark">
                       <ul>
-                        {searchResults.map((result) => (
-                          <div className="" onClick={() => handleNavigateSearchBar(result.id)}>
-                            <li className="px-4 py-2 flex items-center gap-4 hover:bg-primary-light" key={result.id}>
-                              <img className="h-8" src={result.pictures[0].url} alt="" />
-                              <span>{result.name}</span>
+                        {searchResults.map((product) => (
+                          <div className="" onClick={() => handleNavigateSearchBar(product.id)}>
+                            <li className="px-4 py-2 flex items-center gap-4 hover:bg-primary-light" key={product.id}>
+                              <img className="h-8" src={picture(product)} alt="" />
+                              <span>{product.name}</span>
                             </li>
                             <hr className="border-black" />
                           </div>
