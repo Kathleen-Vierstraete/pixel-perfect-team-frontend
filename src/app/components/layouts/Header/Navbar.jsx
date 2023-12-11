@@ -10,6 +10,7 @@ import NavMenu from "./navMenu";
 import { useSelector } from "react-redux";
 import { selectIsLogged, selectUser } from "../../../redux-store/authenticationSlice";
 import { selectTotalQuantity } from "../../../redux-store/cartSlice";
+import { ConnectionButton } from "./Button/Connection";
 
 const Navbar = () => {
   const [showMenuDropdown, setShowMenuDropdown] = useState(false);
@@ -63,32 +64,7 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="flex lg:order-2 align-middle justify-center">
-          <div className="flex align-middle justify-center">
-            <button
-              onClick={() => navigate(URL_CONNEXION)}
-              type="button"
-              data-collapse-toggle="navbar-search"
-              aria-controls="navbar-search"
-              aria-expanded="false"
-              className="text-white hover:bg-gray-900/25 rounded-lg text-sm p-2.5 me-1 flex flex-row justify-end cursor-pointer w-fit"
-            >
-              <span className="h-full flex items-center justify-center me-2">
-                <FaRegUser />
-              </span>
-              {!isAuthenticated ?
-                <span className="text-left w-fit hidden lg:inline">
-                  Bonjour
-                  <br />
-                  Se connecter / S'inscrire
-                </span>
-                :
-                <span className="text-left w-fit hidden lg:inline">
-                  Bonjour {user.userFirstName}
-                </span>
-
-              }
-            </button>
-          </div>
+          <ConnectionButton />
           <div className="flex align-middle justify-center">
             <button
               onClick={() => navigate(URL_PICK)}

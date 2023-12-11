@@ -15,6 +15,9 @@ import PickView from "../views/PickView";
 import Page404 from "../views/404View";
 import CategoryView from "../views/CategoryView";
 
+import MyAccount from "../views/MyAccountView";
+
+
 /**
  * Routes of the application
  * with public and private route
@@ -49,6 +52,8 @@ const Routes = () => {
       <Route path={URL.URL_CONNEXION} element={<Connexion />} />
       <Route path={URL.URL_CREATEACCOUNT} element={<CreateAccount />} />   
       <Route path={URL.URL_PRODUCTS_BY_CATEGORY()} element={<CategoryView />} />
+
+      <Route path={URL.URL_ACCOUNT} element={<MyAccount />} />
       <Route path="*" element={<Page404 />} />
     </RoutesContainer>
   );
