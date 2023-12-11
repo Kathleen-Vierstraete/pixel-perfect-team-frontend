@@ -2,7 +2,6 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { Spinner } from "../components/animation/Spinner";
-// import ProductByCategory from "../components/ProductByCategory";
 import PaginationView from "./PaginationView";
 
 const CategoryView = ({}) => {
@@ -25,7 +24,10 @@ const CategoryView = ({}) => {
   return isLoading ? (
     <Spinner />
   ) : (
-    <div>
+    <div className="m-5 flex flex-col gap-5">
+      <h1 className="font-SilkScreen underline">
+        {products[0].category.label}
+      </h1>
       <PaginationView products={products} />
     </div>
   );

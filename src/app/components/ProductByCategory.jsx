@@ -15,7 +15,6 @@ const ProductByCategory = ({ products }) => {
 
   return (
     <div className="flex flex-col gap-4 px-5">
-      <h1>{products[0].category.label}</h1>
       <div className="grid grid-cols-2 gap-2 lg:grid-cols-4">
         {products.map((product, index) => (
           <div key={index} className={`relative rounded-xl`}>

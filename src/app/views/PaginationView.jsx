@@ -11,7 +11,7 @@ const PaginationView = ({ products }) => {
   const currentProducts = products.slice(startIndex, endIndex);
 
   return (
-    <div>
+    <div className="m-5 flex flex-col gap-5">
       <PaginationArrows
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}

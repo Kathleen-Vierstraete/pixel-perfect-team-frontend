@@ -1,4 +1,5 @@
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const PaginationArrows = ({ currentPage, setCurrentPage, totalPages }) => {
   const handlePageChange = (newPage) => {
@@ -8,33 +9,39 @@ const PaginationArrows = ({ currentPage, setCurrentPage, totalPages }) => {
   return (
     <div>
       <div className="flex items-center gap-4 font-SilkScreen">
-        <div>
+        <button>
           <FaArrowLeft
             className={currentPage == 1 ? "hidden" : ""}
             onClick={() => handlePageChange(currentPage - 1)}
           />
-        </div>
+        </button>
 
         {Array.from({ length: totalPages }, (_, index) => (
           <button
-            className={
-              index + 1 == currentPage
-                ? "text-white font-extrabold bg-primary rounded-full w-7 aspect-square"
-                : "text-secondary"
-            }
+            className="flex items-center"
             key={index + 1}
             onClick={() => handlePageChange(index + 1)}
           >
-            {index + 1}
+            <span
+              className={ "rounded-full w-7 aspect-square " +
+                (
+                    index + 1 == currentPage
+                  ? "text-white font-extrabold bg-primary"
+                  : "text-primary"
+                  )
+              }
+            >
+              {index + 1}
+            </span>
           </button>
         ))}
 
-        <div>
+        <button>
           <FaArrowRight
             className={currentPage == totalPages ? "hidden" : ""}
             onClick={() => handlePageChange(currentPage + 1)}
           />
-        </div>
+        </button>
       </div>
     </div>
   );
