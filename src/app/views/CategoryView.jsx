@@ -2,7 +2,8 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { Spinner } from "../components/animation/Spinner";
-import ProductByCategory from "../components/ProductByCategory";
+// import ProductByCategory from "../components/ProductByCategory";
+import PaginationView from "./PaginationView";
 
 const CategoryView = ({}) => {
   const params = useParams();
@@ -25,8 +26,7 @@ const CategoryView = ({}) => {
     <Spinner />
   ) : (
     <div>
-      <div className="text-2xl underline">{products[0].category.label}</div>
-        <ProductByCategory products={products} />
+      <PaginationView products={products} />
     </div>
   );
 };

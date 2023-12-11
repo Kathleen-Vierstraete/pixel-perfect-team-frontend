@@ -1,14 +1,15 @@
 import { useState } from 'react';
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import ProductByCategory from '../components/ProductByCategory';
 
-const PaginationView = () => {
-    const productList = Array.from({ length: 50 }, (_, index) => ({ id: index + 1, name: `Produit ${index + 1}` }));
+const PaginationView = ({products}) => {
+    console.log(products);
     const itemsPerPage = 12;
     const [currentPage, setCurrentPage] = useState(1);
-    const totalPages = Math.ceil(productList.length / itemsPerPage);
+    const totalPages = Math.ceil(products.length / itemsPerPage);
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
-    const currentProducts = productList.slice(startIndex, endIndex);
+    const currentProducts = products.slice(startIndex, endIndex);
 
     const handlePageChange = (newPage) => {
         setCurrentPage(newPage);
@@ -16,13 +17,7 @@ const PaginationView = () => {
 
     return (
         <div>
-            <h1>Liste de Produits</h1>
-            <ul>
-                {currentProducts.map(product => (
-                    <li key={product.id}>{product.name}</li>
-                ))}
-            </ul>
-
+            <ProductByCategory products={currentProducts} />
             <div className='flex items-center gap-4'>
                 <div>
                     <FaArrowLeft onClick={() => handlePageChange(currentPage - 1)} />
