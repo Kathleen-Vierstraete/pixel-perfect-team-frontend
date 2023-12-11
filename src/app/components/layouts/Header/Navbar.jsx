@@ -128,7 +128,6 @@ const Navbar = () => {
             id="navbar-search"
           >
             <SearchBar text={searchText} setText={setSearchText} />
-
             {
               searchText && <>
                 {
@@ -137,14 +136,15 @@ const Navbar = () => {
                       <p className="text-center"> Aucun resultat trouvé</p>
                     </div>
                   ) : (
-                    <div className="absolute right-0 left-0  rounded-lg overflow-y-auto  max-h-80 bg-secondary-dark text-white">
+                    <div className="absolute right-0 left-0  rounded-lg overflow-y-auto  max-h-80 bg-secondary text-dark">
                       <ul>
                         {searchResults.map((result) => (
-                          <div onClick={() => handleNavigateSearchBar(result.id)}>
-                            <li className="px-4 py-2" key={result.id}>
-                              {result.name}
+                          <div className="" onClick={() => handleNavigateSearchBar(result.id)}>
+                            <li className="px-4 py-2 flex items-center gap-4 hover:bg-primary-light" key={result.id}>
+                              <img className="h-8" src={result.pictures[0].url} alt="" />
+                              <span>{result.name}</span>
                             </li>
-                            <hr />
+                            <hr className="border-black" />
                           </div>
                         ))}
                       </ul>
