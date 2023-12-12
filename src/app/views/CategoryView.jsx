@@ -31,7 +31,7 @@ const CategoryView = ({}) => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [params.id]);
 
   // Getting the similar products
   useEffect(() => {
