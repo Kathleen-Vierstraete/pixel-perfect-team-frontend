@@ -6,13 +6,15 @@ import { URL_HOME, URL_PICK, URL_PRODUCT_BY_ID } from "../../../constants/urls/u
 import MenuModal from "../../mobileLayout/MenuModal";
 import apiBackEnd from "../../../api/backend/api.Backend";
 import NavMenu from "./navMenu";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectTotalQuantity } from "../../../redux-store/cartSlice";
 import { ConnectionButton } from "./Button/Connection";
 import { SearchBar } from "./SearchBar";
-import { getProducts } from "../../../redux-store/productSlice";
+import { getProducts, setProduct } from "../../../redux-store/productSlice";
+import { URL_BACK_PRODUCT } from "../../../constants/urls/urlBackEnd";
 
 const Navbar = () => {
+  const dispatch = useDispatch();
   const [showMenuDropdown, setShowMenuDropdown] = useState(false);
   const [categories, setCategories] = useState([]);
   const [searchText, setSearchText] = useState("");
@@ -23,6 +25,17 @@ const Navbar = () => {
     setShowMenuDropdown(!showMenuDropdown);
   };
   const products = useSelector(getProducts);
+
+  if (window.location.pathname.startsWith("/product/") && !products) {
+    apiBackEnd.get(URL_BACK_PRODUCT)
+      .then(response => {
+        dispatch(setProduct(response.data))
+        console.log("product Ajouter")
+      })
+      .catch(error => {
+        console.error('Error fetching product:', error);
+      });
+  }
 
   const picture = (product) => {
     if (product.pictures && product.pictures.length > 0) {
@@ -134,7 +147,9 @@ const Navbar = () => {
             className="relative flex-col items-center justify-between w-full  lg:w-1/2 lg:order-1"
             id="navbar-search"
           >
-            <SearchBar text={searchText} setText={setSearchText} categoryName={products[0].category.label} />
+            {products &&
+              <SearchBar text={searchText} setText={setSearchText} categoryName={products[0].category.label} />
+            }
             {
               searchText && <>
                 {
@@ -143,10 +158,10 @@ const Navbar = () => {
                       <p className="text-center"> Aucun resultat trouvé</p>
                     </div>
                   ) : (
-                    <div className="absolute right-0 left-0  rounded-lg overflow-y-auto  max-h-80 bg-secondary text-dark">
+                    <div  className="absolute right-0 left-0  rounded-lg overflow-y-auto  max-h-80 bg-secondary text-dark">
                       <ul>
                         {searchResults.map((product) => (
-                          <div className="" onClick={() => handleNavigateSearchBar(product.id)}>
+                          <div key={product.id} className="" onClick={() => handleNavigateSearchBar(product.id)}>
                             <li className="px-4 py-2 flex items-center gap-4 hover:bg-primary-light" key={product.id}>
                               <img className="h-8" src={picture(product)} alt="" />
                               <span>{product.name}</span>
