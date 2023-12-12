@@ -13,6 +13,8 @@ const ProductByCategory = ({ products }) => {
     navigate(URL_PRODUCT_BY_ID(id));
   };
 
+// TODO : utiliser le window.location.pathname, le stocker dans une variable, comparer avec l'url, en cas de changement -> remettre currentPage à 1
+
   return (
     <div className="flex flex-col gap-4 px-5">
       <div className="grid grid-cols-2 gap-2 lg:grid-cols-4">
