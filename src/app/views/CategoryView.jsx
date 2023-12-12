@@ -36,7 +36,6 @@ const CategoryView = ({}) => {
   // Getting the similar products
   useEffect(() => {
     if (products.length > 0) {
-      console.log(productIds());
       apiBackEnd
         .post(URL_BACK_PRODUCTS_BY_TAGS, {
           product_ids: [productIds()],

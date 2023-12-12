@@ -18,7 +18,6 @@ const ProductSingleView = () => {
             .then(response => {
                 setProduct(response.data);
                 setIsLoading(false);
-                console.log(product)
             })
             .catch(error => {
                 console.error('Error fetching product:', error);

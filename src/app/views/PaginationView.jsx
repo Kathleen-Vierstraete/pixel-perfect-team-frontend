@@ -13,7 +13,6 @@ const PaginationView = ({ products }) => {
 
   useEffect(() => {
     setCurrentPage(1);
-    console.log("oui oui", currentPage);
   }, [pathname]);
 
   return (
