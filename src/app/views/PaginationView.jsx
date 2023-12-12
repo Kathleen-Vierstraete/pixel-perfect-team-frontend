@@ -17,26 +17,20 @@ const PaginationView = ({ products }) => {
   }, [pathname]);
 
   return (
-    <div>
-      <div className="m-5 flex flex-col gap-5">
-        <PaginationArrows
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
-          totalPages={totalPages}
-          categoryId={products[0].category.id}
-        />
-        <ProductByCategory products={currentProducts} />
-        <PaginationArrows
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
-          totalPages={totalPages}
-          categoryId={products[0].category.id}
-        />
-      </div>
-      <div>
-        <h4 className="text-2xl font-medium">NOS PRODUITS PHARES</h4>
-        <ProductCarousel products={expensiveProducts} />
-      </div>
+    <div className="m-5 flex flex-col gap-5">
+      <PaginationArrows
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        totalPages={totalPages}
+        categoryId={products[0].category.id}
+      />
+      <ProductByCategory products={currentProducts} />
+      <PaginationArrows
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        totalPages={totalPages}
+        categoryId={products[0].category.id}
+      />
     </div>
   );
 };
