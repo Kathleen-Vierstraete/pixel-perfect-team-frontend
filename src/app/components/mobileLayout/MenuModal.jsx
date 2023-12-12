@@ -20,9 +20,9 @@ const MenuModal = ({ toggleMenuDropdown, categories }) => {
             className="flex justify-end cursor-pointer"
             onClick={toggleMenuDropdown}
           >
-            <IoCloseCircle className="text-red-600 bg-white rounded-full" />
+            <IoCloseCircle size={40} className="text-red-600 bg-white rounded-full" />
           </span>
-          <NavMenu categories={categories} />
+          <NavMenu categories={categories} toggleMenuDropdown={toggleMenuDropdown} />
         </div>
       </div>
     </div>

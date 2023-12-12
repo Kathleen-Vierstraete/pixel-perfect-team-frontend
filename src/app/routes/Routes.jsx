@@ -51,7 +51,7 @@ const Routes = () => {
       <Route path={URL.URL_LOGIN} element={<LoginView />} />
       <Route path={URL.URL_PICK} element={<PickView />} />
       <Route path={URL.URL_CONNEXION} element={<Connexion />} />
-      <Route path={URL.URL_CREATEACCOUNT} element={<CreateAccount />} />   
+      <Route path={URL.URL_CREATEACCOUNT} element={<CreateAccount />} />
       <Route path={URL.URL_PRODUCTS_BY_CATEGORY()} element={<CategoryView />} />
 
       <Route path={URL.URL_ACCOUNT} element={<MyAccount />} />

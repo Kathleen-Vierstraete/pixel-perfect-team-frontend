@@ -4,16 +4,17 @@ import { Spinner } from "../components/animation/Spinner";
 import PaginationView from "./PaginationView";
 import apiBackEnd from "../api/backend/api.Backend";
 import ProductCarousel from "../components/carrousel/ProductCarrousel";
-import {
-  URL_BACK_PRODUCTS_BY_TAGS,
-  URL_BACK_PRODUCT_BY_CATEGORY,
-} from "../constants/urls/urlBackEnd";
+import { URL_BACK_PRODUCTS_BY_TAGS, URL_BACK_PRODUCT_BY_CATEGORY} from "../constants/urls/urlBackEnd";
+import ProductByCategory from "../components/ProductByCategory";
+import { useDispatch } from "react-redux";
+import { setProduct } from "../redux-store/productSlice";
 
-const CategoryView = ({}) => {
+const CategoryView = ({ }) => {
   const params = useParams();
   const [products, setProducts] = useState([]);
   const [similarProducts, setSimilarProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const dispatch = useDispatch();
 
   const productIds = () => {
     let test = products.map((item) => item.id).join(",");
@@ -27,6 +28,7 @@ const CategoryView = ({}) => {
       .then((res) => {
         setProducts(res.data);
         setIsLoading(false);
+        dispatch(setProduct(res.data))
       })
       .catch((err) => {
         console.log(err);

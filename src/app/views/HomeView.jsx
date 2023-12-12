@@ -6,8 +6,11 @@ import { FirstProduct } from "../components/Product/FirstProduct";
 import ProductCarousel from "../components/carrousel/ProductCarrousel";
 import { AvantagePP } from "../components/Product/AvantagePP";
 import { BottomProduct } from "../components/Product/BottomProduct";
+import { useDispatch, useSelector } from "react-redux";
+import { getProducts, setProduct } from "../redux-store/productSlice";
 
 const HomeView = () => {
+    const dispatch = useDispatch();
     const [products, setProducts] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
@@ -16,11 +19,6 @@ const HomeView = () => {
         const top10ExpensiveProducts = sortedProducts.slice(0, count);
         return top10ExpensiveProducts;
     };
-    const navigateProduct = (id) => {
-        navigate(URL_PRODUCT_BY_ID(id));
-    }
-
-
     const expensiveProducts = getTop10ExpensiveProducts(10);
 
     useEffect(() => {
@@ -28,12 +26,12 @@ const HomeView = () => {
             .then(response => {
                 setProducts(response.data);
                 setIsLoading(false);
+                dispatch(setProduct(response.data))
             })
             .catch(error => {
                 console.error('Error fetching product:', error);
             });
     }, []);
-
 
     return (
         isLoading ? (
