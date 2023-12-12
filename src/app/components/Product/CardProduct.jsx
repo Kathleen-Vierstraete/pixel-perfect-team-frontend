@@ -21,7 +21,7 @@ export const CardProduct = ({ product, position }) => {
 
     return (
         <div className={`relative rounded-xl ${position}`}>
-            <img src={picture} alt={product.name} className="w-full h-full object-cover rounded-xl min-h-[13vh]" />
+            <img src={picture} alt={product.name} className="select-none w-full h-full object-cover rounded-xl min-h-[13vh]" />
             <div className='absolute inset-0 p-2 m-4 flex flex-col justify-between'>
                 <span className="gap-2 bg-slate-500 bg-opacity-40 rounded-2xl text-white text-center font-bold text-xl">
                     {product.name}
