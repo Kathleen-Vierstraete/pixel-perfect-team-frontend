@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 import { FaEye } from "react-icons/fa";
 import { LiaShoppingCartSolid } from "react-icons/lia";
 import { URL_PRODUCT_BY_ID } from "../constants/urls/urlFrontEnd";
+import { addItem } from "../redux-store/cartSlice";
 
 const ProductByCategory = ({ products }) => {
   const dispatch = useDispatch();
@@ -12,8 +13,6 @@ const ProductByCategory = ({ products }) => {
   const navigateProduct = (id) => {
     navigate(URL_PRODUCT_BY_ID(id));
   };
-
-// TODO : utiliser le window.location.pathname, le stocker dans une variable, comparer avec l'url, en cas de changement -> remettre currentPage à 1
 
   return (
     <div className="flex flex-col gap-4 px-5">
@@ -31,9 +30,10 @@ const ProductByCategory = ({ products }) => {
               </span>
               <div
                 className="flex justify-between hover:cursor-pointer"
-                onClick={() => navigateProduct(product.id)}
+
               >
-                <div className="bg-primary-light p-2 rounded-full">
+                <div className="bg-primary-light p-2 rounded-full"
+                  onClick={() => navigateProduct(product.id)}>
                   <FaEye size={35} color="white" />
                 </div>
                 <div
