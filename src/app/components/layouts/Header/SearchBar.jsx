@@ -41,7 +41,7 @@ export const SearchBar = ({ text, setText, categoryName }) => {
                 id="search-navbar"
                 className="block py-auto w-full p-2 ps-10 text-sm text-gray-900 border rounded-lg bg-gray-50 focus:ring-secondary focus:border-secondary"
                 placeholder={placeholder()}
-                value={text}
+                value={searchText}
                 onChange={(e) => handleChangeText(e.target.value)}
             />
         </div>
