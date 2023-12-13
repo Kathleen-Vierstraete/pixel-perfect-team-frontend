@@ -8,6 +8,9 @@ import { selectIsLogged, signIn } from "./redux-store/authenticationSlice";
 import Routes from "./routes/Routes";
 import { getToken } from "./services/tokenServices";
 import Footer from "./components/layouts/Footer/Footer";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements, PaymentElement } from "@stripe/react-stripe-js";
+import axios from "axios";
 
 const contextClass = {
   success: "bg-green-600",
@@ -18,6 +21,10 @@ const contextClass = {
   dark: "bg-white-600 font-gray-300",
 };
 
+const stripePromise = loadStripe(
+  "pk_test_51OMRVALyzOhw50jnAqxDVuiKOyhKUlHbaN1ECZtEsaFKgEnEK1fu4ALIcaEddj2aRmBBgaxo2WjZjQaBWOAzWk2D00K4pv5eXl"
+);
+
 /**
  * Component RouteWithNavigation
  * To create the structure of the application (nav bar, routes, toast, etc...)
@@ -27,6 +34,45 @@ const contextClass = {
 const App = () => {
   const dispatch = useDispatch();
   const [isLogin, setIsLogin] = useState(true);
+  const [clientSecret, setClientSecret] = useState("");
+
+  // useEffect(() => {
+  //   // Create PaymentIntent as soon as the page loads
+  //   fetch("http://localhost:8000/api/stripe/create", {
+  //     method: "POST",
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify({ items: [{ id: "xl-tshirt" }] }),
+  //   }).then((res) => {
+  //     const { clientSecret } = res.data;
+  //     setClientSecret(clientSecret);
+  //   });
+  // }, []);
+
+  useEffect(() => {
+    axios
+      .post("http://localhost:8000/api/stripe/create", {
+        headers: { "Content-Type": "application/json" },
+        data: {
+          currency: "eur",
+          amount: 1999,
+          description: "bla bla bla",
+        },
+      })
+      .then((response) => {
+        setClientSecret(response.data);
+        console.log("reponse axios :",response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching client secret:", error);
+      });
+  }, []);
+
+  const options = {
+    // passing the client secret obtained from the server
+    clientSecret: clientSecret,
+  };
+
+  console.log(options);
 
   useEffect(() => {
     const token = getToken();
@@ -38,6 +84,14 @@ const App = () => {
 
   return (
     <BrowserRouter>
+      {/* Test Stripe */}
+      <Elements stripe={stripePromise} options={options}>
+        <form>
+          <PaymentElement />
+          <button>Submit</button>
+        </form>
+      </Elements>
+
       <div className="relative flex h-full cursor-default flex-col">
         <Navbar />
         <main className="mt-24 grow">
