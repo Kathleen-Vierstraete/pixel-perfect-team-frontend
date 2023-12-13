@@ -8,10 +8,11 @@ import { LeftBox } from '../components/MyAccount/LeftBox';
 import { RightContent } from '../components/MyAccount/RightContent';
 import { FaBars } from "react-icons/fa";
 import apiBackEnd from '../api/backend/api.Backend';
-import { URL_BACK_PERSON } from '../constants/urls/urlBackEnd';
+import { URL_BACK_PERSON, URL_BACK_PURCHASE } from '../constants/urls/urlBackEnd';
 import { setHearderToken } from '../services/tokenServices';
 import { Spinner } from '../components/animation/Spinner';
 import  AccountSection  from '../components/MyAccount/AccountSection';
+import  PurchaseSection  from '../components/MyAccount/PurchaseSection';
 
 
 const MyAccountView = () => {
@@ -21,6 +22,7 @@ const MyAccountView = () => {
   const dispatch = useDispatch();
   const [activeBox, setActiveBox] = useState(null);
   const [userInfo, setUserInfo] = useState(null);
+  const [purchaseInfo,setPurchaseInfo] = useState([])
 
   useEffect(() => {
     apiBackEnd.get(URL_BACK_PERSON(user.id), setHearderToken(token))
@@ -29,7 +31,14 @@ const MyAccountView = () => {
       })
       .catch(error => {
         console.error('Error fetching product:', error);
+      });
+    apiBackEnd.get(URL_BACK_PURCHASE(user.id), setHearderToken(token))
+      .then(res => {
+        setPurchaseInfo(res.data);
       })
+      .catch(error => {
+        console.error('Error fetching product:', error);
+      });
   }, [])
 
   const RenderRightContent = () => {
@@ -41,7 +50,7 @@ const MyAccountView = () => {
       case 'Mes commentaires':
         return <RightContent content="Mes commentaires seront affichés ici." />;
       default:
-        return <RightContent content="Mes commandes seront affichées ici." />;
+        return !purchaseInfo ? (<Spinner message="Vos données ne sont pas recuperer" />) : (<PurchaseSection purchases={purchaseInfo} />)
     }
   };
 
@@ -97,7 +106,7 @@ const MyAccountView = () => {
       </div>
 
       <div className="flex justify-center mt-10">
-        <button className="block w-1/7 text-left py-2 px-4 rounded-lg hover:bg-primary-light" onClick={handleLogout}>
+        <button className="btn-primary-outline py-2 px-6" onClick={handleLogout}>
           Me déconnecter
         </button>
       </div>
