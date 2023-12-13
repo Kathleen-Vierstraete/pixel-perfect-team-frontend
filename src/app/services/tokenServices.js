@@ -65,3 +65,7 @@ export function isTokenValid(token) {
 export function setHearderToken(token) {
     return { headers: { "Authorization": `Bearer ${token}` } }
 }
+
+export function setHearderTokenWithBody(token,data) {
+    return { headers: { "Authorization": `Bearer ${token}` },data: data}
+}
