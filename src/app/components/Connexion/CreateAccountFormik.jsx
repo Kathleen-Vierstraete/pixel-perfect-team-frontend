@@ -6,9 +6,12 @@ import Checkbox from "./Checkbox";
 import * as Yup from 'yup';
 import { URL_BACK_CREATE_ACCOUNT } from "../../constants/urls/urlBackEnd";
 import apiBackEnd from "../../api/backend/api.Backend";
+import { useNavigate } from "react-router";
+import { URL_CONNEXION } from "../../constants/urls/urlFrontEnd";
 
 
 const CreateAccountFormik  = () => {
+    const navigate = useNavigate()
 
     const validate = Yup.object({
         firstName: Yup.string()
@@ -38,6 +41,7 @@ const CreateAccountFormik  = () => {
         try {
             const response = await apiBackEnd.post(URL_BACK_CREATE_ACCOUNT, values);
             console.log('User created successfully:', response.data);
+            navigate(URL_CONNEXION)
           } catch (error) {
             console.error('User creation error:', error);
           }
@@ -75,8 +79,6 @@ const CreateAccountFormik  = () => {
                             <p className='mb-3'>Un caractère spécial</p>
 
                             <TextField  label="Confirmation de mot de passe" name="passwordconfirm" type="password"/>
-
-                            {/* {console.log(formik.values)} */}
 
                             <Checkbox labelText="J’accepte de recevoir des promotions de la part de Pixel Perfect"/> 
 
