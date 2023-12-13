@@ -3,6 +3,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { Elements, PaymentElement } from '@stripe/react-stripe-js';
 import axios from 'axios';
 import { Spinner } from '../components/animation/Spinner';
+import CheckoutForm from '../components/Checkout/CheckoutForm';
 
 const Checkout = () => {
     const [isLoading, setIsLoading] = useState(true);
@@ -15,18 +16,11 @@ const Checkout = () => {
 
     useEffect(() => {
         axios
-          .post("http://localhost:8000/api/stripe/create", {
-            headers: { "Content-Type": "application/json" },
-            data: {
-              currency: "eur",
-              amount: 1999,
-              description: "bla bla bla",
-            },
-          })
+          .post("http://localhost:8000/api/stripe/create" )
           .then((response) => {
             setClientSecret(response.data.clientSecret);
             setIsLoading(false);
-            console.log("reponse axios :",response.data.clientSecret);
+            // console.log("reponse axios :",response.data.clientSecret);
           })
           .catch((error) => {
             console.error("Error fetching client secret:", error);
@@ -38,8 +32,8 @@ const Checkout = () => {
         clientSecret: clientSecret,
       };
 
-    console.log(clientSecret);
-    console.log(options);
+    // console.log(clientSecret);
+    // console.log(options);
 
     return (
 
@@ -47,10 +41,7 @@ const Checkout = () => {
             <Spinner message="Chargement" />
         ) : (
           <Elements stripe={stripePromise} options={options}>
-            <form>
-              <PaymentElement />
-              <button>Submit</button>
-            </form>
+              <CheckoutForm />
           </Elements>
         )
     )

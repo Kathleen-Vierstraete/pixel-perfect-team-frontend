@@ -17,7 +17,7 @@ import CategoryView from "../views/CategoryView";
 import PaginationView from "../views/PaginationView";
 
 import MyAccount from "../views/MyAccountView";
-import Checkout from "../views/Checkout";
+import CheckoutView from "../views/CheckoutView";
 
 
 /**
@@ -58,7 +58,7 @@ const Routes = () => {
       <Route path={URL.URL_ACCOUNT} element={<MyAccount />} />
       <Route path="*" element={<Page404 />} />
       <Route path="/pagination" element={<PaginationView />} />
-      <Route path="/checkout" element={<Checkout />} />
+      <Route path={URL.URL_CHECKOUT} element={<CheckoutView />} />
     </RoutesContainer>
   );
 };
