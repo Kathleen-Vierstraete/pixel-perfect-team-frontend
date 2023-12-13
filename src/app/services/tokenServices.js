@@ -61,3 +61,7 @@ export function isTokenValid(token) {
         return false;
     }
 }
+
+export function setHearderToken(token) {
+    return { headers: { "Authorization": `Bearer ${token}` } }
+}

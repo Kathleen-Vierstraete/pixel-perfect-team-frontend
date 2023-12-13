@@ -39,8 +39,6 @@ const ConnexionFormik  = () => {
     const onSubmit = (values) => {
         apiBackEnd.post(URL_BACK_LOGIN_CHECK, values)
           .then((response) => {
-            console.log(response.status);
-            console.log('Login successful:', getPayloadToken(response.data.token));
             if (response.status === 200 && response.data.token) {
               dispatch(signIn(response.data.token));
               navigate(URL_HOME);
