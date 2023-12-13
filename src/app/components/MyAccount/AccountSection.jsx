@@ -42,6 +42,7 @@ const AccountSection = ({ user }) => {
             onSubmit={onSubmit}
         >
             <Form className="bg-white flex flex-col items-center gap-4 p-4 shadow-md shadow-blue-500/40 rounded-xl">
+            <h4>Mon compte</h4>
                 <div className="flex flex-col items-center  gap-4 sm:flex-row sm:gap-10 md:justify-star ">
                     <TextField className="border-x-0 border-t-0 border-b-2 border-primary focus:ring-0 focus:border-secondary" label="Prénom" name="firstName" type="text" />
                     <TextField className="border-x-0 border-t-0 border-b-2 border-primary focus:ring-0 focus:border-secondary" label="Nom" name="lastName" type="text" />

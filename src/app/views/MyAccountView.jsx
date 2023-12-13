@@ -11,8 +11,9 @@ import apiBackEnd from '../api/backend/api.Backend';
 import { URL_BACK_PERSON, URL_BACK_PURCHASE } from '../constants/urls/urlBackEnd';
 import { setHearderToken } from '../services/tokenServices';
 import { Spinner } from '../components/animation/Spinner';
-import  AccountSection  from '../components/MyAccount/AccountSection';
-import  PurchaseSection  from '../components/MyAccount/PurchaseSection';
+import AccountSection from '../components/MyAccount/AccountSection';
+import PurchaseSection from '../components/MyAccount/PurchaseSection';
+import AddresseSection from '../components/MyAccount/AdresseSection';
 
 
 const MyAccountView = () => {
@@ -22,7 +23,7 @@ const MyAccountView = () => {
   const dispatch = useDispatch();
   const [activeBox, setActiveBox] = useState(null);
   const [userInfo, setUserInfo] = useState(null);
-  const [purchaseInfo,setPurchaseInfo] = useState([])
+  const [purchaseInfo, setPurchaseInfo] = useState([]);
 
   useEffect(() => {
     apiBackEnd.get(URL_BACK_PERSON(user.id), setHearderToken(token))
@@ -46,7 +47,7 @@ const MyAccountView = () => {
       case 'Mon compte':
         return !userInfo ? (<Spinner message="Vos données ne sont pas recuperer" />) : (<AccountSection user={userInfo} />)
       case 'Mes adresses':
-        return <RightContent content="Mes adresses seront affichées ici." />;
+        return !userInfo ? (<Spinner message="Vos données ne sont pas recuperer" />) : (<AddresseSection addresses={userInfo.addresses} />)
       case 'Mes commentaires':
         return <RightContent content="Mes commentaires seront affichés ici." />;
       default:

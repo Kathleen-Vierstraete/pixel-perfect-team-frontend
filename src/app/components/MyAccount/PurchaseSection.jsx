@@ -4,9 +4,9 @@ import { IoIosCalendar } from "react-icons/io";
 import { FaBox } from "react-icons/fa";
 
 const PurchaseSection = ({ purchases }) => {
-    console.log(purchases);
     return (
         <div className="bg-white flex flex-col gap-4 p-4 shadow-md shadow-blue-500/40 rounded-xl">
+            <h4 className="self-center">Mes commandes</h4>
             {purchases.length === 0 ? (
                 <Spinner message="Aucune commande" />
             ) : purchases.map((purchase) => (
