@@ -10,7 +10,7 @@ const PurchaseSection = ({ purchases }) => {
             {purchases.length === 0 ? (
                 <Spinner message="Aucune commande" />
             ) : purchases.map((purchase) => (
-                <div className="bg-secondary p-2 rounded-xl flex justify-between">
+                <div key={purchase.id} className="bg-secondary p-2 rounded-xl flex justify-between">
                     <div key={purchase.id} className=" flex flex-col gap-4">
                         <p className="font-medium md:hidden">Commande du {convertDate(purchase.datePurchase)}</p>
                         {purchase.dateDelivery === null ? (
@@ -20,7 +20,7 @@ const PurchaseSection = ({ purchases }) => {
                         )}
                         <div className="max-w-xs flex gap-2 overflow-hidden p-2 border border-primary  rounded-xl">
                             {purchase.picks.map((pick) => (
-                                <img className="w-28" src={pick.product.pictures[0].url} alt="" />
+                                <img key={pick.product.pictures[0].id} className="w-28" src={pick.product.pictures[0].url} alt="" />
                             ))}
                         </div>
                     </div>
