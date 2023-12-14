@@ -10,26 +10,27 @@ import { EMAIL_REGEX } from "../../constants/regex";
 
 
 const CreateAccountFormik  = () => {
-     
+
     const validate = Yup.object({
         firstName: Yup.string()
-                    .max(15, "Must be 15 characters or less")
-                    .required("Required"),
+                    .max(15, "Doit contenir moins de 15 caractères")
+                    .required("Requis"),
         lastName: Yup.string()
-                    .max(20, "Must be 20 characters or less")
-                    .required("Required"),
+                    .max(20, "Doit contenir moins de 20 caractères")
+                    .required("Requis"),
         phone: Yup.string()
-                    .max(10, "Must be 10 characters or less")
-                    .required("Required"),
+                    .max(10, "Doit contenir 10 chiffres")
+                    .required("Requis"),
         email: Yup.string()
-                    .email("Invalid email")
-                    .matches(EMAIL_REGEX, "Invalid email address")
-                    .required("Required"),
+                    .email("Format email invalide")
+                    .matches(EMAIL_REGEX, "adresse email invalide")
+                    .required("Requis"),
         password: Yup.string()
-                    .min(12, "Password must be at least 12 characters")
-                    .matches(/[0-9]/, "Password must have one digit")
-                    .matches(/[a-z]/, "Password must have one lowercase character")
-                    .matches(/[A-Z]/, "Password must have one uppercase character")
+                    .min(12, "Doit contenir au moins 12 caractères ")
+                    .matches(/[0-9]/, "Doit contenir au moins un chiffre ")
+                    .matches(/[a-z]/, "Doit contenir au moins une minuscule")
+                    .matches(/[A-Z]/, "Doit contenir au moins une majuscule")
+                    .matches(/[!@#$%^&*(),;.?":{}|<>]/, 'Doit contenir au moins un caractère spécial')
                     .required("Required"),
         passwordconfirm: Yup.string()
                     .oneOf([Yup.ref('password'), undefined], "Passwords must match")
@@ -74,7 +75,7 @@ const CreateAccountFormik  = () => {
                             <p className='mt-3'>Le mot de passe doit contenir:</p>
                             <p className=''>Entre 12 et 32 caractères</p>
                             <p className=''>Au moins une majuscule et une minuscule</p>
-                            <p className='mb-3'>Un caractère spécial</p>
+                            <p className='mb-3'>Un caractère spécial parmi !@#$%^&*(),;.?":{}|<></> </p>
 
                             <TextField  label="Confirmation de mot de passe" name="passwordconfirm" type="password"/>
 
