@@ -7,6 +7,8 @@ import { URL_BACK_ADMINISTRATORS, URL_BACK_PRODUCT_CREATE } from '../../constant
 import { Spinner } from '../animation/Spinner';
 import { useSelector } from 'react-redux';
 import { selectToken } from '../../redux-store/authenticationSlice';
+import { storage } from '../../firebase/firebase';
+
 
 const validationSchema = Yup.object().shape({
     name: Yup.string().required('Le nom est requis'),
@@ -24,7 +26,15 @@ const validationSchema = Yup.object().shape({
     creator_ids: Yup.array(),
     editor_id: Yup.number(),
     tag_ids: Yup.array(),
-    category_id: Yup.number()
+    category_id: Yup.number(),
+    picture: Yup.array().of(
+        Yup.object().shape({
+            name: Yup.string().required('Le nom de l\'image est requis'),
+            url: Yup.string().url('L\'URL de l\'image n\'est pas valide').required('L\'URL de l\'image est requise'),
+            alt: Yup.string().required('La description alternative de l\'image est requise'),
+            file: Yup.mixed(),
+        })
+    ),
 
 });
 
@@ -40,9 +50,30 @@ function ProductForm() {
         } catch (error) {
             console.error('Error:', error);
         } finally {
-            setSubmitting(false); 
+            setSubmitting(false);
         }
     };
+
+
+    const handleFileChange = async (event) => {
+        const file = event.target.files[0];
+        const storageRef = storage.ref();
+        const imageRef = storageRef.child(`images/${file.name}`);
+
+        try {
+            // Téléchargez l'image vers Firebase Storage
+            const snapshot = await imageRef.put(file);
+
+            // Obtenez l'URL de l'image téléchargée
+            const imageUrl = await snapshot.ref.getDownloadURL();
+
+            // Mettez à jour les valeurs dans le formulaire
+            formik.setFieldValue('picture.url', imageUrl);
+        } catch (error) {
+            console.error('Erreur lors du téléchargement de l\'image vers Firebase Storage:', error);
+        }
+    };
+
 
     const token = useSelector(selectToken);
     useEffect(() => {
@@ -79,6 +110,11 @@ function ProductForm() {
         creator_ids: [],
         isArchived: false,
         isCollector: false,
+        picture: [{
+            name: "",
+            url: "",
+            alt: ""
+        }]
     })
     return (
         <div>
@@ -148,7 +184,7 @@ function ProductForm() {
                                 <div className='mb-4'>
                                     <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="creator_ids">creator :</label>
                                     <Field as="select" id="creator_ids" name="creator_ids" className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-500" multiple>
-                                        <option value="" label="Select a creator" disabled/>
+                                        <option value="" label="Select a creator" disabled />
                                         {data.creator.map((option) => (
                                             <option key={option.id} label={(!option.label) ? option.name : option.label} value={option.id}>
                                             </option>
@@ -159,7 +195,7 @@ function ProductForm() {
                                 <div className='mb-4'>
                                     <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="editor_id">Editor :</label>
                                     <Field as="select" id="editor_id" name="editor_id" className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-500">
-                                        <option value="" label="Select a editor" disabled/>
+                                        <option value="" label="Select a editor" disabled />
                                         {data.editor.map((option) => (
                                             <option key={option.id} label={(!option.label) ? option.name : option.label} value={option.id}>
                                             </option>
@@ -170,13 +206,44 @@ function ProductForm() {
                                 <div className='mb-4'>
                                     <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="tag_ids">tag :</label>
                                     <Field as="select" id="tag_ids" name="tag_ids" className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-500" multiple>
-                                        <option value="" label="Select a tag" disabled/>
+                                        <option value="" label="Select a tag" disabled />
                                         {data.tag.map((option) => (
                                             <option key={option.id} label={(!option.label) ? option.name : option.label} value={option.id}>
                                             </option>
                                         ))}
                                     </Field>
                                     <ErrorMessage className='text-red-500 text-sm mt-1' name="tag_ids" component="div" />
+                                </div>
+                                <div className='mb-4'>
+                                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="picture.name">nom du l'image product:</label>
+                                    <Field
+                                        type="text"
+                                        id="picture.name"
+                                        name="picture.name"
+                                        className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-500"
+                                    />
+                                    <ErrorMessage className='text-red-500 text-sm mt-1' name="picture.name" component="div" />
+                                </div>
+                                <div className='mb-4'>
+                                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="picture.url">l'image product</label>
+                                    <Field
+                                        type="file"
+                                        id="picture.url"
+                                        name="picture.url"
+                                        onChange={handleFileChange}
+                                        className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-500"
+                                    />
+                                    <ErrorMessage className='text-red-500 text-sm mt-1' name="picture.url" component="div" />
+                                </div>
+                                <div className='mb-4'>
+                                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="picture.alt">Description de l'image du produit</label>
+                                    <Field
+                                        type="text"
+                                        id="picture.alt"
+                                        name="picture.alt"
+                                        className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-500"
+                                    />
+                                    <ErrorMessage className='text-red-500 text-sm mt-1' name="picture.alt" component="div" />
                                 </div>
                                 <button className='bg-gray-200 border-2 border-gray-200 lg-around' type="submit">Soumettre</button>
                             </Form>
