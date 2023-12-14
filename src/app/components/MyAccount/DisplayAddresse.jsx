@@ -15,6 +15,7 @@ export const DisplayAddresse = ({ addresse, validate, toggleUpToDate }) => {
     const [editingAddressId, setEditingAddressId] = useState(null);
     const [errorUser, setErrorUser] = useState("");
     const token = useSelector(selectToken);
+    
 
     const toggleEditing = (id) => {
         if (editingAddressId !== id || editingAddressId == null) {
@@ -25,6 +26,7 @@ export const DisplayAddresse = ({ addresse, validate, toggleUpToDate }) => {
     }
 
     const onUpdate = async (value) => {
+        console.log(value);
         setIsEditingSpinner(true)
         try {
             apiBackEnd.put(URL_BACK_UPDATE_ADDRESSE(value.id), value, setHearderToken(token))
@@ -82,10 +84,10 @@ export const DisplayAddresse = ({ addresse, validate, toggleUpToDate }) => {
                 >
                     <Form className="flex gap-4 flex-col items-center">
                         <div className="flex flex-wrap justify-center gap-4">
-                            <TextField className="border-x-0 border-t-0 border-b-2 border-primary focus:ring-0 focus:border-secondary" label="Numéro de la rue" name="streetNumber" type="text" />
+                            <TextField className="border-x-0 border-t-0 border-b-2 border-primary focus:ring-0 focus:border-secondary" label="Numéro de la rue" name="streetNumber" type="number" />
                             <TextField className="border-x-0 border-t-0 border-b-2 border-primary focus:ring-0 focus:border-secondary" label="Nom de la rue" name="streetName" type="text" />
                             <TextField className="border-x-0 border-t-0 border-b-2 border-primary focus:ring-0 focus:border-secondary" label="Ville" name="city" type="text" />
-                            <TextField className="border-x-0 border-t-0 border-b-2 border-primary focus:ring-0 focus:border-secondary" label="Code postal" name="zipcode" type="text" />
+                            <TextField className="border-x-0 border-t-0 border-b-2 border-primary focus:ring-0 focus:border-secondary" label="Code postal" name="zipcode" type="number" />
                         </div>
                         <button className="btn-primary-outline py-2 px-6 flex items-center gap-4" type="submit">Modifier {isEditingSpinner && <MiniSpinner />}</button>
                         {errorUser.length > 0 ? <p className="text-error font-extrabold">{errorUser}</p> : <></>}

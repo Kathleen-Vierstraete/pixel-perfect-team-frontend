@@ -17,10 +17,9 @@ const AddresseSection = ({ addresses, toggleUpToDate }) => {
     const toggleAdded = () => {
         setIsAdded(!isAdded);
     }
-    
     const validate = Yup.object({
         id: Yup.number(),
-        streetNumber: Yup.string()
+        streetNumber: Yup.number()
             .required("Required"),
         streetName: Yup.string()
             .required("Required"),
@@ -37,11 +36,14 @@ const AddresseSection = ({ addresses, toggleUpToDate }) => {
             apiBackEnd.post(URL_BACK_ADD_ADDRESSE(user.id), values, setHearderToken(token))
                 .then(res => {
                     toggleUpToDate();
+                    toggleAdded()
                 }).catch(error => {
                     console.error('Error adding addresse:', error);
+                    toggleAdded()
                 })
         } catch (error) {
             console.error('Error adding addresse:', error);
+            toggleAdded()
         }
     }
 
