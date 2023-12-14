@@ -13,7 +13,13 @@ export const ProductPick = ({ item }) => {
                         <h4 className="text-2xl">{item.name}</h4>
                         <p className="hidden lg:inline">{item.price / 100}€</p>
                     </div>
-                    <div className="flex gap-2 items-baseline"><RiRestartLine /> <p>Retour gratuit jusqu'au 12 janvier 2023</p></div>
+                    <div className="flex  items-baseline justify-between">
+                        <div className="flex gap-2 items-baseline">
+                            <RiRestartLine />
+                            <p>Retour gratuit jusqu'au 12 janvier 2023</p>
+                        </div>
+                        <p className="hidden lg:inline">{item.quantity*item.price/100}€</p>
+                    </div>
                     <div className="hidden self-start gap-4 justify-between items-center sm:justify-around lg:flex">
                         <QuantityPick item={item} />
                         <span className="border-r border-black h-full"></span>
