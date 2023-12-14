@@ -20,11 +20,11 @@ const ConnexionFormik  = () => {
     
     const validate = Yup.object({
         email: Yup.string()
-            .email('Invalid email')
-            .required('Required')
-            .matches(EMAIL_REGEX, "Invalid email address"),
+            .email('Email invalide')
+            .required('Requis')
+            .matches(EMAIL_REGEX, "Email invalide"),
         password: Yup.string()
-            .required('Required'),
+            .required('Requis'),
       });
 
     const [showAlert, setShowAlert] = useState(false);
