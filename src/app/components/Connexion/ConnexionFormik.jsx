@@ -6,11 +6,8 @@ import * as Yup from 'yup';
 import apiBackEnd from './../../api/backend/api.Backend';
 import { URL_BACK_LOGIN_CHECK } from '../../constants/urls/urlBackEnd';
 import { Link, useNavigate } from "react-router-dom";
-import { getPayloadToken } from '../../services/tokenServices';
+import { EMAIL_REGEX } from '../../constants/regex';
 import { useDispatch } from 'react-redux';
-import { signIn } from '../../redux-store/authenticationSlice';
-import { URL_HOME } from '../../constants/urls/urlFrontEnd';
-
 
 const ConnexionFormik  = () => {
 
@@ -24,10 +21,11 @@ const ConnexionFormik  = () => {
     
     const validate = Yup.object({
         email: Yup.string()
-            .email('Invalid email')
-            .required('Required'),
+            .email('Email invalide')
+            .required('Requis')
+            .matches(EMAIL_REGEX, "Email invalide"),
         password: Yup.string()
-            .required('Required'),
+            .required('Requis'),
       });
 
     const [showAlert, setShowAlert] = useState(false);
