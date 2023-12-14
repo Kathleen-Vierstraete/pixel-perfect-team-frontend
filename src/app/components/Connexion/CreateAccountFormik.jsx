@@ -9,7 +9,11 @@ import apiBackEnd from "../../api/backend/api.Backend";
 
 
 const CreateAccountFormik  = () => {
-
+    
+    const EMAIL_REGX = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+    
+    
+    
     const validate = Yup.object({
         firstName: Yup.string()
                     .max(15, "Must be 15 characters or less")
@@ -22,6 +26,7 @@ const CreateAccountFormik  = () => {
                     .required("Required"),
         email: Yup.string()
                     .email("Invalid email")
+                    .matches(EMAIL_REGX, "Invalid email address")
                     .required("Required"),
         password: Yup.string()
                     .min(12, "Password must be at least 12 characters")
