@@ -31,24 +31,26 @@ const MyAccountView = () => {
   }
 
   useEffect(() => {
-    apiBackEnd.get(URL_BACK_PERSON(user.id), setHearderToken(token))
-      .then(res => {
+    (async () => {
+      try {
+        const res = await apiBackEnd.get(URL_BACK_PERSON(user.id), setHearderToken(token));
         setUserInfo(res.data);
-      })
-      .catch(error => {
+      } catch (error) {
         console.error('Error fetching product:', error);
-      });
-  }, [, addresseUpToDate])
+      }
+    })();
+  }, [addresseUpToDate]);
 
   useEffect(() => {
-    apiBackEnd.get(URL_BACK_PURCHASE(user.id), setHearderToken(token))
-      .then(res => {
+    (async () => {
+      try {
+        const res = await apiBackEnd.get(URL_BACK_PURCHASE(user.id), setHearderToken(token));
         setPurchaseInfo(res.data);
-      })
-      .catch(error => {
+      } catch (error) {
         console.error('Error fetching product:', error);
-      });
-  })
+      }
+    })();
+  }, []);
 
   const RenderRightContent = () => {
     switch (activeBox) {
