@@ -7,6 +7,9 @@ import apiBackEnd from './../../api/backend/api.Backend';
 import { URL_BACK_LOGIN_CHECK } from '../../constants/urls/urlBackEnd';
 import { Link } from "react-router-dom";
 import { EMAIL_REGEX } from '../../constants/regex';
+import { signIn } from '../../redux-store/authenticationSlice';
+import { URL_HOME } from '../../constants/urls/urlFrontEnd';
+import { getPayloadToken } from '../../services/tokenServices';
 
 const ConnexionFormik  = () => {
 
