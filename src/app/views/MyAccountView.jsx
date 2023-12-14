@@ -14,6 +14,7 @@ import { Spinner } from '../components/animation/Spinner';
 import AccountSection from '../components/MyAccount/AccountSection';
 import PurchaseSection from '../components/MyAccount/PurchaseSection';
 import AddresseSection from '../components/MyAccount/AdresseSection';
+import CommentSection from '../components/MyAccount/CommentSection';
 
 
 const MyAccountView = () => {
@@ -23,12 +24,12 @@ const MyAccountView = () => {
   const dispatch = useDispatch();
   const [activeBox, setActiveBox] = useState(null);
   const [userInfo, setUserInfo] = useState(null);
-  const [purchaseInfo, setPurchaseInfo] = useState([]);
   const [addresseUpToDate, setAddresseUpToDate] = useState(false);
 
   const toggleAddresse = () => {
     setAddresseUpToDate(!addresseUpToDate);
   }
+  
 
   useEffect(() => {
     (async () => {
@@ -36,21 +37,11 @@ const MyAccountView = () => {
         const res = await apiBackEnd.get(URL_BACK_PERSON(user.id), setHearderToken(token));
         setUserInfo(res.data);
       } catch (error) {
-        console.error('Error fetching product:', error);
+        console.error('Error fetching person:', error);
       }
     })();
   }, [addresseUpToDate]);
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const res = await apiBackEnd.get(URL_BACK_PURCHASE(user.id), setHearderToken(token));
-        setPurchaseInfo(res.data);
-      } catch (error) {
-        console.error('Error fetching product:', error);
-      }
-    })();
-  }, []);
 
   const RenderRightContent = () => {
     switch (activeBox) {
@@ -59,9 +50,9 @@ const MyAccountView = () => {
       case 'Mes adresses':
         return !userInfo ? (<Spinner message="Vos données ne sont pas recuperer" />) : (<AddresseSection toggleUpToDate={toggleAddresse} addresses={userInfo.addresses} token={token} />)
       case 'Mes commentaires':
-        return <RightContent content="Mes commentaires seront affichés ici." />;
+        return !userInfo ? (<Spinner message="Vos données ne sont pas recuperer" />) : (<CommentSection comments={userInfo.comments} token={token} />);
       default:
-        return !purchaseInfo ? (<Spinner message="Vos données ne sont pas recuperer" />) : (<PurchaseSection purchases={purchaseInfo} />)
+        return !userInfo ? (<Spinner message="Vos données ne sont pas recuperer" />) : (<PurchaseSection purchases={userInfo.purchases} />)
     }
   };
 
@@ -80,7 +71,6 @@ const MyAccountView = () => {
   };
 
   const [showMenuAccount, setMenuAccount] = useState(false);
-
   return (
     <div className='mx-10 mb-8' >
       <div className="flex justify-center ">
