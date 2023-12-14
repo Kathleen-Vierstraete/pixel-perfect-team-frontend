@@ -1,8 +1,8 @@
+import React, { useState } from "react";
+import CommentDetail from "./CommentDetail";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa";
-import { useState } from "react";
-import { CharactDetail } from "./CharactDetail";
 
-export const CharactProduct = ({ product }) => {
+const CommentProduct = ({ product }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -11,9 +11,12 @@ export const CharactProduct = ({ product }) => {
         className="bg-white flex justify-between items-center font-bold text-lg tracking-wider"
         onClick={() => setIsOpen((prev) => !prev)}
       >
-        CARACTÉRISTIQUES{!isOpen ? <FaAngleDown /> : <FaAngleUp />}
+        COMMENTAIRES{!isOpen ? <FaAngleDown /> : <FaAngleUp />}
       </button>
-      {isOpen && <CharactDetail product={product} />}
+      {/* TODO: make the if statement work */}
+      {isOpen && <CommentDetail product={product} />}
     </div>
   );
 };
+
+export default CommentProduct;

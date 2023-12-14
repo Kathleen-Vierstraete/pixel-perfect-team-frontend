@@ -3,6 +3,9 @@ export default {
   content: ["./src/**/*.{js,jsx,ts,tsx}", "./index.html"],
   theme: {
     extend: {
+      gridTemplateRows: {
+        'products' : '1fr 5fr'
+      },
       colors: {
         primary: {
           light: "#A855F7",
