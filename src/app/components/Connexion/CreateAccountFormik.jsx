@@ -11,6 +11,8 @@ import { EMAIL_REGEX } from "../../constants/regex";
 
 const CreateAccountFormik  = () => {
 
+    const special = "!@#$%^&*(),;.?\":{}|<>"
+
     const validate = Yup.object({
         firstName: Yup.string()
                     .max(15, "Doit contenir moins de 15 caractères")
@@ -27,14 +29,15 @@ const CreateAccountFormik  = () => {
                     .required("Requis"),
         password: Yup.string()
                     .min(12, "Doit contenir au moins 12 caractères ")
+                    .max(32, "Doit contenir maximum 32 caractères")
                     .matches(/[0-9]/, "Doit contenir au moins un chiffre ")
                     .matches(/[a-z]/, "Doit contenir au moins une minuscule")
                     .matches(/[A-Z]/, "Doit contenir au moins une majuscule")
                     .matches(/[!@#$%^&*(),;.?":{}|<>]/, 'Doit contenir au moins un caractère spécial')
-                    .required("Required"),
+                    .required("Requis"),
         passwordconfirm: Yup.string()
-                    .oneOf([Yup.ref('password'), undefined], "Passwords must match")
-                    .required("Required"),
+                    .oneOf([Yup.ref('password'), undefined], "Les mots de passe doivent correspondre")
+                    .required("Requis"),
     })
 
     const onSubmit = async (values) => {
@@ -75,7 +78,7 @@ const CreateAccountFormik  = () => {
                             <p className='mt-3'>Le mot de passe doit contenir:</p>
                             <p className=''>Entre 12 et 32 caractères</p>
                             <p className=''>Au moins une majuscule et une minuscule</p>
-                            <p className='mb-3'>Un caractère spécial parmi !@#$%^&*(),;.?":{}|<></> </p>
+                            <p className='mb-3'>Un caractère spécial parmi {special} </p>
 
                             <TextField  label="Confirmation de mot de passe" name="passwordconfirm" type="password"/>
 
