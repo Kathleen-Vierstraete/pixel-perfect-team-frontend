@@ -78,7 +78,7 @@ const CreateAccountFormik  = () => {
                             <p className='mt-3'>Le mot de passe doit contenir:</p>
                             <p className=''>Entre 12 et 32 caractères</p>
                             <p className=''>Au moins une majuscule et une minuscule</p>
-                            <p className='mb-3'>Un caractère spécial parmi {special} </p>
+                            <p className='mb-3'>Un caractère spécial parmi {special}</p>
 
                             <TextField  label="Confirmation de mot de passe" name="passwordconfirm" type="password"/>
 
