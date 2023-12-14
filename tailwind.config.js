@@ -20,12 +20,15 @@ export default {
         black: {
           DEFAULT: "#191617",
         },
+        error: {
+          DEFAULT: "#5C0000"
+        }
       },
     },
     fontFamily: {
       NicoMoji: ["NicoMoji", "sans-serif"],
       SilkScreen: ["SilkScreen", "sans-serif"],
-      numito : ['Nunito', "sans-serif"]
+      numito: ['Nunito', "sans-serif"]
     },
   },
   plugins: [require("@tailwindcss/forms")],
