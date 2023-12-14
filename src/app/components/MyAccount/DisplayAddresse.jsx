@@ -10,11 +10,10 @@ import apiBackEnd from "../../api/backend/api.Backend";
 import { useSelector } from "react-redux";
 import { selectToken } from "../../redux-store/authenticationSlice";
 
-export const DisplayAddresse = ({ addresse, validate, toggleUpToDate }) => {
+export const DisplayAddresse = ({ addresse, validate, toggleUpToDate, token }) => {
     const [isEditingSpinner, setIsEditingSpinner] = useState(false);
     const [editingAddressId, setEditingAddressId] = useState(null);
     const [errorUser, setErrorUser] = useState("");
-    const token = useSelector(selectToken);
     
 
     const toggleEditing = (id) => {
@@ -50,7 +49,6 @@ export const DisplayAddresse = ({ addresse, validate, toggleUpToDate }) => {
         try {
             apiBackEnd.delete(URL_BACK_UPDATE_ADDRESSE(id), setHearderToken(token))
                 .then(res => {
-                    console.log(res.data)
                     toggleUpToDate();
                     setErrorUser("")
                 }).catch(error => {

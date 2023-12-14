@@ -10,9 +10,8 @@ import { selectToken, selectUser } from "../../redux-store/authenticationSlice";
 import { setHearderToken } from "../../services/tokenServices";
 import { DisplayAddresse } from "./DisplayAddresse";
 
-const AddresseSection = ({ addresses, toggleUpToDate }) => {
+const AddresseSection = ({ addresses, toggleUpToDate, token }) => {
     const user = useSelector(selectUser);
-    const token = useSelector(selectToken);
     const [isAdded, setIsAdded] = useState(false);
     const toggleAdded = () => {
         setIsAdded(!isAdded);
@@ -51,7 +50,7 @@ const AddresseSection = ({ addresses, toggleUpToDate }) => {
         <div className="bg-white flex flex-col items-center gap-4 p-4 shadow-md shadow-blue-500/40 rounded-xl">
             <h4>Mes adresses</h4>
             {addresses.map(addresse => (
-                <DisplayAddresse key={addresse.id} addresse={addresse} validate={validate} toggleUpToDate={toggleUpToDate} />
+                <DisplayAddresse key={addresse.id} addresse={addresse} validate={validate} toggleUpToDate={toggleUpToDate} token={token} />
             ))}
             <button className="btn-primary-outline py-2 px-6 self-end flex items-center gap-2"
                 onClick={toggleAdded}>

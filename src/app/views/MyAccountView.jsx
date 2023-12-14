@@ -55,9 +55,9 @@ const MyAccountView = () => {
   const RenderRightContent = () => {
     switch (activeBox) {
       case 'Mon compte':
-        return !userInfo ? (<Spinner message="Vos données ne sont pas recuperer" />) : (<AccountSection user={userInfo} />)
+        return !userInfo ? (<Spinner message="Vos données ne sont pas recuperer" />) : (<AccountSection user={userInfo} setUser={setUserInfo} token={token} />)
       case 'Mes adresses':
-        return !userInfo ? (<Spinner message="Vos données ne sont pas recuperer" />) : (<AddresseSection toggleUpToDate={toggleAddresse} addresses={userInfo.addresses} />)
+        return !userInfo ? (<Spinner message="Vos données ne sont pas recuperer" />) : (<AddresseSection toggleUpToDate={toggleAddresse} addresses={userInfo.addresses} token={token} />)
       case 'Mes commentaires':
         return <RightContent content="Mes commentaires seront affichés ici." />;
       default:
