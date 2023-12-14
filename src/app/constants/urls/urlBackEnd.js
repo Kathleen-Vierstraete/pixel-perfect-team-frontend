@@ -8,3 +8,4 @@ export const URL_BACK_CREATE_ACCOUNT = "/users"
 export const URL_BACK_PERSON = (id = null) => { return id === null ? "/persons/:id" : `/persons/${id}` };
 export const URL_BACK_PURCHASE = (id) => { return `/persons/${id}/purchases`};
 export const URL_BACK_ADD_ADDRESSE = (id) => {return `/persons/${id}/addresses`};
+export const URL_BACK_UPDATE_ADDRESSE = (id) => {return `/addresses/${id}`};
