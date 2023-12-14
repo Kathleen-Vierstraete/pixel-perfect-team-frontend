@@ -7,9 +7,13 @@ import * as Yup from 'yup';
 import { URL_BACK_CREATE_ACCOUNT } from "../../constants/urls/urlBackEnd";
 import apiBackEnd from "../../api/backend/api.Backend";
 import { EMAIL_REGEX } from "../../constants/regex";
+import { URL_CONNEXION } from "../../constants/urls/urlFrontEnd";
+import { useNavigate } from "react-router-dom";
 
 
 const CreateAccountFormik  = () => {
+
+    const navigate = useNavigate();
 
     const special = "!@#$%^&*(),;.?\":{}|<>"
 
@@ -40,14 +44,17 @@ const CreateAccountFormik  = () => {
                     .required("Requis"),
     })
 
-    const onSubmit = async (values) => {
-        try {
-            const response = await apiBackEnd.post(URL_BACK_CREATE_ACCOUNT, values);
-            console.log('User created successfully:', response.data);
-          } catch (error) {
+      const onSubmit = (values) => {
+        apiBackEnd.post(URL_BACK_CREATE_ACCOUNT, values)
+          .then((response) => {
+            if (response.status === 201) {
+                navigate(URL_CONNEXION);
+            }
+          })
+          .catch((error) => {
             console.error('User creation error:', error);
-          }
-      }
+        });
+    };
 
       return(
         <Formik 
