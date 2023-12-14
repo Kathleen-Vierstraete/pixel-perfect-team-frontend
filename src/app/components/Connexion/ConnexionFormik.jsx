@@ -6,6 +6,7 @@ import * as Yup from 'yup';
 import apiBackEnd from './../../api/backend/api.Backend';
 import { URL_BACK_LOGIN_CHECK } from '../../constants/urls/urlBackEnd';
 import { Link } from "react-router-dom";
+import { EMAIL_REGEX } from '../../constants/regex';
 
 const ConnexionFormik  = () => {
 
@@ -20,7 +21,8 @@ const ConnexionFormik  = () => {
     const validate = Yup.object({
         email: Yup.string()
             .email('Invalid email')
-            .required('Required'),
+            .required('Required')
+            .matches(EMAIL_REGEX, "Invalid email address"),
         password: Yup.string()
             .required('Required'),
       });

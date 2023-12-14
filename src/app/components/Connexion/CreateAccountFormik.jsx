@@ -6,14 +6,11 @@ import Checkbox from "./Checkbox";
 import * as Yup from 'yup';
 import { URL_BACK_CREATE_ACCOUNT } from "../../constants/urls/urlBackEnd";
 import apiBackEnd from "../../api/backend/api.Backend";
+import { EMAIL_REGEX } from "../../constants/regex";
 
 
 const CreateAccountFormik  = () => {
-    
-    const EMAIL_REGX = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
-    
-    
-    
+     
     const validate = Yup.object({
         firstName: Yup.string()
                     .max(15, "Must be 15 characters or less")
@@ -26,7 +23,7 @@ const CreateAccountFormik  = () => {
                     .required("Required"),
         email: Yup.string()
                     .email("Invalid email")
-                    .matches(EMAIL_REGX, "Invalid email address")
+                    .matches(EMAIL_REGEX, "Invalid email address")
                     .required("Required"),
         password: Yup.string()
                     .min(12, "Password must be at least 12 characters")
