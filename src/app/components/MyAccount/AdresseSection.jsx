@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 import { selectToken, selectUser } from "../../redux-store/authenticationSlice";
 import { setHearderToken, setHearderTokenWithBody } from "../../services/tokenServices";
 
-const AddresseSection = ({ addresses }) => {
+const AddresseSection = ({ addresses ,toggleUpToDate}) => {
     const user = useSelector(selectUser);
     const token = useSelector(selectToken);
     const [isAdded, setIsAdded] = useState(false);
@@ -30,11 +30,10 @@ const AddresseSection = ({ addresses }) => {
     })
 
     const onSubmit = async (values) => {
-        console.log(setHearderTokenWithBody(token, values))
         try {
             apiBackEnd.post(URL_BACK_ADD_ADDRESSE(user.id),values, setHearderToken(token))
                 .then(res => {
-                    console.log(res.data);
+                    toggleUpToDate();
                 }).catch(error => {
                     console.error('Error adding addresse:', error);
                 })

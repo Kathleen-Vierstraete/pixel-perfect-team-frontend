@@ -24,6 +24,11 @@ const MyAccountView = () => {
   const [activeBox, setActiveBox] = useState(null);
   const [userInfo, setUserInfo] = useState(null);
   const [purchaseInfo, setPurchaseInfo] = useState([]);
+  const [addresseUpToDate, setAddresseUpToDate] = useState(false);
+
+  const toggleAddresse = () => {
+    setAddresseUpToDate(!addresseUpToDate);
+  }
 
   useEffect(() => {
     apiBackEnd.get(URL_BACK_PERSON(user.id), setHearderToken(token))
@@ -33,6 +38,9 @@ const MyAccountView = () => {
       .catch(error => {
         console.error('Error fetching product:', error);
       });
+  }, [, addresseUpToDate])
+
+  useEffect(() => {
     apiBackEnd.get(URL_BACK_PURCHASE(user.id), setHearderToken(token))
       .then(res => {
         setPurchaseInfo(res.data);
@@ -40,14 +48,14 @@ const MyAccountView = () => {
       .catch(error => {
         console.error('Error fetching product:', error);
       });
-  }, [])
+  })
 
   const RenderRightContent = () => {
     switch (activeBox) {
       case 'Mon compte':
         return !userInfo ? (<Spinner message="Vos données ne sont pas recuperer" />) : (<AccountSection user={userInfo} />)
       case 'Mes adresses':
-        return !userInfo ? (<Spinner message="Vos données ne sont pas recuperer" />) : (<AddresseSection addresses={userInfo.addresses} />)
+        return !userInfo ? (<Spinner message="Vos données ne sont pas recuperer" />) : (<AddresseSection toggleUpToDate={toggleAddresse} addresses={userInfo.addresses} />)
       case 'Mes commentaires':
         return <RightContent content="Mes commentaires seront affichés ici." />;
       default:
