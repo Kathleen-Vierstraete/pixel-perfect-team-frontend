@@ -36,7 +36,7 @@ const ProductSingleView = () => {
                 <Spinner message="Chargement du produit..." redirect404={false}/>
             ) : (
                 <div className='relative'>
-                    <div className="grid grid-cols-1 grid-rows-3 gap-6 px-10 items-start lg:grid-cols-3 lg:grid-rows-products">
+                    <div className="grid grid-cols-1 grid-rows-products gap-6 px-10 items-start lg:grid-cols-3 lg:grid-rows-lgProducts">
                         <img className='self-center w-full border rounded-3xl lg:col-span-2' src={picture} alt={product.product.name} />
                         <div className="lg:col-start-3 lg:row-start-1 lg:sticky lg:top-40 xl:top-36">
                             <ProductSingle product={product.product} />

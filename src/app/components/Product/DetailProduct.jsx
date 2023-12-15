@@ -1,5 +1,4 @@
 import { CharactProduct } from './CharactProduct';
-import CommentDetail from './CommentDetail';
 import CommentProduct from './CommentProduct';
 import { DescriptionDetailProduct } from './DescriptionDetailProduct';
 import { DescriptionProduct } from './DescriptionProduct';

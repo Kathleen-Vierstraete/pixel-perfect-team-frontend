@@ -4,7 +4,8 @@ export default {
   theme: {
     extend: {
       gridTemplateRows: {
-        'products' : '1fr 5fr'
+        'products' : '1fr 1fr auto',
+        'lgProducts' : '1fr auto'
       },
       colors: {
         primary: {

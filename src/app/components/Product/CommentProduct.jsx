@@ -10,11 +10,11 @@ const CommentProduct = ({ product }) => {
       <button
         className="bg-white flex justify-between items-center font-bold text-lg tracking-wider"
         onClick={() => setIsOpen((prev) => !prev)}
-      >
+        >
         COMMENTAIRES{!isOpen ? <FaAngleDown /> : <FaAngleUp />}
       </button>
-      {/* TODO: make the if statement work */}
-      {isOpen && <CommentDetail product={product} />}
+      {(isOpen && product.comments.length>0) && <CommentDetail product={product} />}
+      {(isOpen && !product.comments.length>0) && <div>Aucun commentaire.</div>}
     </div>
   );
 };

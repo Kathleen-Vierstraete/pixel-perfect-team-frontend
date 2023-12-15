@@ -64,10 +64,16 @@ export const DescriptionDetailProduct = ({ product }) => {
         </div>
       )}
 
-      {commentIsOpen && (
+      {(commentIsOpen && product.comments.length>0) && (
         <div className="flex flex-col">
           <h3 className="underline">Commentaires</h3>
           <CommentDetail product={product} />
+        </div>
+      )}
+      {(commentIsOpen && !product.comments.length>0) && (
+        <div className="flex flex-col">
+          <h3 className="underline">Commentaires</h3>
+          <div className="my-4">Aucun commentaire.</div>
         </div>
       )}
     </>

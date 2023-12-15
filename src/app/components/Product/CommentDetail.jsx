@@ -1,4 +1,6 @@
 import React from "react";
+import { FiThumbsUp, FiThumbsDown } from "react-icons/fi";
+import { FaStar, FaRegStar } from "react-icons/fa";
 
 const CommentDetail = ({ product }) => {
   return (
@@ -9,7 +11,15 @@ const CommentDetail = ({ product }) => {
           key={index}
         >
           <div className="flex justify-between">
-            <div>{comment.rate}</div>
+            <div className="flex items-center">
+              {[...Array(comment.rate)].map((x, i) =>
+                <FaStar key={i} />
+              )}
+              {[...Array(5-comment.rate)].map((x, i) =>
+                <FaRegStar key={i} />
+              )}
+            </div>
+            {/* <div>{<FiThumbsUp />.repeat(comment.rate)+"b".repeat(5-comment.rate)}</div> */}
             <div>{comment.date}</div>
           </div>
 
@@ -19,7 +29,11 @@ const CommentDetail = ({ product }) => {
 
           <div className="flex justify-between">
             <div className="capitalize">{comment.person.firstName}</div>
-            <div>{comment.vote}</div>
+            <div className="flex gap-2 items-center">
+              <div>{comment.vote}</div>
+              <div><FiThumbsUp /></div>
+              <div><FiThumbsDown /></div>
+            </div>
           </div>
         </div>
       ))}
