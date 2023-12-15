@@ -15,6 +15,7 @@ import PickView from "../views/PickView";
 import Page404 from "../views/404View";
 import CategoryLinks from "../components/CategoryLinks";
 import FormProductView from './../views/FormProductView';
+import { TestUpload } from "../views/TestUpload";
 
 /**
  * Routes of the application
@@ -49,6 +50,7 @@ const Routes = () => {
       <Route path={URL.URL_PICK} element={<PickView />} />
       <Route path={URL.URL_CONNEXION} element={<Connexion />} />
       <Route path={URL.URL_CREATE_PRODUCT} element={<FormProductView />} />
+      <Route path={"/test"} element={<TestUpload />} />
       <Route path={URL.URL_CREATEACCOUNT} element={<CreateAccount />} />   
       <Route path={URL.URL_PRODUCTS_BY_CATEGORY()} element={<CategoryLinks />} />
       <Route path="*" element={<Page404 />} />

@@ -1,13 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import * as Yup from 'yup';
 import TextField from '../Connexion/TextField';
-import { ErrorMessage, Field, Form, Formik } from 'formik';
+import { ErrorMessage, Field, FieldArray, Form, Formik } from 'formik';
 import apiBackEnd from '../../api/backend/api.Backend';
 import { URL_BACK_ADMINISTRATORS, URL_BACK_PRODUCT_CREATE } from '../../constants/urls/urlBackEnd';
 import { Spinner } from '../animation/Spinner';
 import { useSelector } from 'react-redux';
 import { selectToken } from '../../redux-store/authenticationSlice';
 import { storage } from '../../firebase/firebase';
+import { uuidv4 } from "@firebase/util";
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+
+const validFileExtensions = { image: ['jpg', 'png', 'jpeg', 'svg', 'webp'] };
+
+function isValidFileType(fileName, fileType) {
+    return fileName && validFileExtensions[fileType].indexOf(fileName.split('.').pop()) > -1;
+}
 
 
 const validationSchema = Yup.object().shape({
@@ -27,55 +35,41 @@ const validationSchema = Yup.object().shape({
     editor_id: Yup.number(),
     tag_ids: Yup.array(),
     category_id: Yup.number(),
-    picture: Yup.array().of(
+    pictures: Yup.array().of(
         Yup.object().shape({
-            name: Yup.string().required('Le nom de l\'image est requis'),
-            url: Yup.string().url('L\'URL de l\'image n\'est pas valide').required('L\'URL de l\'image est requise'),
-            alt: Yup.string().required('La description alternative de l\'image est requise'),
-            file: Yup.mixed(),
+            name: Yup.string(),
+            url: Yup.string().url('L\'URL de l\'image n\'est pas valide'),
+            file: Yup.mixed().required("Required"),
+            alt: Yup.string()
         })
-    ),
+    ).compact(),
 
 });
 
 function ProductForm() {
     const [data, setdata] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    const handleSubmit = async (values, { setSubmitting }) => {
-
+    const token = useSelector(selectToken);
+    const handleSubmit = async (values) => {
+        if (values.pictures[0].file !== null) {
+            const img = values.pictures[0].file
+            console.log("first", img)
+            const imgRef = ref(storage, `images/${uuidv4()}`)
+            uploadBytes(imgRef, img).then(value => {
+                getDownloadURL(value.ref).then(url => {
+                    values.pictures[0].url = url
+                })
+            })
+        }
         console.log(values)
         try {
             const response = await apiBackEnd.post(URL_BACK_PRODUCT_CREATE, values);
             console.log('Response:', response.data);
         } catch (error) {
             console.error('Error:', error);
-        } finally {
-            setSubmitting(false);
         }
     };
 
-
-    const handleFileChange = async (event) => {
-        const file = event.target.files[0];
-        const storageRef = storage.ref();
-        const imageRef = storageRef.child(`images/${file.name}`);
-
-        try {
-            // Téléchargez l'image vers Firebase Storage
-            const snapshot = await imageRef.put(file);
-
-            // Obtenez l'URL de l'image téléchargée
-            const imageUrl = await snapshot.ref.getDownloadURL();
-
-            // Mettez à jour les valeurs dans le formulaire
-            formik.setFieldValue('picture.url', imageUrl);
-        } catch (error) {
-            console.error('Erreur lors du téléchargement de l\'image vers Firebase Storage:', error);
-        }
-    };
-
-
-    const token = useSelector(selectToken);
     useEffect(() => {
         apiBackEnd.get(URL_BACK_ADMINISTRATORS, { headers: { 'Authorization': `Bearer ${token}` } })
             .then((response) => {
@@ -93,36 +87,38 @@ function ProductForm() {
                 }
             });
     }, []);
-    const [initialValues, setInitialValues] = useState({
-        category_id: '',
-        editor_id: '',
-        name: '',
-        reference: '',
-        price: '',
-        description: '',
-        stock: '',
-        length: '',
-        height: '',
-        width: '',
-        weight: '',
-        creationDate: '',
-        tag_ids: [],
-        creator_ids: [],
-        isArchived: false,
-        isCollector: false,
-        picture: [{
-            name: "",
-            url: "",
-            alt: ""
-        }]
-    })
+
     return (
         <div>
             {isLoading ? (
                 <Spinner />
             ) : (
                 <Formik
-                    initialValues={initialValues}
+                    initialValues={
+                        {
+                            category_id: '',
+                            editor_id: '',
+                            name: '',
+                            reference: '',
+                            price: '',
+                            description: '',
+                            stock: '',
+                            length: '',
+                            height: '',
+                            width: '',
+                            weight: '',
+                            creationDate: '',
+                            tag_ids: [],
+                            creator_ids: [],
+                            isArchived: false,
+                            isCollector: false,
+                            pictures: [{
+                                name: "",
+                                url: "",
+                                file: "",
+                                alt: ""
+                            }]
+                        }}
                     validationSchema={validationSchema}
                     onSubmit={handleSubmit}
                 >
@@ -130,36 +126,16 @@ function ProductForm() {
                         <div className='flex flex-col items-center pb-5 pt-5 mb-10'>
                             <div className="max-w-xs"></div>
                             <Form >
-                                <div>
-                                    <TextField label="Nom" name="name" type="text" />
-                                </div>
-                                <div>
-                                    <TextField label="Reference" name="reference" type="text" />
-                                </div>
-                                <div>
-                                    <TextField label="Prix" name="price" type="number" />
-                                </div>
-                                <div>
-                                    <TextField label="Description" name="description" type="text" />
-                                </div>
-                                <div>
-                                    <TextField label="stock" name="stock" type="number" />
-                                </div>
-                                <div>
-                                    <TextField label="Longueur" name="length" type="number" />
-                                </div>
-                                <div>
-                                    <TextField label="Hauteur" name="height" type="number" />
-                                </div>
-                                <div>
-                                    <TextField label="Largeur" name="width" type="number" />
-                                </div>
-                                <div>
-                                    <TextField label="Poids" name="weight" type="number" />
-                                </div>
-                                <div>
-                                    <TextField label="Date de création" name="creationDate" type="number" />
-                                </div>
+                                <TextField label="Nom" name="name" type="text" />
+                                <TextField label="Reference" name="reference" type="text" />
+                                <TextField label="Prix" name="price" type="number" />
+                                <TextField label="Description" name="description" type="text" />
+                                <TextField label="stock" name="stock" type="number" />
+                                <TextField label="Longueur" name="length" type="number" />
+                                <TextField label="Hauteur" name="height" type="number" />
+                                <TextField label="Largeur" name="width" type="number" />
+                                <TextField label="Poids" name="weight" type="number" />
+                                <TextField label="Date de création" name="creationDate" type="number" />
                                 <div className="mb-4 flex items-center">
                                     <label htmlFor="isArchived">est Archived : </label>
                                     <Field className="form-checkbox h-4 w-4 mx-2 my-1 text-indigo-600 transition duration-150 ease-in-out" type="checkbox" name="isArchived" />
@@ -214,37 +190,10 @@ function ProductForm() {
                                     </Field>
                                     <ErrorMessage className='text-red-500 text-sm mt-1' name="tag_ids" component="div" />
                                 </div>
-                                <div className='mb-4'>
-                                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="picture.name">nom du l'image product:</label>
-                                    <Field
-                                        type="text"
-                                        id="picture.name"
-                                        name="picture.name"
-                                        className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-500"
-                                    />
-                                    <ErrorMessage className='text-red-500 text-sm mt-1' name="picture.name" component="div" />
-                                </div>
-                                <div className='mb-4'>
-                                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="picture.url">l'image product</label>
-                                    <Field
-                                        type="file"
-                                        id="picture.url"
-                                        name="picture.url"
-                                        onChange={handleFileChange}
-                                        className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-500"
-                                    />
-                                    <ErrorMessage className='text-red-500 text-sm mt-1' name="picture.url" component="div" />
-                                </div>
-                                <div className='mb-4'>
-                                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="picture.alt">Description de l'image du produit</label>
-                                    <Field
-                                        type="text"
-                                        id="picture.alt"
-                                        name="picture.alt"
-                                        className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-500"
-                                    />
-                                    <ErrorMessage className='text-red-500 text-sm mt-1' name="picture.alt" component="div" />
-                                </div>
+                                <TextField label="Nom de l'image" name="pictures[0].name" type="text" />
+                                <TextField label="Description de l'image" name="pictures[0].alt" type="text" />
+                                <TextField label="l'image du produit" name="pictures[0].file" type="file" />
+
                                 <button className='bg-gray-200 border-2 border-gray-200 lg-around' type="submit">Soumettre</button>
                             </Form>
                         </div>
@@ -252,7 +201,7 @@ function ProductForm() {
                 </Formik >
             )
             }
-        </div>
+        </div >
     )
 
 }
