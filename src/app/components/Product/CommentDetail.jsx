@@ -12,11 +12,8 @@ const CommentDetail = ({ product }) => {
         >
           <div className="flex justify-between">
             <div className="flex items-center">
-              {[...Array(comment.rate)].map((x, i) =>
-                <FaStar key={i} />
-              )}
-              {[...Array(5-comment.rate)].map((x, i) =>
-                <FaRegStar key={i} />
+              {[...Array(5)].map((x, i) =>
+                i+1<=comment.rate?<FaStar key={i} />:<FaRegStar />
               )}
             </div>
             {/* <div>{<FiThumbsUp />.repeat(comment.rate)+"b".repeat(5-comment.rate)}</div> */}
