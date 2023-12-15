@@ -3,33 +3,43 @@ import { FiThumbsUp, FiThumbsDown } from "react-icons/fi";
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 
 const CommentDetail = ({ product }) => {
-  const average = Math.round((product.comments.map(comment => comment.rate).reduce((a, b) => a + b) / 10) * 2) / 2;
-  console.log(average, product.comments.length);
+  const average = Math.round((product.comments.map(comment => comment.rate).reduce((a, b) => a + b) / product.comments.length) * 2) / 2;
+  let starArray = [0, 0, 0, 0, 0];
+  product.comments.map(comment =>
+    starArray[comment.rate - 1] += 1
+  );
 
   return (
     <>
-      <div className="flex justify-between">
-        <div>
+      <div className="flex justify-between my-4 p-2">
+        <div className="flex flex-col gap-3 w-[45%]">
           <div>Moyenne :</div>
-          <div className= "text-xl lg:text-4xl font-bold text-primary">{average}/5</div>
-          <div className="flex items-center text-lg lg:text-2xl text-secondary">
+          <div className="text-4xl lg:text-5xl font-bold text-primary">{average}/5</div>
+          <div className="flex items-center text-2xl lg:text-3xl text-secondary">
             {[...Array(5)].map((x, i) =>
               i + 1 <= average ? <FaStar key={i} /> : i + 0.5 <= average ? <FaStarHalfAlt key={i} /> : <FaRegStar key={i} />
             )}
           </div>
         </div>
-        <div>
-          Detail
+        <div className="flex flex-col gap-3  w-[45%]">
+          <div>Details :</div>
+          <div className="flex flex-col">
+            {starArray.map((star, i) => (
+              <div className="flex justify-between items-center" key={i}>
+                <span className="flex items-center"><span className="text-center">{i+1}</span><FaStar className="text-secondary" /></span><span className="text-primary text-center">{star}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
       <div className="flex flex-col lg:flex-row lg:flex-wrap lg:justify-between">
         {product.comments.map((comment, index) => (
           <div
-            className="flex flex-col lg:w-[48%] gap-4 p-5 my-4 bg-primary text-white rounded-lg"
+            className="flex flex-col lg:w-[48%] h-fit gap-4 p-5 my-4 bg-primary text-white rounded-lg"
             key={index}
           >
             <div className="flex justify-between">
-              <div className="flex items-center">
+              <div className="flex items-center text-secondary">
                 {[...Array(5)].map((x, i) =>
                   i + 1 <= comment.rate ? <FaStar key={i} /> : <FaRegStar key={i} />
                 )}
