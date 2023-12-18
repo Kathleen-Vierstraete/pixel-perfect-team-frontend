@@ -8,7 +8,6 @@ export const ImageSelect = () => {
     const handleImage = (e) => {
         const file = e.target.files[0];
         formikProps.setFieldValue("pictures[0].file", file);
-        fileInputRef.current.value = '';
     };
 
     return (
