@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import * as Yup from 'yup';
 import TextField from '../Connexion/TextField';
-import { ErrorMessage, Field, FieldArray, Form, Formik } from 'formik';
+import { ErrorMessage, Field, Form, Formik, useFormikContext } from 'formik';
 import apiBackEnd from '../../api/backend/api.Backend';
 import { URL_BACK_ADMINISTRATORS, URL_BACK_PRODUCT_CREATE } from '../../constants/urls/urlBackEnd';
 import { Spinner } from '../animation/Spinner';
@@ -10,13 +10,7 @@ import { selectToken } from '../../redux-store/authenticationSlice';
 import { storage } from '../../firebase/firebase';
 import { uuidv4 } from "@firebase/util";
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
-
-const validFileExtensions = { image: ['jpg', 'png', 'jpeg', 'svg', 'webp'] };
-
-function isValidFileType(fileName, fileType) {
-    return fileName && validFileExtensions[fileType].indexOf(fileName.split('.').pop()) > -1;
-}
-
+import { ImageSelect } from './ImageSelector';
 
 const validationSchema = Yup.object().shape({
     name: Yup.string().required('Le nom est requis'),
@@ -39,10 +33,10 @@ const validationSchema = Yup.object().shape({
         Yup.object().shape({
             name: Yup.string(),
             url: Yup.string().url('L\'URL de l\'image n\'est pas valide'),
-            file: Yup.mixed().required("Required"),
+            file: Yup.mixed(),
             alt: Yup.string()
         })
-    ).compact(),
+    ),
 
 });
 
@@ -52,16 +46,18 @@ function ProductForm() {
     const token = useSelector(selectToken);
     const handleSubmit = async (values) => {
         if (values.pictures[0].file !== null) {
-            const img = values.pictures[0].file
-            console.log("first", img)
-            const imgRef = ref(storage, `images/${uuidv4()}`)
-            uploadBytes(imgRef, img).then(value => {
-                getDownloadURL(value.ref).then(url => {
-                    values.pictures[0].url = url
-                })
-            })
+            const img = values.pictures[0].file;
+            console.log("first",img)
+            try {
+                const imgRef = ref(storage, `images/${uuidv4()}`);
+                await uploadBytes(imgRef, img);
+                const url = await getDownloadURL(imgRef);
+                values.pictures[0].url = url;
+            } catch (error) {
+                console.error('Error uploading image:', error);
+            }
+            console.log(JSON.stringify(values));
         }
-        console.log(values)
         try {
             const response = await apiBackEnd.post(URL_BACK_PRODUCT_CREATE, values);
             console.log('Response:', response.data);
@@ -69,6 +65,7 @@ function ProductForm() {
             console.error('Error:', error);
         }
     };
+
 
     useEffect(() => {
         apiBackEnd.get(URL_BACK_ADMINISTRATORS, { headers: { 'Authorization': `Bearer ${token}` } })
@@ -121,6 +118,7 @@ function ProductForm() {
                         }}
                     validationSchema={validationSchema}
                     onSubmit={handleSubmit}
+
                 >
                     <div className='flex justify-center'>
                         <div className='flex flex-col items-center pb-5 pt-5 mb-10'>
@@ -192,9 +190,8 @@ function ProductForm() {
                                 </div>
                                 <TextField label="Nom de l'image" name="pictures[0].name" type="text" />
                                 <TextField label="Description de l'image" name="pictures[0].alt" type="text" />
-                                <TextField label="l'image du produit" name="pictures[0].file" type="file" />
-
-                                <button className='bg-gray-200 border-2 border-gray-200 lg-around' type="submit">Soumettre</button>
+                                <ImageSelect/>
+                               <button className='bg-gray-200 border-2 border-gray-200 lg-around' type="submit">Soumettre</button>
                             </Form>
                         </div>
                     </div>
