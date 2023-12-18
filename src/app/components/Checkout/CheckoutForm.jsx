@@ -24,16 +24,16 @@ const CheckoutForm = () => {
     stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
       switch (paymentIntent.status) {
         case "succeeded":
-          setMessage("Payment succeeded!");
+          setMessage("Paiement réussi!");
           break;
         case "processing":
-          setMessage("Your payment is processing.");
+          setMessage("Votre paiement est en cours.");
           break;
         case "requires_payment_method":
-          setMessage("Your payment was not successful, please try again.");
+          setMessage("Votre paiement a échoué, veuillez à nouveau.");
           break;
         default:
-          setMessage("Something went wrong.");
+          setMessage("Quelque chose s'est mal passé.");
           break;
       }
     });
@@ -87,7 +87,7 @@ const CheckoutForm = () => {
         <PaymentElement id="payment-element" options={paymentElementOptions}/>
         <button className="block w-1/4 py-2 text-center text-white m-auto mt-2 rounded-lg bg-primary-light hover:bg-primary-dark">Payer</button>
               {/* Show any error or success messages */}
-      {message && <div className='mt-5 text-xl font-semibold'>{message}</div>}
+      {message && <div className='mt-5 text-xl font-semibold justify-center'>{message}</div>}
       </form>
     </div>
   );
