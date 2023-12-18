@@ -190,7 +190,7 @@ function ProductForm() {
                                 </div>
                                 <TextField label="Nom de l'image" name="pictures[0].name" type="text" />
                                 <TextField label="Description de l'image" name="pictures[0].alt" type="text" />
-                                <ImageSelect/>
+                                <ImageSelect label="Image du produit"/>
                                <button className='bg-gray-200 border-2 border-gray-200 lg-around' type="submit">Soumettre</button>
                             </Form>
                         </div>
