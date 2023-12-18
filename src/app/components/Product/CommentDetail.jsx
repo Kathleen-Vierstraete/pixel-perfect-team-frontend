@@ -2,6 +2,7 @@ import { FiThumbsUp, FiThumbsDown } from "react-icons/fi";
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 import { URL_BACK_COMMENTS } from "../../constants/urls/urlBackEnd";
 import apiBackEnd from "../../api/backend/api.Backend";
+import StarCount from "./StarCount";
 
 const CommentDetail = ({ comments, setComments, token }) => {
   const average =
@@ -19,16 +20,13 @@ const CommentDetail = ({ comments, setComments, token }) => {
       )
       .then((response) => {
         if (response.status === 200) {
-          // TODO : find which comment is modified by its ID and then change it's vote count
           const updatedComments = comments.map((comment) => {
             if (comment.id === response.data.id) {
               return { ...comment, vote: response.data.vote };
             }
             return comment;
           });
-
           setComments(updatedComments);
-          console.log(response.data);
         }
       })
       .catch((error) => {
@@ -46,17 +44,7 @@ const CommentDetail = ({ comments, setComments, token }) => {
           <div className="text-4xl lg:text-5xl font-bold text-primary">
             {average}/5
           </div>
-          <div className="flex items-center text-2xl lg:text-3xl text-secondary">
-            {[...Array(5)].map((x, i) =>
-              i + 1 <= average ? (
-                <FaStar key={i} />
-              ) : i + 0.5 <= average ? (
-                <FaStarHalfAlt key={i} />
-              ) : (
-                <FaRegStar key={i} />
-              )
-            )}
-          </div>
+          <StarCount className="text-2xl lg:text-3xl" count={average}/>
         </div>
         <div className="flex flex-col gap-3  w-[45%]">
           <div>Details :</div>
@@ -80,15 +68,7 @@ const CommentDetail = ({ comments, setComments, token }) => {
             key={index}
           >
             <div className="flex justify-between">
-              <div className="flex items-center text-secondary">
-                {[...Array(5)].map((x, i) =>
-                  i + 1 <= comment.rate ? (
-                    <FaStar key={i} />
-                  ) : (
-                    <FaRegStar key={i} />
-                  )
-                )}
-              </div>
+              <StarCount count={comment.rate} />
               <div>{comment.date}</div>
             </div>
             <div className="underline">{comment.title}</div>
