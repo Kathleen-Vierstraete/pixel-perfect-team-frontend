@@ -1,5 +1,5 @@
 import { FiThumbsUp, FiThumbsDown } from "react-icons/fi";
-import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
+import { FaStar } from "react-icons/fa";
 import { URL_BACK_COMMENTS } from "../../constants/urls/urlBackEnd";
 import apiBackEnd from "../../api/backend/api.Backend";
 import StarCount from "./StarCount";
