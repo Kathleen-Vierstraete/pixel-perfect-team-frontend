@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { loadStripe } from "@stripe/stripe-js";
-import { Elements, PaymentElement } from '@stripe/react-stripe-js';
+import { Elements } from '@stripe/react-stripe-js';
 import axios from 'axios';
 import { Spinner } from '../components/animation/Spinner';
 import CheckoutForm from '../components/Checkout/CheckoutForm';
@@ -34,6 +34,7 @@ const Checkout = () => {
 
     // console.log(clientSecret);
     // console.log(options);
+    
 
     return (
 
