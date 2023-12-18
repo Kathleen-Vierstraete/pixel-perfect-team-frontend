@@ -28,7 +28,7 @@ const Routes = () => {
       <Route
         path={URL.URL_HOME}
         element={
-            <HomeView />
+          <HomeView />
         }
       />
       <Route
@@ -48,8 +48,12 @@ const Routes = () => {
       <Route path={URL.URL_LOGIN} element={<LoginView />} />
       <Route path={URL.URL_PICK} element={<PickView />} />
       <Route path={URL.URL_CONNEXION} element={<Connexion />} />
-      <Route path={URL.URL_CREATE_PRODUCT} element={<FormProductView />} />
-      <Route path={URL.URL_CREATEACCOUNT} element={<CreateAccount />} />   
+      <Route path={URL.URL_CREATE_PRODUCT} element={
+        <PrivateRoute roles={[ROLE_ADMIN]}>
+          <FormProductView />
+        </PrivateRoute>
+      } />
+      <Route path={URL.URL_CREATEACCOUNT} element={<CreateAccount />} />
       <Route path={URL.URL_PRODUCTS_BY_CATEGORY()} element={<CategoryLinks />} />
       <Route path="*" element={<Page404 />} />
     </RoutesContainer>
