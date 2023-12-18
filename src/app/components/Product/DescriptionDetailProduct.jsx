@@ -2,7 +2,7 @@ import { useState } from "react";
 import { CharactDetail } from "./CharactDetail";
 import CommentDetail from "./CommentDetail";
 
-export const DescriptionDetailProduct = ({ product }) => {
+export const DescriptionDetailProduct = ({ product, token, comments, setComments }) => {
   const [descriptionIsOpen, setDescriptionIsOpen] = useState(true);
   const [charactIsOpen, setCharactIsOpen] = useState(false);
   const [commentIsOpen, setCommentIsOpen] = useState(false);
@@ -64,13 +64,13 @@ export const DescriptionDetailProduct = ({ product }) => {
         </div>
       )}
 
-      {(commentIsOpen && product.comments.length>0) && (
+      {commentIsOpen && product.comments.length > 0 && (
         <div className="flex flex-col">
           <h3 className="underline">Commentaires</h3>
-          <CommentDetail product={product} />
+          <CommentDetail comments={comments} setComments={setComments}  token={token} />
         </div>
       )}
-      {(commentIsOpen && !product.comments.length>0) && (
+      {commentIsOpen && !product.comments.length > 0 && (
         <div className="flex flex-col">
           <h3 className="underline">Commentaires</h3>
           <div className="my-4">Aucun commentaire.</div>
