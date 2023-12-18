@@ -78,6 +78,7 @@ const CommentDetail = ({ comments, setComments, token }) => {
               <div className="flex gap-2 items-center">
                 <div>{comment.vote}</div>
                 <div
+                  className="rounded-full cursor-pointer"
                   onClick={() => {
                     voteButton(comment, comment.vote + 1);
                   }}
@@ -85,6 +86,7 @@ const CommentDetail = ({ comments, setComments, token }) => {
                   <FiThumbsUp />
                 </div>
                 <div
+                  className="rounded-full cursor-pointer"
                   onClick={() => {
                     voteButton(comment, comment.vote - 1);
                   }}
