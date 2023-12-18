@@ -1,9 +1,44 @@
 import {useStripe, useElements, PaymentElement} from '@stripe/react-stripe-js';
+import { useEffect, useState } from 'react';
 
 const CheckoutForm = () => {
 
   const stripe = useStripe();
   const elements = useElements();
+
+  const [message, setMessage] = useState(null);
+
+  useEffect(() => {
+    if (!stripe) {
+      return;
+    }
+
+    const clientSecret = new URLSearchParams(window.location.search).get(
+      "payment_intent_client_secret"
+    );
+
+    if (!clientSecret) {
+      return;
+    }
+
+    stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
+      switch (paymentIntent.status) {
+        case "succeeded":
+          setMessage("Payment succeeded!");
+          break;
+        case "processing":
+          setMessage("Your payment is processing.");
+          break;
+        case "requires_payment_method":
+          setMessage("Your payment was not successful, please try again.");
+          break;
+        default:
+          setMessage("Something went wrong.");
+          break;
+      }
+    });
+  }, [stripe]);
+
 
   const handleSubmit = async (event) => {
     // We don't want to let default form submission happen here,
@@ -16,32 +51,44 @@ const CheckoutForm = () => {
       return;
     }
 
-    const result = await stripe.confirmPayment({
-      //`Elements` instance that was used to create the Payment Element
+
+
+    const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
+        // Make sure to change this to your payment completion page
         return_url: "http://localhost:5173/",
       },
     });
 
-    if (result.error) {
-      // Show error to your customer (for example, payment details incomplete)
-      console.log(result.error.message);
+    // This point will only be reached if there is an immediate error when
+    // confirming the payment. Otherwise, your customer will be redirected to
+    // your `return_url`. For some payment methods like iDEAL, your customer will
+    // be redirected to an intermediate site first to authorize the payment, then
+    // redirected to the `return_url`.
+    if (error.type === "card_error" || error.type === "validation_error") {
+      setMessage(error.message);
     } else {
-      // Your customer will be redirected to your `return_url`. For some payment
-      // methods like iDEAL, your customer will be redirected to an intermediate
-      // site first to authorize the payment, then redirected to the `return_url`.
-      console.log(result);
-
+      setMessage("An unexpected error occurred.");
     }
-  };
 
+  };
+  
+    const paymentElementOptions = {
+      layout: "tabs"
+    }
+
+  
+
+  
   return (
     <div className='flex justify-center'>
-    <form onSubmit={handleSubmit} className='flex flex-col justify-center text-red-600'>
-      <PaymentElement/>
-      <button className="block w-1/4 py-2 text-center text-white m-auto mt-2 rounded-lg bg-primary-light hover:bg-primary-dark">Payer</button>
-    </form>
+      <form onSubmit={handleSubmit} className='flex flex-col justify-center text-red-600'>
+        <PaymentElement id="payment-element" options={paymentElementOptions}/>
+        <button className="block w-1/4 py-2 text-center text-white m-auto mt-2 rounded-lg bg-primary-light hover:bg-primary-dark">Payer</button>
+              {/* Show any error or success messages */}
+      {message && <div className='mt-5 text-xl font-semibold'>{message}</div>}
+      </form>
     </div>
   );
 };
