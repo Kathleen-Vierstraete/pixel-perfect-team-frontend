@@ -1,10 +1,13 @@
 import {useStripe, useElements, PaymentElement} from '@stripe/react-stripe-js';
 import { useEffect, useState } from 'react';
+import { clearCart } from '../../redux-store/cartSlice';
+import { useDispatch } from 'react-redux';
 
 const CheckoutForm = () => {
 
   const stripe = useStripe();
   const elements = useElements();
+  const dispatch = useDispatch()
 
   const [message, setMessage] = useState(null);
 
@@ -51,16 +54,20 @@ const CheckoutForm = () => {
       return;
     }
 
-
+    const returnHome = () => {
+      dispatch(clearCart())
+       return "http://localhost:5173/account"
+    }
 
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: "http://localhost:5173/",
+        return_url: returnHome(),
       },
     
-    });
+    })
+
 
     // This point will only be reached if there is an immediate error when
     // confirming the payment. Otherwise, your customer will be redirected to
