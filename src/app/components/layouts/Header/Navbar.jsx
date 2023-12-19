@@ -175,10 +175,7 @@ const Navbar = () => {
                 }
               </>
             }
-
-
           </div>
-
         </div>
         <div className="hidden lg:flex lg:bg-primary-light">
           <NavMenu categories={categories} />

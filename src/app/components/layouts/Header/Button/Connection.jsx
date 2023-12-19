@@ -1,22 +1,28 @@
 import { FaRegUser } from "react-icons/fa";
-import { URL_ACCOUNT, URL_CONNEXION } from "../../../../constants/urls/urlFrontEnd";
+import { URL_ACCOUNT, URL_CONNEXION, URL_CREATE_PRODUCT } from "../../../../constants/urls/urlFrontEnd";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { selectIsLogged, selectUser, signOut } from "../../../../redux-store/authenticationSlice";
+import { selectHasRole, selectIsLogged, selectUser, signOut } from "../../../../redux-store/authenticationSlice";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 export const ConnectionButton = () => {
     const isAuthenticated = useSelector(selectIsLogged);
+    const hasRole = useSelector(selectHasRole)
     const user = useSelector(selectUser);
     const dispatch = useDispatch();
     const navigate = useNavigate()
     const [isClick, setIsClick] = useState(false);
+    const [panelIsClick, setPanelIsClick] = useState(false);
 
     const handleLogout = () => {
         dispatch(signOut());
         toogleDropBox();
     };
+
+    const tooglePanel = () => {
+        setPanelIsClick(!panelIsClick)
+    }
 
     const toogleDropBox = () => {
         setIsClick(!isClick);
@@ -25,6 +31,7 @@ export const ConnectionButton = () => {
     const navigated = (route) => {
         navigate(route);
         toogleDropBox();
+        setPanelIsClick(false)
     }
 
     return (
@@ -72,6 +79,14 @@ export const ConnectionButton = () => {
                             <button className="block w-full text-left py-2 px-4 rounded-lg hover:bg-primary-light" onClick={handleLogout}>
                                 Se déconnecter
                             </button>
+                            {hasRole && (
+                                <button className="block w-full text-left py-2 px-4 rounded-lg hover:bg-primary-light" onClick={tooglePanel}>Panel Admin</button>
+                            )}
+                            {panelIsClick &&
+                                <div className="absolute z-10 top-20 right-48 mt-2 w-48 bg-primary-dark text-white rounded-lg shadow-lg p-2">
+                                    <button className="block w-full text-left py-2 px-4 rounded-lg hover:bg-primary-light" onClick={() => navigated(URL_CREATE_PRODUCT)}>Créer un produit</button>
+                                </div>
+                            }
                         </div>
                     }
                 </div>
