@@ -60,7 +60,6 @@ const Routes = () => {
         </PrivateRoute>
       } />
       <Route path="*" element={<Page404 />} />
-      <Route path="/pagination" element={<PaginationView />} />
       <Route path={URL.URL_CHECKOUT} element={<CheckoutView />} />
     </RoutesContainer>
   );
