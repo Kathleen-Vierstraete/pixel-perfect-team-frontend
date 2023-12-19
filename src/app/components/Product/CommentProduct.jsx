@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import CommentDetail from "./CommentDetail";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa";
 
-const CommentProduct = ({ product }) => {
+const CommentProduct = ({ token, comments, setComments }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -10,11 +10,17 @@ const CommentProduct = ({ product }) => {
       <button
         className="bg-white flex justify-between items-center font-bold text-lg tracking-wider"
         onClick={() => setIsOpen((prev) => !prev)}
-        >
+      >
         COMMENTAIRES{!isOpen ? <FaAngleDown /> : <FaAngleUp />}
       </button>
-      {(isOpen && product.comments.length>0) && <CommentDetail product={product} />}
-      {(isOpen && !product.comments.length>0) && <div>Aucun commentaire.</div>}
+      {isOpen && comments.length > 0 && (
+        <CommentDetail
+          comments={comments}
+          token={token}
+          setComments={setComments}
+        />
+      )}
+      {isOpen && !comments.length > 0 && <div>Aucun commentaire.</div>}
     </div>
   );
 };

@@ -6,17 +6,22 @@ import { URL_PRODUCT_BY_ID } from '../constants/urls/urlBackEnd';
 import DetailProduct from '../components/Product/DetailProduct';
 import ProductCarousel from '../components/carrousel/ProductCarrousel';
 import { Spinner } from '../components/animation/Spinner';
+import { useSelector } from 'react-redux';
+import { selectToken } from './../redux-store/authenticationSlice';
 
 const ProductSingleView = () => {
     const { id } = useParams();
     const [product, setProduct] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [comments,setComments] = useState([])
+    const token = useSelector(selectToken);
     let picture = "";
-    
+
     useEffect(() => {
         apiBackEnd.get(URL_PRODUCT_BY_ID(id))
             .then(response => {
                 setProduct(response.data);
+                setComments(response.data.product.comments)
                 setIsLoading(false);
             })
             .catch(error => {
@@ -42,7 +47,7 @@ const ProductSingleView = () => {
                             <ProductSingle product={product.product} />
                         </div>
                         <div className=" lg:col-span-2 lg:col-start-1 lg:row-start-2">
-                            <DetailProduct product={product.product} />
+                            <DetailProduct product={product.product} token={token} comments={comments} setComments={setComments} />
                         </div>
                     </div>
                     <div className='px-10 mt-5'>
