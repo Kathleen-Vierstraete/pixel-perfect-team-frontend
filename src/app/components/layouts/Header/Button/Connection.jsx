@@ -1,14 +1,15 @@
 import { FaRegUser } from "react-icons/fa";
-import { URL_ACCOUNT, URL_CONNEXION, URL_CREATE_PRODUCT } from "../../../../constants/urls/urlFrontEnd";
+import { URL_ACCOUNT, URL_CONNEXION, URL_CREATE_PRODUCT, URL_HOME } from "../../../../constants/urls/urlFrontEnd";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { selectHasRole, selectIsLogged, selectUser, signOut } from "../../../../redux-store/authenticationSlice";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { ROLE_ADMIN } from "../../../../constants/rolesConstant";
 
 export const ConnectionButton = () => {
     const isAuthenticated = useSelector(selectIsLogged);
-    const hasRole = useSelector(selectHasRole)
+    const hasRole = useSelector((state) => selectHasRole(state, [ROLE_ADMIN]));
     const user = useSelector(selectUser);
     const dispatch = useDispatch();
     const navigate = useNavigate()
@@ -18,6 +19,7 @@ export const ConnectionButton = () => {
     const handleLogout = () => {
         dispatch(signOut());
         toogleDropBox();
+        navigate(URL_HOME)
     };
 
     const tooglePanel = () => {
