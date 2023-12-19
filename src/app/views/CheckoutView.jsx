@@ -5,7 +5,8 @@ import axios from 'axios';
 import { Spinner } from '../components/animation/Spinner';
 import CheckoutForm from '../components/Checkout/CheckoutForm';
 import { useSelector } from 'react-redux';
-import { selectItems } from "../redux-store/cartSlice";
+import { selectTotalCost } from "../redux-store/cartSlice";
+
 
 const Checkout = () => {
     const [isLoading, setIsLoading] = useState(true);
@@ -16,7 +17,7 @@ const Checkout = () => {
 
     const [clientSecret, setClientSecret] = useState("");
 
-    const paniers = useSelector(selectItems);
+    const totalPrice = useSelector(selectTotalCost);
 
     useEffect(() => {
       axios
@@ -24,7 +25,7 @@ const Checkout = () => {
 
                   "products": [
                     {
-                      "amount": 997
+                      "amount": totalPrice + 2900
                     },
                   ]
                 
