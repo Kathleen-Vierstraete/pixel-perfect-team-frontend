@@ -2,8 +2,11 @@ import { convertDate } from "../../services/stringifyService";
 import { Spinner } from "../animation/Spinner";
 import { IoIosCalendar } from "react-icons/io";
 import { FaBox } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import { URL_ACCOUNT_PURCHASE } from "../../constants/urls/urlFrontEnd";
 
 const PurchaseSection = ({ purchases }) => {
+    const navigate = useNavigate()
     return (
         <div className="bg-white flex flex-col gap-4 p-4 shadow-md shadow-blue-500/40 rounded-xl">
             <h4 className="self-center">Mes commandes</h4>
@@ -18,9 +21,9 @@ const PurchaseSection = ({ purchases }) => {
                         ) : (
                             <p className="font-bold">Commande livré le {convertDate(purchase.dateDelivery)}</p>
                         )}
-                        <div className="max-w-xs flex gap-2 overflow-hidden p-2 border border-primary  rounded-xl">
+                        <div onClick={()=>{navigate(URL_ACCOUNT_PURCHASE(purchase.reference))}} className="max-w-xs flex gap-2 overflow-hidden p-2 border border-primary  rounded-xl hover:cursor-pointer">
                             {purchase.picks.map((pick) => (
-                                <img key={pick.product.pictures[0].id} className="w-28" src={pick.product.pictures[0].url} alt="" />
+                                <img key={pick.product.pictures[0].id} className="max-h-24" src={pick.product.pictures[0].url} alt="" />
                             ))}
                         </div>
                     </div>
@@ -41,7 +44,7 @@ const PurchaseSection = ({ purchases }) => {
                                 </div>
                             </div>
                         </div>
-                        <button className="btn-primary self-end py-2 px-4 rounded-xl">Details de la commande</button>
+                        <button onClick={()=>{navigate(URL_ACCOUNT_PURCHASE(purchase.reference))}} className="btn-primary self-end py-2 px-4 rounded-xl">Details de la commande</button>
                     </div>
                 </div>
             ))
