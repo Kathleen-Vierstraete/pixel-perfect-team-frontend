@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from "react-redux";
 import { selectToken, selectUser, signOut } from "../redux-store/authenticationSlice";
 import { useDispatch } from "react-redux";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { URL_CONNEXION } from "../constants/urls/urlFrontEnd";
 import { LeftBox } from '../components/MyAccount/LeftBox';
 import { RightContent } from '../components/MyAccount/RightContent';
@@ -15,6 +15,7 @@ import AccountSection from '../components/MyAccount/AccountSection';
 import PurchaseSection from '../components/MyAccount/PurchaseSection';
 import AddresseSection from '../components/MyAccount/AdresseSection';
 import CommentSection from '../components/MyAccount/CommentSection';
+import { DetailPurchaseSection } from '../components/MyAccount/DetailPurchaseSection';
 
 
 const MyAccountView = () => {
@@ -25,11 +26,12 @@ const MyAccountView = () => {
   const [activeBox, setActiveBox] = useState(null);
   const [userInfo, setUserInfo] = useState(null);
   const [addresseUpToDate, setAddresseUpToDate] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams()
 
   const toggleAddresse = () => {
     setAddresseUpToDate(!addresseUpToDate);
   }
-  
+
 
   useEffect(() => {
     (async () => {
@@ -52,7 +54,16 @@ const MyAccountView = () => {
       case 'Mes commentaires':
         return !userInfo ? (<Spinner message="Vos données ne sont pas recuperer" />) : (<CommentSection comments={userInfo.comments} token={token} />);
       default:
-        return !userInfo ? (<Spinner message="Vos données ne sont pas recuperer" />) : (<PurchaseSection purchases={userInfo.purchases} />)
+        return !userInfo ? (
+          <Spinner message="Vos données ne sont pas recuperer" />
+        ) : (
+          searchParams.get("purchase") ?
+            (
+              <DetailPurchaseSection purchase={userInfo.purchases.find(purchase => purchase.reference === searchParams.get("purchase"))}/>
+            ) : (
+              <PurchaseSection purchases={userInfo.purchases} />
+            )
+        )
     }
   };
 

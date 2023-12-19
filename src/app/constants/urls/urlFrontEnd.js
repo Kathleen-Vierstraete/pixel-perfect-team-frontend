@@ -12,4 +12,5 @@ export const URL_CREATE_PRODUCT = '/create-product';
 export const URL_404_PAGE = '/404'
 export const URL_PRODUCTS_BY_CATEGORY = (id = null) =>{return id ===null?'/category/:id/products':`/category/${id}/products`}
 export const URL_ACCOUNT = '/account'
+export const URL_ACCOUNT_PURCHASE = (params) =>{ return `/account?purchase=${params}`} 
 export const URL_CHECKOUT = '/checkout'
