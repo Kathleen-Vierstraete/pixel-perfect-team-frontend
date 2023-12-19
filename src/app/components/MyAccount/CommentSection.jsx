@@ -24,7 +24,7 @@ function CommentSection({ comments }) {
                 </Link>
                 </div>
 
-                <div className='mt-4 border-t grid grid-cols-5 content-baseline items-center border-gray-300 pt-4'>
+                <div className='mt-4 border-t flex flex-col items-center text-center gap-6 border-gray-300 pt-4 lg:flex-row'>
                     <h4>{comment.title}</h4>
                     <p>{comment.body}</p>
                     <p>Rate: {comment.rate}</p>
