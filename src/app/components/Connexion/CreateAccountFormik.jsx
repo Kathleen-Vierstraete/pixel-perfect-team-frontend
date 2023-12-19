@@ -14,8 +14,6 @@ import { useNavigate } from "react-router-dom";
 const CreateAccountFormik  = () => {
     const navigate = useNavigate()
 
-    const navigate = useNavigate();
-
     const special = "!@#$%^&*(),;.?\":{}|<>"
 
     const validate = Yup.object({
