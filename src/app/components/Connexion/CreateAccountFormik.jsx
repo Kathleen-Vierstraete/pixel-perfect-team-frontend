@@ -12,8 +12,7 @@ import { useNavigate } from "react-router-dom";
 
 
 const CreateAccountFormik  = () => {
-
-    const navigate = useNavigate();
+    const navigate = useNavigate()
 
     const special = "!@#$%^&*(),;.?\":{}|<>"
 
@@ -44,6 +43,7 @@ const CreateAccountFormik  = () => {
                     .oneOf([Yup.ref('password'), undefined], "Les mots de passe doivent correspondre")
                     .required("Requis"),
     })
+
 
       const onSubmit = (values) => {
         apiBackEnd.post(URL_BACK_CREATE_ACCOUNT, values)
@@ -89,8 +89,6 @@ const CreateAccountFormik  = () => {
                             <p className='mb-3'>Un caractère spécial parmi {special}</p>
 
                             <TextField  label="Confirmation de mot de passe" name="passwordconfirm" type="password"/>
-
-                            {/* {console.log(formik.values)} */}
 
                             <Checkbox labelText="J’accepte de recevoir des promotions de la part de Pixel Perfect"/> 
 
