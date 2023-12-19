@@ -6,7 +6,7 @@ import Checkbox from "./Checkbox";
 import * as Yup from 'yup';
 import { URL_BACK_CREATE_ACCOUNT } from "../../constants/urls/urlBackEnd";
 import apiBackEnd from "../../api/backend/api.Backend";
-import { EMAIL_REGEX } from "../../constants/regex";
+import { EMAIL_REGEX, TEL_REGEX } from "../../constants/regex";
 import { URL_CONNEXION } from "../../constants/urls/urlFrontEnd";
 import { useNavigate } from "react-router-dom";
 
@@ -26,6 +26,7 @@ const CreateAccountFormik  = () => {
                     .required("Requis"),
         phone: Yup.string()
                     .max(10, "Doit contenir 10 chiffres")
+                    .matches(TEL_REGEX,"numéro de téléphone invalide")
                     .required("Requis"),
         email: Yup.string()
                     .email("Format email invalide")
