@@ -75,12 +75,18 @@ function ProductForm() {
             })
             .catch((error) => {
                 if (error.response) {
-                    console.error('Server responded with an error:', error.response.data);
-                    console.error('Status code:', error.response.status);
+                    if (error.response.status === 400) {
+                        setError('un champ est vide, ou possede un nombre négatif');
+                    } else {
+                        setError('Une erreur inattendue s\'est produite.');
+                    }
+                    if(error.response.status === 409){
+                        setError('une erreur s\'est produite, une duplication de reference du produit')
+                    }
                 } else if (error.request) {
-                    console.error('No response received from the server');
+                    setError('Pas de réponse du serveur.');
                 } else {
-                    console.error('Error setting up the request:', error.message);
+                    setError('Une erreur inattendue s\'est produite.');
                 }
             });
     }, []);
@@ -191,7 +197,7 @@ function ProductForm() {
                                 <TextField label="Nom de l'image" name="pictures[0].name" type="text" />
                                 <TextField label="Description de l'image" name="pictures[0].alt" type="text" />
                                 <ImageSelect label="Image du produit"/>
-                               <button className='bg-gray-200 border-2 border-gray-200 lg-around' type="submit">Soumettre</button>
+                                <button className='bg-gray-200 border-2 border-gray-200 lg-around' type="submit">Soumettre</button>
                             </Form>
                         </div>
                     </div>
