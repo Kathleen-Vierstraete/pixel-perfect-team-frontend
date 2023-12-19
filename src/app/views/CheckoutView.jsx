@@ -4,6 +4,8 @@ import { Elements } from '@stripe/react-stripe-js';
 import axios from 'axios';
 import { Spinner } from '../components/animation/Spinner';
 import CheckoutForm from '../components/Checkout/CheckoutForm';
+import { useSelector } from 'react-redux';
+import { selectItems } from "../redux-store/cartSlice";
 
 const Checkout = () => {
     const [isLoading, setIsLoading] = useState(true);
@@ -14,56 +16,34 @@ const Checkout = () => {
 
     const [clientSecret, setClientSecret] = useState("");
 
-    
+    const paniers = useSelector(selectItems);
+
     useEffect(() => {
-      // Create PaymentIntent as soon as the page loads
-      fetch("http://localhost:8000/api/stripe/create", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            "products": [
-              {
-                "amount": 500
-              },
-              {
-                "amount": 300
-              },
-              {
-                "amount": 200
-              }
-            ]
-          }),
+      axios
+        .post("http://localhost:8000/api/stripe/create", {
+
+                  "products": [
+                    {
+                      "amount": 997
+                    },
+                  ]
+                
+                })
+      
+        .then((response) => {
+          setClientSecret(response.data.clientSecret);
+          setIsLoading(false);
+          console.log("reponse axios :", response.data.clientSecret);
         })
-        .then((res) => res.json())
-        .then((data) => setClientSecret(data.clientSecret))
-        .then(() => setIsLoading(false));
+        .catch((error) => {
+          console.error("Error fetching client secret:", error);
+        });
     }, []);
 
     const options = {
       // passing the client secret obtained from the server
       clientSecret: clientSecret,
     };
-    
-    // useEffect(() => {
-    //   axios
-    //     .post("http://localhost:8000/api/stripe/create" )
-    //     .then((response) => {
-    //       setClientSecret(response.data.clientSecret);
-    //       setIsLoading(false);
-    //       // console.log("reponse axios :",response.data.clientSecret);
-    //     })
-    //     .catch((error) => {
-    //       console.error("Error fetching client secret:", error);
-    //     });
-    // }, []);
-      // const options = {
-      //   // passing the client secret obtained from the server
-      //   clientSecret: clientSecret,
-      // };
-
-    // console.log(clientSecret);
-    // console.log(options);
-    
 
     return (
 
