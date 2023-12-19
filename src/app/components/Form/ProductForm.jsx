@@ -44,6 +44,8 @@ function ProductForm() {
     const [data, setdata] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const token = useSelector(selectToken);
+    const [error, setError] = useState();
+    
     const handleSubmit = async (values) => {
         if (values.pictures[0].file !== null) {
             const img = values.pictures[0].file;
@@ -61,9 +63,22 @@ function ProductForm() {
         try {
             const response = await apiBackEnd.post(URL_BACK_PRODUCT_CREATE, values);
             console.log('Response:', response.data);
-        } catch (error) {
-            console.error('Error:', error);
-        }
+        } catch(error) {
+            if (error.response) {
+                if (error.response.status === 400) {
+                    setError('un champ est vide, ou possede un nombre négatif');
+                } else {
+                    setError('Une erreur inattendue s\'est produite.');
+                }
+                if(error.response.status === 409){
+                    setError('une erreur s\'est produite, une duplication de reference du produit')
+                }
+            } else if (error.request) {
+                setError('Pas de réponse du serveur.');
+            } else {
+                setError('Une erreur inattendue s\'est produite.');
+            }
+        };
     };
 
 
@@ -76,12 +91,9 @@ function ProductForm() {
             .catch((error) => {
                 if (error.response) {
                     if (error.response.status === 400) {
-                        setError('un champ est vide, ou possede un nombre négatif');
+                        setError('Une erreur inattendue s\'est produite.');
                     } else {
                         setError('Une erreur inattendue s\'est produite.');
-                    }
-                    if(error.response.status === 409){
-                        setError('une erreur s\'est produite, une duplication de reference du produit')
                     }
                 } else if (error.request) {
                     setError('Pas de réponse du serveur.');
@@ -197,6 +209,7 @@ function ProductForm() {
                                 <TextField label="Nom de l'image" name="pictures[0].name" type="text" />
                                 <TextField label="Description de l'image" name="pictures[0].alt" type="text" />
                                 <ImageSelect label="Image du produit"/>
+                                {error && <div style={{ color: 'red' }}>{error}</div>}
                                 <button className='bg-gray-200 border-2 border-gray-200 lg-around' type="submit">Soumettre</button>
                             </Form>
                         </div>
