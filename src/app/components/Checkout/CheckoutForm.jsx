@@ -1,7 +1,5 @@
 import {useStripe, useElements, PaymentElement} from '@stripe/react-stripe-js';
 import { useEffect, useState } from 'react';
-import { selectTotalCost} from "../../redux-store/cartSlice";
-import { useSelector } from 'react-redux';
 
 const CheckoutForm = () => {
 
@@ -9,9 +7,6 @@ const CheckoutForm = () => {
   const elements = useElements();
 
   const [message, setMessage] = useState(null);
-
-  const totalPrice = useSelector(selectTotalCost);
-  
 
   useEffect(() => {
     if (!stripe) {
@@ -83,12 +78,9 @@ const CheckoutForm = () => {
     const paymentElementOptions = {
       layout: "tabs"
     }
-    
 
   return (
     <div className='flex justify-center'>
-      <p className='flex flex-col justify-center'>total items : {totalPrice /100} </p>
-
       <form onSubmit={handleSubmit} className='flex flex-col justify-center text-red-600'>
         <PaymentElement id="payment-element" options={paymentElementOptions}/>
         <button className="block w-1/4 py-2 text-center text-white m-auto mt-2 rounded-lg bg-primary-light hover:bg-primary-dark">Payer</button>

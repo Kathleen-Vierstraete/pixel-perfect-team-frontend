@@ -14,23 +14,52 @@ const Checkout = () => {
 
     const [clientSecret, setClientSecret] = useState("");
 
-    useEffect(() => {
-        axios
-          .post("http://localhost:8000/api/stripe/create" )
-          .then((response) => {
-            setClientSecret(response.data.clientSecret);
-            setIsLoading(false);
-            // console.log("reponse axios :",response.data.clientSecret);
-          })
-          .catch((error) => {
-            console.error("Error fetching client secret:", error);
-          });
-      }, []);
     
-      const options = {
-        // passing the client secret obtained from the server
-        clientSecret: clientSecret,
-      };
+    useEffect(() => {
+      // Create PaymentIntent as soon as the page loads
+      fetch("http://localhost:8000/api/stripe/create", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            "products": [
+              {
+                "amount": 500
+              },
+              {
+                "amount": 300
+              },
+              {
+                "amount": 200
+              }
+            ]
+          }),
+        })
+        .then((res) => res.json())
+        .then((data) => setClientSecret(data.clientSecret))
+        .then(() => setIsLoading(false));
+    }, []);
+
+    const options = {
+      // passing the client secret obtained from the server
+      clientSecret: clientSecret,
+    };
+    
+    // useEffect(() => {
+    //   axios
+    //     .post("http://localhost:8000/api/stripe/create" )
+    //     .then((response) => {
+    //       setClientSecret(response.data.clientSecret);
+    //       setIsLoading(false);
+    //       // console.log("reponse axios :",response.data.clientSecret);
+    //     })
+    //     .catch((error) => {
+    //       console.error("Error fetching client secret:", error);
+    //     });
+    // }, []);
+      // const options = {
+      //   // passing the client secret obtained from the server
+      //   clientSecret: clientSecret,
+      // };
 
     // console.log(clientSecret);
     // console.log(options);
