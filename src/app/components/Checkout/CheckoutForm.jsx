@@ -9,21 +9,30 @@ const CheckoutForm = () => {
   const elements = useElements();
   const dispatch = useDispatch()
 
-  const [message, setMessage] = useState(null);
+  const [message, setMessage] = useState(null);    
+  
+  //init for the clientSecret
+  const clientSecret = new URLSearchParams(window.location.search).get(
+      "payment_intent_client_secret"
+      
+    );
 
+  const paymentElementOptions = {
+      layout: "tabs"
+    }
+
+  //behavior if stripe isn't found
   useEffect(() => {
     if (!stripe) {
       return;
     }
 
-    const clientSecret = new URLSearchParams(window.location.search).get(
-      "payment_intent_client_secret"
-    );
+  //default behavior if the clientSecret isn't found
+  if (!clientSecret) {
+    return;
+  }
 
-    if (!clientSecret) {
-      return;
-    }
-
+  //managing stripe payment intent
     stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
       switch (paymentIntent.status) {
         case "succeeded":
@@ -44,8 +53,7 @@ const CheckoutForm = () => {
 
 
   const handleSubmit = async (event) => {
-    // We don't want to let default form submission happen here,
-    // which would refresh the page.
+    // preventing the page from refreshing
     event.preventDefault();
 
     if (!stripe || !elements) {
@@ -54,11 +62,13 @@ const CheckoutForm = () => {
       return;
     }
 
+    //const to be able to clear cart and redirect
     const returnHome = () => {
       dispatch(clearCart())
-       return "http://localhost:5173/account"
+      return "http://localhost:5173/account"
     }
 
+    //stripe const to handle paiement
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
@@ -67,8 +77,7 @@ const CheckoutForm = () => {
       },
     
     })
-
-
+    
     // This point will only be reached if there is an immediate error when
     // confirming the payment. Otherwise, your customer will be redirected to
     // your `return_url`. For some payment methods like iDEAL, your customer will
@@ -81,11 +90,6 @@ const CheckoutForm = () => {
     }
 
   };
-
-    const paymentElementOptions = {
-      layout: "tabs"
-    }
-
   return (
     <div className='flex justify-center'>
       <form onSubmit={handleSubmit} className='flex flex-col justify-center text-red-600'>
