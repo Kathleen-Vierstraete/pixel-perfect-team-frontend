@@ -4,10 +4,12 @@ import { BrowserRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
 import Navbar from "./components/layouts/Header/Navbar";
-import { selectIsLogged, signIn } from "./redux-store/authenticationSlice";
+import { signIn } from "./redux-store/authenticationSlice";
 import Routes from "./routes/Routes";
 import { getToken } from "./services/tokenServices";
 import Footer from "./components/layouts/Footer/Footer";
+
+
 
 const contextClass = {
   success: "bg-green-600",
@@ -17,6 +19,8 @@ const contextClass = {
   default: "bg-indigo-600",
   dark: "bg-white-600 font-gray-300",
 };
+
+
 
 /**
  * Component RouteWithNavigation

@@ -10,6 +10,7 @@ import { getPayloadToken } from '../../services/tokenServices';
 import { useDispatch } from 'react-redux';
 import { signIn } from '../../redux-store/authenticationSlice';
 import { URL_HOME } from '../../constants/urls/urlFrontEnd';
+import { EMAIL_REGEX } from './../../constants/regex';
 
 
 const ConnexionFormik  = () => {
@@ -23,12 +24,14 @@ const ConnexionFormik  = () => {
     };
     
     const validate = Yup.object({
-        email: Yup.string()
-            .email('Invalid email')
-            .required('Required'),
-        password: Yup.string()
-            .required('Required'),
-      });
+      email: Yup.string()
+          .email('Email invalide')
+          .required('Requis')
+          .matches(EMAIL_REGEX, "Email invalide"),
+      password: Yup.string()
+          .required('Requis'),
+    });
+
 
     const [showAlert, setShowAlert] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');

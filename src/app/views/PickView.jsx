@@ -9,7 +9,7 @@ import { ProductPick } from "../components/pick/ProductPick";
 import { Spinner } from "../components/animation/Spinner";
 import { IoIosArrowBack } from "react-icons/io";
 import { Link } from "react-router-dom";
-import { URL_HOME } from "../constants/urls/urlFrontEnd";
+import { URL_CHECKOUT, URL_HOME } from "../constants/urls/urlFrontEnd";
 
 export const PickView = () => {
   const paniers = useSelector(selectItems);
@@ -17,11 +17,14 @@ export const PickView = () => {
   const totalQuantity = useSelector(selectTotalQuantity);
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-
+  const productIds = () => {
+    let test = paniers.map(item => item.id).join(",");
+    return test;
+  }
+  
   useEffect(() => {
     apiBackEnd.post(URL_BACK_PRODUCTS_BY_TAGS, {
-      "tag_ids": [1931, 1957, 1910, 1942],
-      "product_ids": [2469, 2502]
+      "product_ids": [productIds()]
     })
       .then(response => {
         setProducts(response.data);
@@ -30,7 +33,7 @@ export const PickView = () => {
       .catch(error => {
         console.error("Error fetching products By tags", error);
       })
-  }, []);
+  }, [paniers]);
 
   return (
     <div className="flex flex-col mx-2 mt-9 md:mt-0">
@@ -60,7 +63,7 @@ export const PickView = () => {
                 <div className="flex justify-between mt-2"><span className="font-bold">Prix TTC</span><span>{(totalPrice + 2900) / 100}€</span></div>
                 <div className="flex flex-col my-6 gap-2 lg:hidden">
                   {isLoading ? (
-                    <Spinner />
+                    <Spinner message="Aucun article similaire trouvé" />
                   ) : (
                     <>
                       <h4 className="text-2xl font-medium">ARTICLES SIMILAIRES</h4>
@@ -70,7 +73,7 @@ export const PickView = () => {
                 </div>
                 <hr className="h-px  my-8 border-1 border-slate-600 lg:hidden" />
                 <div className="flex flex-col lg:order-first">
-                  <a className="btn-primary-outline self-center w-11/12 text-xl ">Continuer pour payer</a>
+                  <Link to={URL_CHECKOUT} className="btn-primary-outline self-center w-11/12 text-xl">Continuer pour payer</Link>
                   <span className="text-center">Pour une meilleur experience, <a className="underline">créer un compte.</a></span>
                 </div>
               </>
@@ -80,7 +83,7 @@ export const PickView = () => {
       </div>
       <div className="hidden flex-col my-6 gap-2 lg:flex">
         {isLoading ? (
-          <Spinner />
+          <Spinner message="Aucun article similaire trouvé" />
         ) : (
           <>
             <h4 className="text-2xl font-medium">ARTICLES SIMILAIRES</h4>

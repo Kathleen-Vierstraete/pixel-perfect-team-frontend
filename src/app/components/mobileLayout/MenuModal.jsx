@@ -13,16 +13,16 @@ const MenuModal = ({ toggleMenuDropdown, categories }) => {
     };
   }, []);
   return (
-    <div className="absolute h-full w-full top-0 left-0 backdrop-blur-sm bg-gray-500/50 z-10">
+    <div className="fixed h-full w-full top-0 left-0 backdrop-blur-sm bg-gray-500/50 z-20">
       <div className="h-full w-4/5 overflow-hidden bg-primary p-1 rounded shadow border border-black">
         <div className="flex flex-col">
           <span
             className="flex justify-end cursor-pointer"
             onClick={toggleMenuDropdown}
           >
-            <IoCloseCircle className="text-red-600 bg-white rounded-full" />
+            <IoCloseCircle size={40} className="text-red-600 bg-white rounded-full" />
           </span>
-          <NavMenu categories={categories} />
+          <NavMenu categories={categories} toggleMenuDropdown={toggleMenuDropdown} />
         </div>
       </div>
     </div>

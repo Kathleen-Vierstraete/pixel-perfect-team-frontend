@@ -13,9 +13,11 @@ import { PrivateRoute } from "./PrivateRoute";
 import ProductSingleView from './../views/ProductSingleView';
 import PickView from "../views/PickView";
 import Page404 from "../views/404View";
-import CategoryLinks from "../components/CategoryLinks";
+import CategoryView from "../views/CategoryView";
+import PaginationView from "../views/PaginationView";
 import MyAccount from "../views/MyAccountView";
-
+import CheckoutView from "../views/CheckoutView";
+import FormProductView from './../views/FormProductView';
 
 /**
  * Routes of the application
@@ -29,7 +31,7 @@ const Routes = () => {
       <Route
         path={URL.URL_HOME}
         element={
-            <HomeView />
+          <HomeView />
         }
       />
       <Route
@@ -49,10 +51,17 @@ const Routes = () => {
       <Route path={URL.URL_LOGIN} element={<LoginView />} />
       <Route path={URL.URL_PICK} element={<PickView />} />
       <Route path={URL.URL_CONNEXION} element={<Connexion />} />
-      <Route path={URL.URL_CREATEACCOUNT} element={<CreateAccount />} />   
-      <Route path={URL.URL_PRODUCTS_BY_CATEGORY()} element={<CategoryLinks />} />
+      <Route path={URL.URL_CREATEACCOUNT} element={<CreateAccount />} />
+      <Route path={URL.URL_PRODUCTS_BY_CATEGORY()} element={<CategoryView />} />
       <Route path={URL.URL_ACCOUNT} element={<MyAccount />} />
+      <Route path={URL.URL_CREATE_PRODUCT} element={
+        <PrivateRoute roles={[ROLE_ADMIN]}>
+          <FormProductView />
+        </PrivateRoute>
+      } />
       <Route path="*" element={<Page404 />} />
+      <Route path="/pagination" element={<PaginationView />} />
+      <Route path={URL.URL_CHECKOUT} element={<CheckoutView />} />
     </RoutesContainer>
   );
 };

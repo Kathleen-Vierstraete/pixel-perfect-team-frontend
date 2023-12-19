@@ -15,11 +15,17 @@ export const ConnectionButton = () => {
 
     const handleLogout = () => {
         dispatch(signOut());
+        toogleDropBox();
     };
 
     const toogleDropBox = () => {
         setIsClick(!isClick);
     };
+
+    const navigated = (route) => {
+        navigate(route);
+        toogleDropBox();
+    }
 
     return (
         <div className="flex align-middle justify-center">
@@ -42,7 +48,7 @@ export const ConnectionButton = () => {
                     </span>
                 </button>
             ) : (
-                <div className="relative">
+                <div className="relative self-center">
                     <button
                         onClick={toogleDropBox}
                         type="button"
@@ -59,8 +65,8 @@ export const ConnectionButton = () => {
                         </span>
                     </button>
                     {isClick &&
-                        <div className="absolute left-0 mt-2 w-48 bg-primary-dark text-white rounded-lg shadow-lg p-2">
-                            <button className="block w-full text-left py-2 px-4 rounded-lg hover:bg-primary-light" onClick={() => navigate(URL_ACCOUNT)}>
+                        <div className="absolute z-10 left-0 mt-2 w-48 bg-primary-dark text-white rounded-lg shadow-lg p-2">
+                            <button className="block w-full text-left py-2 px-4 rounded-lg hover:bg-primary-light" onClick={() => navigated(URL_ACCOUNT)}>
                                 Voir le compte
                             </button>
                             <button className="block w-full text-left py-2 px-4 rounded-lg hover:bg-primary-light" onClick={handleLogout}>
