@@ -13,6 +13,4 @@ export const URL_BACK_ADD_ADDRESSE = (id) => {return `/persons/${id}/addresses`}
 export const URL_BACK_UPDATE_ADDRESSE = (id) => {return `/addresses/${id}`};
 export const URL_BACK_ADMINISTRATORS = "/administrators"
 export const URL_BACK_PRODUCT_CREATE = "/products"
-
-
-
+export const URL_BACK_STRIPE = "/stripe/create"
