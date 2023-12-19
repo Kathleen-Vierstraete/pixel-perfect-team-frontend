@@ -20,7 +20,7 @@ const PurchaseSection = ({ purchases }) => {
                         )}
                         <div className="max-w-xs flex gap-2 overflow-hidden p-2 border border-primary  rounded-xl">
                             {purchase.picks.map((pick) => (
-                                <img key={pick.product.pictures[0].id} className="w-28" src={pick.product.pictures[0].url} alt="" />
+                                <img key={pick.product.pictures[0].id} className="max-h-24" src={pick.product.pictures[0].url} alt="" />
                             ))}
                         </div>
                     </div>
