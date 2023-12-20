@@ -33,10 +33,12 @@ const MyAccountView = () => {
   }
 
 
+
   useEffect(() => {
     (async () => {
       try {
         const res = await apiBackEnd.get(URL_BACK_PERSON(user.id), setHearderToken(token));
+        res.data.purchases.sort((a,b)=>{return new Date(a.dateExpectedDelivery) - new Date(b.dateExpectedDelivery);})
         setUserInfo(res.data);
       } catch (error) {
         console.error('Error fetching person:', error);
