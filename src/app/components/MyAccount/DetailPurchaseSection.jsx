@@ -1,6 +1,7 @@
 import { IoIosArrowBack } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import { URL_ACCOUNT } from "../../constants/urls/urlFrontEnd";
+import { Link } from "react-router-dom";
 
 export const DetailPurchaseSection = ({ purchase }) => {
     const navigate = useNavigate();
@@ -32,10 +33,12 @@ export const DetailPurchaseSection = ({ purchase }) => {
                     </div>
                     <div className="flex flex-col gap-4 lg:order-1">
                         {purchase.picks.map(pick => (
+                            <Link to={`/product/${pick.product.id}`} >
                             <div key={pick.id} className="bg-secondary p-4 rounded-xl flex gap-4 items-center">
-                                <img src={pick.product.pictures[0].url} className="h-32" />
+                                <img loading="lazy" src={pick.product.pictures[0].url} className="h-32" />
                                 <h6>{pick.product.name}</h6>
                             </div>
+                            </Link>
                         ))}
                     </div>
                 </div>

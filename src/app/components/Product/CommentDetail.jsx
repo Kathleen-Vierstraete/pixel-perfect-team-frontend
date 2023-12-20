@@ -3,6 +3,7 @@ import { FaStar } from "react-icons/fa";
 import { URL_BACK_COMMENTS } from "../../constants/urls/urlBackEnd";
 import apiBackEnd from "../../api/backend/api.Backend";
 import StarCount from "./StarCount";
+import { convertDate } from "../../services/stringifyService";
 
 const CommentDetail = ({ comments, setComments, token }) => {
   const average =
@@ -69,7 +70,7 @@ const CommentDetail = ({ comments, setComments, token }) => {
           >
             <div className="flex justify-between">
               <StarCount count={comment.rate} />
-              <div>{comment.date}</div>
+              <div>{convertDate(comment.date)}</div>
             </div>
             <div className="underline">{comment.title}</div>
             <div className="text-xs lg:text-base">{comment.body}</div>

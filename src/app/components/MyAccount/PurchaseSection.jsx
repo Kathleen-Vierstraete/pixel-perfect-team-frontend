@@ -17,13 +17,13 @@ const PurchaseSection = ({ purchases }) => {
                     <div key={purchase.id} className=" flex flex-col gap-4">
                         <p className="font-medium md:hidden">Commande du {convertDate(purchase.datePurchase)}</p>
                         {purchase.dateDelivery === null ? (
-                            <p className="font-bold">Commande attendu le {convertDate(purchase.dateExpectedDelivery)}</p>
+                            <p className="font-bold">Commande attendue le {convertDate(purchase.dateExpectedDelivery)}</p>
                         ) : (
-                            <p className="font-bold">Commande livré le {convertDate(purchase.dateDelivery)}</p>
+                            <p className="font-bold">Commande livrée le {convertDate(purchase.dateDelivery)}</p>
                         )}
                         <div onClick={()=>{navigate(URL_ACCOUNT_PURCHASE(purchase.reference))}} className="max-w-xs flex gap-2 overflow-hidden p-2 border border-primary  rounded-xl hover:cursor-pointer">
                             {purchase.picks.map((pick) => (
-                                <img key={pick.product.pictures[0].id} className="max-h-24" src={pick.product.pictures[0].url} alt="" />
+                                <img loading="lazy" key={pick.product.pictures[0].id} className="max-h-24" src={pick.product.pictures[0].url} alt="" />
                             ))}
                         </div>
                     </div>

@@ -53,7 +53,7 @@ const ProductCarousel = ({ products }) => {
       <Slider {...settings}>
         {
           products.map(product => (
-            <ProductForCarrousel key={product.id} product={product} />
+            <ProductForCarrousel  key={product.id} product={product} />
           ))
         }
       </Slider>

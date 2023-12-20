@@ -9,8 +9,12 @@ export const CardProduct = ({ product, position }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     let picture = "";
+    const scrollToTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
     const navigateProduct = (id) => {
         navigate(URL_PRODUCT_BY_ID(id));
+        scrollToTop()
     }
 
     if (product.pictures && product.pictures.length > 0) {
@@ -21,7 +25,7 @@ export const CardProduct = ({ product, position }) => {
 
     return (
         <div className={`relative rounded-xl ${position}`}>
-            <img src={picture} alt={product.name} className="select-none w-full h-full object-cover rounded-xl min-h-[13vh]" />
+            <img loading="lazy" src={picture} alt={product.name} className="select-none w-full h-full object-cover rounded-xl min-h-[13vh]" />
             <div className='absolute inset-0 p-2 m-4 flex flex-col justify-between'>
                 <span className="gap-2 bg-slate-500 bg-opacity-40 rounded-2xl text-white text-center font-bold text-xl">
                     {product.name}

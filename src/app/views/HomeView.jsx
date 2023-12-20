@@ -41,7 +41,7 @@ const HomeView = () => {
                 <div className='flex flex-col gap-4 px-5'>
                 <FirstProduct products={products} />
                 <div>
-                    <h4 className="text-2xl font-medium">NOS PRODUIT PHARE</h4>
+                    <h4 className="text-2xl font-medium">NOS PRODUITS PHARES</h4>
                     <ProductCarousel products={expensiveProducts} />
                 </div>
                 <AvantagePP />

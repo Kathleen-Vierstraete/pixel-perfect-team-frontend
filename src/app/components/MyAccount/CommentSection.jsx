@@ -16,6 +16,7 @@ function CommentSection({ comments }) {
                 <div className='flex flex-col items-center justify-center'>
                 <Link to={`/product/${comment.product.id}`} className='flex flex-col items-center justify-center'>
                     <img
+                        loading="lazy"
                         src={comment.product.pictures[0].url}
                         alt={comment.product.pictures.alt}
                         className="w-16 h-16 object-cover rounded-full"

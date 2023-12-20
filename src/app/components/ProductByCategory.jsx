@@ -18,8 +18,9 @@ const ProductByCategory = ({ products }) => {
     <div className="flex flex-col gap-4 px-5">
       <div className="grid grid-cols-2 gap-2 lg:grid-cols-4">
         {products.map((product, index) => (
-          <div key={index} className={`relative rounded-xl`}>
-            <img
+          <div key={index} className={`relative rounded-xl w-full h-72`}>
+            <img 
+              loading="lazy"
               src={product.pictures[0].url}
               alt={product.name}
               className="select-none w-full h-full object-cover rounded-xl"

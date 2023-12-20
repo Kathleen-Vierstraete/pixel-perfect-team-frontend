@@ -9,9 +9,10 @@ import { ProductPick } from "../components/pick/ProductPick";
 import { Spinner } from "../components/animation/Spinner";
 import { IoIosArrowBack } from "react-icons/io";
 import { Link } from "react-router-dom";
-import { URL_ADDRESS, URL_CHECKOUT, URL_CONNEXION, URL_HOME } from "../constants/urls/urlFrontEnd";
 import { selectIsLogged, selectToken, selectUser } from "../redux-store/authenticationSlice";
 import { setHearderToken } from "../services/tokenServices";
+import { URL_ADDRESS, URL_CONNEXION, URL_HOME } from "../constants/urls/urlFrontEnd";
+
 
 
 export const PickView = () => {
@@ -46,7 +47,7 @@ export const PickView = () => {
       { product: paniers },
       setHearderToken(token),
     ).then(res => {
-      dispatch(setPurchase({id:res.data[0].purchase.id}))
+      dispatch(setPurchase({ id: res.data[0].purchase.id }))
 
     }).catch(error => {
       console.error('Error adding pick', error);
@@ -131,10 +132,10 @@ export const PickView = () => {
                   }
                 </div>
               </>
-            </div>
+            </div >
           }
-        </div>
-      </div>
+        </div >
+      </div >
       <div className="hidden flex-col my-6 gap-2 lg:flex">
         {isLoading ? (
           <Spinner message="Aucun article similaire trouvé" />
