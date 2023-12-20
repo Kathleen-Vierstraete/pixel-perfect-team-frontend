@@ -68,7 +68,7 @@ const CheckoutForm = ({ token }) => {
 
     //const to be able to clear cart and redirect
     const returnHome = () => {
-      apiBackEnd.get(URL_BACK_SET_PURCHASE_STATUS(purchaseId), setHearderToken(token))
+      apiBackEnd.post(URL_BACK_SET_PURCHASE_STATUS(purchaseId),{name:"en cours"}, setHearderToken(token))
         .catch(error => {
           console.error("Error update purchase : ", error)
         })
