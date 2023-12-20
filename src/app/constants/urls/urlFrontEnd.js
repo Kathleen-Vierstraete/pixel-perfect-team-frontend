@@ -14,3 +14,4 @@ export const URL_PRODUCTS_BY_CATEGORY = (id = null) =>{return id ===null?'/categ
 export const URL_ACCOUNT = '/account'
 export const URL_ACCOUNT_PURCHASE = (params) =>{ return `/account?purchase=${params}`} 
 export const URL_CHECKOUT = '/checkout'
+export const URL_ADDRESS = '/address'

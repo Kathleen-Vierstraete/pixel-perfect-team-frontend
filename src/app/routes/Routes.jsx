@@ -14,10 +14,10 @@ import ProductSingleView from './../views/ProductSingleView';
 import PickView from "../views/PickView";
 import Page404 from "../views/404View";
 import CategoryView from "../views/CategoryView";
-import PaginationView from "../views/PaginationView";
 import MyAccount from "../views/MyAccountView";
 import CheckoutView from "../views/CheckoutView";
 import FormProductView from './../views/FormProductView';
+import { AddressView } from "../views/AddressView";
 
 /**
  * Routes of the application
@@ -61,6 +61,7 @@ const Routes = () => {
       } />
       <Route path="*" element={<Page404 />} />
       <Route path={URL.URL_CHECKOUT} element={<CheckoutView />} />
+      <Route path={URL.URL_ADDRESS} element={<AddressView />} />
     </RoutesContainer>
   );
 };

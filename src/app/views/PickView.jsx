@@ -9,7 +9,7 @@ import { ProductPick } from "../components/pick/ProductPick";
 import { Spinner } from "../components/animation/Spinner";
 import { IoIosArrowBack } from "react-icons/io";
 import { Link } from "react-router-dom";
-import { URL_CHECKOUT, URL_CONNEXION, URL_HOME } from "../constants/urls/urlFrontEnd";
+import { URL_ADDRESS, URL_CHECKOUT, URL_CONNEXION, URL_HOME } from "../constants/urls/urlFrontEnd";
 import { selectIsLogged, selectToken, selectUser } from "../redux-store/authenticationSlice";
 import { setHearderToken } from "../services/tokenServices";
 
@@ -121,7 +121,7 @@ export const PickView = () => {
                 <hr className="h-px  my-8 border-1 border-slate-600 lg:hidden" />
                 <div className="flex flex-col lg:order-first">
                   {isAuthenticated ? (
-                    <Link to={URL_CHECKOUT} className="btn-primary-outline self-center w-11/12 text-xl">Continuer pour payer</Link>)
+                    <Link to={URL_ADDRESS} className="btn-primary-outline self-center w-11/12 text-xl">Continuer pour payer</Link>)
                     : (
                       <div className="flex flex-col gap-2">
                         <Link to={URL_CONNEXION} className="btn-primary-outline self-center w-full text-xl">Se connecter</Link>
