@@ -3,6 +3,7 @@ import { FaStar } from "react-icons/fa";
 import { URL_BACK_COMMENTS } from "../../constants/urls/urlBackEnd";
 import apiBackEnd from "../../api/backend/api.Backend";
 import StarCount from "./StarCount";
+import { convertDate } from "../../services/stringifyService";
 
 const CommentDetail = ({ comments, setComments, token }) => {
   const average =
