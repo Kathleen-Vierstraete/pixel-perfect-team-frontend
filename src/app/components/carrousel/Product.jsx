@@ -9,8 +9,13 @@ const ProductForCarrousel = ({ product }) => {
     const navigate = useNavigate();
     let picture = "";
 
+    const scrollToTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
     const navigateProduct = (id) => {
         navigate(URL_PRODUCT_BY_ID(id));
+        scrollToTop();
     }
 
     if (product.pictures && product.pictures.length > 0) {
@@ -25,7 +30,7 @@ const ProductForCarrousel = ({ product }) => {
                 <img src={picture} alt={product.name} className="w-full" />
             </div>
             <div className="flex justify-between items-center">
-                <div className="flex flex-col hover:cursor-pointer" onClick={() => navigateProduct(product.id)}>
+                <div className="flex flex-col hover:cursor-pointer" onClick={() => navigateProduct(product.id)}> 
                     <span className="text-xl font-medium">{product.price / 100}€</span>
                     <span className="text-xl">{product.name}</span>
                 </div>
