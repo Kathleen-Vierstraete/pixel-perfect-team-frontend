@@ -67,7 +67,7 @@ export const DescriptionDetailProduct = ({ product, token, comments, setComments
       {commentIsOpen && product.comments.length > 0 && (
         <div className="flex flex-col">
           <h3 className="underline">Commentaires</h3>
-          <CommentDetail comments={comments} setComments={setComments}  token={token} />
+          <CommentDetail product={product} comments={comments} setComments={setComments}  token={token} />
         </div>
       )}
       {commentIsOpen && !product.comments.length > 0 && (

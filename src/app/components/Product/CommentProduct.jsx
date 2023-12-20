@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import CommentDetail from "./CommentDetail";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa";
 
-const CommentProduct = ({ token, comments, setComments }) => {
+const CommentProduct = ({product, token, comments, setComments }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -15,6 +15,7 @@ const CommentProduct = ({ token, comments, setComments }) => {
       </button>
       {isOpen && comments.length > 0 && (
         <CommentDetail
+          product={product}
           comments={comments}
           token={token}
           setComments={setComments}

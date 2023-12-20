@@ -1,16 +1,24 @@
 import { FiThumbsUp, FiThumbsDown } from "react-icons/fi";
-import { FaStar } from "react-icons/fa";
-import { URL_BACK_COMMENTS } from "../../constants/urls/urlBackEnd";
+import { FaRegStar, FaStar } from "react-icons/fa";
+import { URL_BACK_COMMENTS, URL_BACK_CREATE_COMMENT } from "../../constants/urls/urlBackEnd";
 import apiBackEnd from "../../api/backend/api.Backend";
 import StarCount from "./StarCount";
 import { convertDate } from "../../services/stringifyService";
+import { selectUser } from "../../redux-store/authenticationSlice";
+import { useSelector } from "react-redux";
+import { useState } from "react";
+import { Formik, Form } from 'formik';
+import * as Yup from 'yup';
+import TextField from "../Connexion/TextField";
+import { setHearderToken } from "../../services/tokenServices";
 
-const CommentDetail = ({ comments, setComments, token }) => {
+const CommentDetail = ({ product, comments, setComments, token }) => {
+  let starArray = [0, 0, 0, 0, 0];
   const average =
     Math.round(
       (comments.map((comment) => comment.rate).reduce((a, b) => a + b) /
         comments.length) *
-        2
+      2
     ) / 2;
   const voteButton = (com, val) => {
     apiBackEnd
@@ -35,7 +43,6 @@ const CommentDetail = ({ comments, setComments, token }) => {
       });
   };
 
-  const token = useSelector(selectToken);
   const user = useSelector(selectUser);
   const [error, setError] = useState();
   const validate = Yup.object({
@@ -53,7 +60,7 @@ const CommentDetail = ({ comments, setComments, token }) => {
 
   const onSubmit = (values) => {
     values.person_id = user.id;
-    apiBackEnd.post(URL_BACK_CREATE_COMMENT(product.id), values, { headers: { Authorization: `Bearer ${token}` } })
+    apiBackEnd.post(URL_BACK_CREATE_COMMENT(product.id), values, setHearderToken(token))
       .then((response) => {
         if (response.status === 201) {
         }
@@ -75,28 +82,48 @@ const CommentDetail = ({ comments, setComments, token }) => {
 
   return (
     <>
-      <div className="flex justify-between my-4 p-2">
-        <div className="flex flex-col gap-3 w-[45%]">
-          <div>Moyenne :</div>
-          <div className="text-4xl lg:text-5xl font-bold text-primary">
-            {average}/5
+      <div className="flex flex-col gap-4">
+        <div className="flex justify-between my-4 p-2">
+          <div className="flex flex-col gap-3 w-[45%]">
+            <div>Moyenne :</div>
+            <div className="text-4xl lg:text-5xl font-bold text-primary">
+              {average}/5
+            </div>
+            <StarCount className="text-2xl lg:text-3xl" count={average} />
           </div>
-          <StarCount className="text-2xl lg:text-3xl" count={average}/>
-        </div>
-        <div className="flex flex-col gap-3  w-[45%]">
-          <div>Details :</div>
-          <div className="flex flex-col">
-            {starArray.map((star, i) => (
-              <div className="flex justify-between items-center" key={i}>
-                <span className="flex items-center">
-                  <span className="text-center">{i + 1}</span>
-                  <FaStar className="text-secondary" />
-                </span>
-                <span className="text-primary text-center">{star}</span>
-              </div>
-            ))}
+          <div className="flex flex-col gap-3  w-[45%]">
+            <div>Details :</div>
+            <div className="flex flex-col">
+              {starArray.map((star, i) => (
+                <div className="flex justify-between items-center" key={i}>
+                  <span className="flex items-center">
+                    <span className="text-center">{i + 1}</span>
+                    <FaStar className="text-secondary" />
+                  </span>
+                  <span className="text-primary text-center">{star}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
+        <Formik
+          initialValues={{ title: '', body: "", rate: '', }}
+          validationSchema={validate}
+          onSubmit={onSubmit}
+        >
+          <div>
+
+            <button className="btn btn-primary" onClick={toggleAdded}>Ajouter un commentaire</button>
+            {isAdded &&
+              <Form className="flex flex-col gap-4">
+                <TextField label="Titre :" name="title" type="text" />
+                <TextField label="Message :" type="text" name="body" />
+                <TextField label="Note :" name="rate" type="number" />
+
+                <button className="self-center btn btn-primary" type="submit">Envoyer</button>
+              </Form>}
+          </div>
+        </Formik>
       </div>
       <div className="flex flex-col lg:flex-row lg:flex-wrap lg:justify-between">
         {comments.map((comment, index) => (
@@ -130,109 +157,6 @@ const CommentDetail = ({ comments, setComments, token }) => {
                 >
                   <FiThumbsDown />
                 </div>
-                <Formik
-                  initialValues={{ title: '', body: "", rate: '', }}
-                  validationSchema={validate}
-                  onSubmit={onSubmit}
-                >
-                  <div className="flex flex-col lg:flex-row-reverse gap-4">
-                    <div className="flex flex-col ">
-                      <div className="flex justify-between my-4 p-2 lg:flex-col">
-                        <div className="flex flex-col gap-3 w-[45%]">
-                          <div>Moyenne :</div>
-                          <div className="text-4xl lg:text-5xl font-bold text-primary">{average}/5</div>
-                          <div className="flex items-center text-2xl lg:text-3xl text-secondary">
-                            {[...Array(5)].map((_x, i) => i + 1 <= average ? <FaStar key={i} /> : i + 0.5 <= average ? <FaStarHalfAlt key={i} /> : <FaRegStar key={i} />
-                            )}
-                          </div>
-                        </div>
-                        <div className="flex flex-col gap-3  w-[45%]">
-                          <div>Details :</div>
-                          <div className="flex flex-col">
-                            {starArray.map((star, i) => (
-                              <div className="flex justify-between items-center" key={i}>
-                                <span className="flex items-center"><span className="text-center">{i + 1}</span><FaStar className="text-secondary" /></span><span className="text-primary text-center">{star}</span>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-                      <div className="self-center flex flex-col gap-4 w-full">
-                        <button className="btn btn-primary" onClick={toggleAdded}>Ajouter un commentaire</button>
-                        {isAdded &&
-                          <Form className="flex flex-col gap-4">
-                            <TextField label="Titre :" name="title" type="text" />
-                            <TextField label="Message :" type="text" name="body" />
-                            <TextField label="Note :" name="rate" type="number" />
-
-                            <button className="self-center btn btn-primary" type="submit">Envoyer</button>
-                          </Form>}
-                      </div>
-                    </div>
-                    <div className="flex flex-col lg:justify-between">
-                      {product.comments.map((comment, index) => (
-                        <div
-                          className="flex flex-col lg:w-full h-fit gap-4 p-5 my-4 bg-primary text-white rounded-lg"
-                          key={index}
-                        >
-                          <div className="flex justify-between">
-                            <div className="flex items-center text-secondary">
-                              {[...Array(5)].map((x, i) => i + 1 <= comment.rate ? <FaStar key={i} /> : <FaRegStar key={i} />
-                              )}
-                            </div>
-                            <div>{comment.date}</div>
-                          </div>
-
-                          <div className="underline">{comment.title}</div>
-
-                          <div className="text-xs lg:text-base">{comment.body}</div>
-
-                          <div className="flex justify-between">
-                            <div className="capitalize">{comment.person.firstName}</div>
-                            <div className="flex gap-2 items-center">
-                              <div>{comment.vote}</div>
-                              <div><FiThumbsUp /></div>
-                              <div><FiThumbsDown /></div>
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                  {totalPages > 1 && (
-                    <div className="flex justify-center my-4">
-
-                      <button
-                        className={currentPage == 1 ? "hidden" : "bg-secondary text-white p-2 rounded-md mx-2"}
-                        onClick={loadPreviousPage}
-                      >
-                        <FaArrowLeft
-                          className={currentPage == 1 ? "hidden" : ""}
-                        />
-                      </button>
-
-                      {[...Array(totalPages).keys()].map((pageNumber) => (
-                        <button
-                          key={pageNumber}
-                          className={`bg-secondary text-white p-2 rounded-md mx-2 ${pageNumber + 1 === currentPage ? 'font-bold' : ''
-                            }`}
-                          onClick={() => setCurrentPage(pageNumber + 1)}
-                        >
-                          {pageNumber + 1}
-                        </button>
-                      ))}
-
-                      <button
-                        className={currentPage == totalPages ? "hidden" : "bg-secondary text-white p-2 rounded-md mx-2"}
-                        onClick={loadNextPage}
-                      >
-                        <FaArrowRight
-                          className={currentPage == totalPages ? "hidden" : ""} ></FaArrowRight>
-                      </button>
-
-                    </div>
-                  )}
-                </Formik>
               </div>
             </div>
           </div>
