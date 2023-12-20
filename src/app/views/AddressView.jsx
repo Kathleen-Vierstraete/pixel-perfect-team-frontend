@@ -151,8 +151,8 @@ export const AddressView = () => {
                 }
             </div>
 
-            <div className="flex flex-col gap-4">
-                <div className="flex justify-between mt-10 font-semibold lg:hidden">
+            <div className="flex flex-col gap-4 lg:hidden">
+                <div className="flex justify-between mt-10 font-semibold ">
                     <span>Total de la commande</span>
                     <span>{totalPrice / 100}€</span>
 
