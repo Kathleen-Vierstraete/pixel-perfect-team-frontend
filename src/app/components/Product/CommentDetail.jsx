@@ -13,7 +13,19 @@ import TextField from "../Connexion/TextField";
 import { setHearderToken } from "../../services/tokenServices";
 
 const CommentDetail = ({ product, comments, setComments, token }) => {
+  const validate = Yup.object({
+    title: Yup.string().required('Required'),
+    body: Yup.string().required('Required'),
+    rate: Yup.number().required('Required').max(5, "La note doit est comprise entre 1 et 5")
+  });
+  const user = useSelector(selectUser);
+  const [error, setError] = useState();
   let starArray = [0, 0, 0, 0, 0];
+  const [isAdded, setIsAdded] = useState(false)
+  comments.map((comment) => (starArray[comment.rate - 1] += 1));
+  const toggleAdded = () => {
+    setIsAdded(!isAdded)
+  }
   const average =
     Math.round(
       (comments.map((comment) => comment.rate).reduce((a, b) => a + b) /
@@ -43,26 +55,12 @@ const CommentDetail = ({ product, comments, setComments, token }) => {
       });
   };
 
-  const user = useSelector(selectUser);
-  const [error, setError] = useState();
-  const validate = Yup.object({
-    title: Yup.string().required('Required'),
-    body: Yup.string().required('Required'),
-    rate: Yup.number().required('Required').max(5, "La note doit est comprise entre 1 et 5")
-
-  });
-  const [isAdded, setIsAdded] = useState(false)
-  comments.map((comment) => (starArray[comment.rate - 1] += 1));
-
-  const toggleAdded = () => {
-    setIsAdded(!isAdded)
-  }
-
   const onSubmit = (values) => {
     values.person_id = user.id;
     apiBackEnd.post(URL_BACK_CREATE_COMMENT(product.id), values, setHearderToken(token))
       .then((response) => {
         if (response.status === 201) {
+          setComments([...comments, response.data])
         }
       })
       .catch((error) => {
