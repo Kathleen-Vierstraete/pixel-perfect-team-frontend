@@ -35,7 +35,7 @@ export const DetailPurchaseSection = ({ purchase }) => {
                         {purchase.picks.map(pick => (
                             <Link to={`/product/${pick.product.id}`} >
                             <div className="bg-secondary p-4 rounded-xl flex gap-4 items-center">
-                                <img src={pick.product.pictures[0].url} className="h-32" />
+                                <img loading="lazy" src={pick.product.pictures[0].url} className="h-32" />
                                 <h6>{pick.product.name}</h6>
                             </div>
                             </Link>

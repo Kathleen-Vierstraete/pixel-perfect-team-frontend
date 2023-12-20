@@ -8,7 +8,7 @@ const Page404 = () => {
   return (
     <div>
         <div className=''>
-            <img src={ squid } alt="404 squid image" className='mx-auto' />
+            <img loading="lazy" src={ squid } alt="404 squid image" className='mx-auto' />
         </div>
         <div className="flex justify-center pb-4">
             <span className='font-SilkScreen text-xl'>Page non trouvée</span>

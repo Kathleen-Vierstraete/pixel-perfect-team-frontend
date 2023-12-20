@@ -10,7 +10,7 @@ export const ProductPick = ({ item }) => {
     return (
         <div key={item.id} className="drop-shadow-lg bg-white rounded-xl p-4 flex flex-col ">
             <div className="flex gap-4">
-                <img onClick={() => navigate(URL_PRODUCT_BY_ID(item.id))} className="w-[100px] lg:w-[200px] hover:cursor-pointer" src={item.image} alt={item.name} />
+                <img loading="lazy" onClick={() => navigate(URL_PRODUCT_BY_ID(item.id))} className="w-[100px] lg:w-[200px] hover:cursor-pointer" src={item.image} alt={item.name} />
                 <div className="flex flex-col justify-between self-stretch lg:w-full">
                     <div className="flex  items-baseline justify-between">
                         <h4 onClick={() => navigate(URL_PRODUCT_BY_ID(item.id))} className="text-2xl hover:cursor-pointer">{item.name}</h4>
