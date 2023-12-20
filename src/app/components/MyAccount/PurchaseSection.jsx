@@ -17,7 +17,7 @@ const PurchaseSection = ({ purchases }) => {
                     <div key={purchase.id} className=" flex flex-col gap-4">
                         <p className="font-medium md:hidden">Commande du {convertDate(purchase.datePurchase)}</p>
                         {purchase.dateDelivery === null ? (
-                            <p className="font-bold">Commande attendu le {convertDate(purchase.dateExpectedDelivery)}</p>
+                            <p className="font-bold">Commande attendue le {convertDate(purchase.dateExpectedDelivery)}</p>
                         ) : (
                             <p className="font-bold">Commande livré le {convertDate(purchase.dateDelivery)}</p>
                         )}

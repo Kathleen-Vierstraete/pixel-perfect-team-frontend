@@ -48,14 +48,14 @@ const MyAccountView = () => {
   const RenderRightContent = () => {
     switch (activeBox) {
       case 'Mon compte':
-        return !userInfo ? (<Spinner message="Vos données ne sont pas recuperer" />) : (<AccountSection user={userInfo} setUser={setUserInfo} token={token} />)
+        return !userInfo ? (<Spinner message="Vos données ne sont pas récupérées" />) : (<AccountSection user={userInfo} setUser={setUserInfo} token={token} />)
       case 'Mes adresses':
-        return !userInfo ? (<Spinner message="Vos données ne sont pas recuperer" />) : (<AddresseSection toggleUpToDate={toggleAddresse} addresses={userInfo.addresses} token={token} />)
+        return !userInfo ? (<Spinner message="Vos données ne sont pas récupérées" />) : (<AddresseSection toggleUpToDate={toggleAddresse} addresses={userInfo.addresses} token={token} />)
       case 'Mes commentaires':
-        return !userInfo ? (<Spinner message="Vos données ne sont pas recuperer" />) : (<CommentSection comments={userInfo.comments} token={token} />);
+        return !userInfo ? (<Spinner message="Vos données ne sont pas récupérées" />) : (<CommentSection comments={userInfo.comments} token={token} />);
       default:
         return !userInfo ? (
-          <Spinner message="Vos données ne sont pas recuperer" />
+          <Spinner message="Vos données ne sont pas récupérées" />
         ) : (
           searchParams.get("purchase") ?
             (
