@@ -83,7 +83,7 @@ const CreateAccountFormik = () => {
 
             {formik =>
                 <div className='flex justify-center' >
-                    <div className='flex flex-col items-center pb-5 pt-5 mb-10 w-full '>
+                    <div className='flex flex-col items-center pb-5 pt-5 mb-10 w-full font-numito'>
                         <div className="w-full max-w-xs">
 
                             <Form>
@@ -93,10 +93,10 @@ const CreateAccountFormik = () => {
                                 <TextField label="Adresse e-mail" name="email" type="email" />
                                 <TextField label="Mot de passe" name="password" type="password" />
 
-                                <p className='mt-3'>Le mot de passe doit contenir:</p>
-                                <p className=''>Entre 12 et 32 caractères</p>
-                                <p className=''>Au moins une majuscule et une minuscule</p>
-                                <p className='mb-3'>Un caractère spécial parmi {special}</p>
+                                <p className='mt-3 font-semibold'>Le mot de passe doit contenir:</p>
+                                <p className='font-semibold'>Entre 12 et 32 caractères</p>
+                                <p className='font-semibold'>Au moins une majuscule et une minuscule</p>
+                                <p className='mb-3 font-semibold'>Un caractère spécial parmi {special}</p>
 
                                 <TextField label="Confirmation de mot de passe" name="passwordconfirm" type="password" />
 
