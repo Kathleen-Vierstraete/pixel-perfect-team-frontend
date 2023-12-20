@@ -9,8 +9,12 @@ export const CardProduct = ({ product, position }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     let picture = "";
+    const scrollToTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
     const navigateProduct = (id) => {
         navigate(URL_PRODUCT_BY_ID(id));
+        scrollToTop()
     }
 
     if (product.pictures && product.pictures.length > 0) {
