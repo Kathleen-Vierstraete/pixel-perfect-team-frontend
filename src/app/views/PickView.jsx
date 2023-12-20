@@ -1,8 +1,8 @@
-import { useSelector } from "react-redux";
-import { selectItems, selectTotalCost, selectTotalQuantity } from "../redux-store/cartSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { addItem, selectItems, selectTotalCost, selectTotalQuantity } from "../redux-store/cartSlice";
 import ProductCarousel from "../components/carrousel/ProductCarrousel";
 import { useEffect } from "react";
-import { URL_BACK_PRODUCTS_BY_TAGS } from "../constants/urls/urlBackEnd";
+import { URL_BACK_GET_PICK, URL_BACK_PICK_BY_USER, URL_BACK_PRODUCTS_BY_TAGS } from "../constants/urls/urlBackEnd";
 import { useState } from "react";
 import apiBackEnd from "../api/backend/api.Backend";
 import { ProductPick } from "../components/pick/ProductPick";
@@ -10,10 +10,12 @@ import { Spinner } from "../components/animation/Spinner";
 import { IoIosArrowBack } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { URL_CHECKOUT, URL_CONNEXION, URL_HOME } from "../constants/urls/urlFrontEnd";
-import { selectIsLogged } from "../redux-store/authenticationSlice";
+import { selectIsLogged, selectToken, selectUser } from "../redux-store/authenticationSlice";
+import { setHearderToken } from "../services/tokenServices";
 
 
 export const PickView = () => {
+  const dispatch = useDispatch()
   const paniers = useSelector(selectItems);
   const totalPrice = useSelector(selectTotalCost);
   const totalQuantity = useSelector(selectTotalQuantity);
@@ -24,8 +26,9 @@ export const PickView = () => {
     return test;
   }
   const isAuthenticated = useSelector(selectIsLogged);
-  
-  useEffect(() => {
+  const user = useSelector(selectUser);
+  const token = useSelector(selectToken)
+  const getProductByTags = () => {
     apiBackEnd.post(URL_BACK_PRODUCTS_BY_TAGS, {
       "product_ids": [productIds()]
     })
@@ -36,6 +39,46 @@ export const PickView = () => {
       .catch(error => {
         console.error("Error fetching products By tags", error);
       })
+  }
+  const addPickPersist = () => {
+    apiBackEnd.post(
+      URL_BACK_PICK_BY_USER(user.id),
+      { product: paniers },
+      setHearderToken(token),
+    ).then(res => {
+      console.log(res.data)
+    }).catch(error => {
+      console.error('Error adding pick', error);
+    })
+  }
+
+  useEffect(() => {
+    if (isAuthenticated && paniers.length === 0) {
+      apiBackEnd.get(URL_BACK_GET_PICK(user.id), setHearderToken(token))
+        .then(res => {
+          console.log(res.data)
+          res.data.forEach(pick => {
+            dispatch(addItem({
+              id: pick.product.id,
+              quantity: pick.quantity,
+              name: pick.product.name,
+              image: pick.product.pictures[0].url,
+              price: pick.product.price
+            }))
+            //  id: product.id, quantity: 1, name: product.name, image: picture, price:product.price
+          })
+        })
+        .catch(error => {
+          console.error('Error getting pick', error);
+        })
+    }
+  }, [])
+
+  useEffect(() => {
+    getProductByTags();
+    if (isAuthenticated && paniers.length > 0) {
+      addPickPersist()
+    }
   }, [paniers]);
 
   return (
@@ -76,12 +119,16 @@ export const PickView = () => {
                 </div>
                 <hr className="h-px  my-8 border-1 border-slate-600 lg:hidden" />
                 <div className="flex flex-col lg:order-first">
-                {!isAuthenticated ? (
-                  <Link to={URL_CONNEXION} className="btn-primary-outline self-center w-11/12 text-xl">Continuer pour payer</Link> )
-                  : (
-                  <Link to={URL_CHECKOUT} className="btn-primary-outline self-center w-11/12 text-xl">Continuer pour payer</Link> )}
-                  <span className="text-center">Pour une meilleur experience, <a className="underline">créer un compte.</a></span>
-                </div> 
+                  {isAuthenticated ? (
+                    <Link to={URL_CHECKOUT} className="btn-primary-outline self-center w-11/12 text-xl">Continuer pour payer</Link>)
+                    : (
+                      <div className="flex flex-col gap-2">
+                        <Link to={URL_CONNEXION} className="btn-primary-outline self-center w-full text-xl">Se connecter</Link>
+                        <span className="text-center">Pour une meilleur experience, <a className="underline">créer un compte.</a></span>
+                      </div>
+                    )
+                  }
+                </div>
               </>
             </div>
           }
@@ -98,7 +145,7 @@ export const PickView = () => {
         )}
       </div>
 
-    </div>
+    </div >
   );
 }
 

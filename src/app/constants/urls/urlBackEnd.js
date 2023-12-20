@@ -14,3 +14,5 @@ export const URL_BACK_UPDATE_ADDRESSE = (id) => {return `/addresses/${id}`};
 export const URL_BACK_ADMINISTRATORS = "/administrators"
 export const URL_BACK_PRODUCT_CREATE = "/products"
 export const URL_BACK_STRIPE = "/stripe/create"
+export const URL_BACK_PICK_BY_USER = (id) =>{return `/persons/${id}/picks`}
+export const URL_BACK_GET_PICK = (id) => {return `/picks/${id}`}
