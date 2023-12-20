@@ -8,7 +8,7 @@ export const CharactDetail = ({product}) => {
                 {product.editor.name === "none" ? (<></>) : (
                     <div className="bg-secondary-dark p-4 rounded-xl flex justify-between">
                         <span >ÉDITEUR</span>
-                        <span >test</span>
+                        <span >{product.editor.name}</span>
                     </div>
                 )}
                 <div className="bg-secondary-light p-4 rounded-xl flex justify-between">
