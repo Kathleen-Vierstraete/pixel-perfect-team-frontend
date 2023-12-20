@@ -32,7 +32,7 @@ export const DetailPurchaseSection = ({ purchase }) => {
                     </div>
                     <div className="flex flex-col gap-4 lg:order-1">
                         {purchase.picks.map(pick => (
-                            <div className="bg-secondary p-4 rounded-xl flex gap-4 items-center">
+                            <div key={pick.id} className="bg-secondary p-4 rounded-xl flex gap-4 items-center">
                                 <img src={pick.product.pictures[0].url} className="h-32" />
                                 <h6>{pick.product.name}</h6>
                             </div>
