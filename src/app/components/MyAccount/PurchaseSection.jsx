@@ -19,7 +19,7 @@ const PurchaseSection = ({ purchases }) => {
                         {purchase.dateDelivery === null ? (
                             <p className="font-bold">Commande attendue le {convertDate(purchase.dateExpectedDelivery)}</p>
                         ) : (
-                            <p className="font-bold">Commande livré le {convertDate(purchase.dateDelivery)}</p>
+                            <p className="font-bold">Commande livrée le {convertDate(purchase.dateDelivery)}</p>
                         )}
                         <div onClick={()=>{navigate(URL_ACCOUNT_PURCHASE(purchase.reference))}} className="max-w-xs flex gap-2 overflow-hidden p-2 border border-primary  rounded-xl hover:cursor-pointer">
                             {purchase.picks.map((pick) => (
