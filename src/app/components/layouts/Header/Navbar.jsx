@@ -163,7 +163,7 @@ const Navbar = () => {
                         {searchResults.map((product) => (
                           <div key={product.id} className="" onClick={() => handleNavigateSearchBar(product.id)}>
                             <li className="px-4 py-2 flex items-center gap-4 hover:bg-primary-light" key={product.id}>
-                              <img className="h-8" src={picture(product)} alt="" />
+                              <img loading="lazy" className="h-8" src={picture(product)} alt="" />
                               <span>{product.name}</span>
                             </li>
                             <hr className="border-black" />
