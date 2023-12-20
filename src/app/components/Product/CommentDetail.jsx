@@ -79,9 +79,9 @@ const CommentDetail = ({ product, comments, setComments, token }) => {
   }
 
   return (
-    <>
+    <div className="flex gap-6 flex-col lg:flex-row-reverse">
       <div className="flex flex-col gap-4">
-        <div className="flex justify-between my-4 p-2">
+        <div className="flex justify-between my-4 p-2 lg:flex-col lg:gap-4">
           <div className="flex flex-col gap-3 w-[45%]">
             <div>Moyenne :</div>
             <div className="text-4xl lg:text-5xl font-bold text-primary">
@@ -89,7 +89,7 @@ const CommentDetail = ({ product, comments, setComments, token }) => {
             </div>
             <StarCount className="text-2xl lg:text-3xl" count={average} />
           </div>
-          <div className="flex flex-col gap-3  w-[45%]">
+          <div className="flex flex-col gap-3 w-[45%]">
             <div>Details :</div>
             <div className="flex flex-col">
               {starArray.map((star, i) => (
@@ -123,10 +123,10 @@ const CommentDetail = ({ product, comments, setComments, token }) => {
           </div>
         </Formik>
       </div>
-      <div className="flex flex-col lg:flex-row lg:flex-wrap lg:justify-between">
+      <div className="flex flex-col xl:flex-row lg:flex-wrap lg:justify-between">
         {comments.map((comment, index) => (
           <div
-            className="flex flex-col lg:w-[48%] h-fit gap-4 p-5 my-4 bg-primary text-white rounded-lg"
+            className="flex flex-col xl:w-[48%] h-fit gap-4 p-5 my-4 bg-primary text-white rounded-lg"
             key={index}
           >
             <div className="flex justify-between">
@@ -160,7 +160,7 @@ const CommentDetail = ({ product, comments, setComments, token }) => {
           </div>
         ))}
       </div>
-    </>
+    </div>
   );
 };
 
