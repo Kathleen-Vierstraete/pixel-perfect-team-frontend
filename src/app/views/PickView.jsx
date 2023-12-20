@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { addItem, selectItems, selectTotalCost, selectTotalQuantity } from "../redux-store/cartSlice";
+import { addItem, selectItems, selectPurchaseId, selectTotalCost, selectTotalQuantity, setPurchase } from "../redux-store/cartSlice";
 import ProductCarousel from "../components/carrousel/ProductCarrousel";
 import { useEffect } from "react";
 import { URL_BACK_GET_PICK, URL_BACK_PICK_BY_USER, URL_BACK_PRODUCTS_BY_TAGS } from "../constants/urls/urlBackEnd";
@@ -46,7 +46,8 @@ export const PickView = () => {
       { product: paniers },
       setHearderToken(token),
     ).then(res => {
-      console.log(res.data)
+      dispatch(setPurchase({id:res.data[0].purchase.id}))
+
     }).catch(error => {
       console.error('Error adding pick', error);
     })

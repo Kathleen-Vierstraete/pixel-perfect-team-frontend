@@ -8,6 +8,7 @@ import { getCart, removeCart, removeCartItem, setCart } from '../services/cartSe
  */
 const initialState = {
     items: getCart(),
+    purchaseId: 0,
 };
 
 export const cartSlice = createSlice({
@@ -48,10 +49,14 @@ export const cartSlice = createSlice({
             state.items = [];
             removeCart()
         },
+        setPurchase: (state, action) => {
+            state.purchaseId = action.payload.id;
+            console.log("purchase id",state.purchaseId);
+        }
     },
 });
 
-export const { addItem, removeItem, updateQuantity, clearCart } = cartSlice.actions;
+export const { addItem, removeItem, updateQuantity, clearCart, setPurchase } = cartSlice.actions;
 
 const selectItems = (state) => state.cart.items;
 const selectTotalQuantity = (state) => selectItems(state).reduce((acc, item) => acc + item.quantity, 0);
@@ -62,6 +67,7 @@ const selectTotalCost = (state) => {
     }
     return totalCost;
 };
+const selectPurchaseId = (state) => state.cart.purchaseId
 
 export default cartSlice.reducer;
-export { selectItems, selectTotalQuantity, selectTotalCost };
+export { selectItems, selectTotalQuantity, selectTotalCost,selectPurchaseId };
