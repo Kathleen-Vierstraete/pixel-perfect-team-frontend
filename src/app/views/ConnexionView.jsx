@@ -5,7 +5,7 @@ const Connexion = () => {
 
   return (
     <div className='bg-white'>
-      <h1 className='text-2xl font-bold mt-10 text-center mb-10'>Connexion</h1>
+      <h1 className='font-SilkScreen text-2xl font-bold mt-2 text-center mb-10 text-primary-dark '>Connexion</h1>
       <ConnexionFormik />
     </div>
   );
