@@ -69,7 +69,7 @@ const CommentDetail = ({ comments, setComments, token }) => {
           >
             <div className="flex justify-between">
               <StarCount count={comment.rate} />
-              <div>{comment.date}</div>
+              <div>{convertDate(comment.date)}</div>
             </div>
             <div className="underline">{comment.title}</div>
             <div className="text-xs lg:text-base">{comment.body}</div>
