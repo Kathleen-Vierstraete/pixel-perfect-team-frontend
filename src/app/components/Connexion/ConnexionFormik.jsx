@@ -62,7 +62,7 @@ const ConnexionFormik  = () => {
         {formik => (
           <div className='flex justify-center'>
             <div className='flex flex-col items-center pb-5 pt-5 mb-10 w-full'>
-              <div className="w-full max-w-xs">
+              <div className="w-full max-w-xs font-numito font-bold">
                 <Form>
                     <TextField label="Adresse e-mail" name="email" type="email" />
                     <TextField label="Mot de passe" name="password" type="password" />
