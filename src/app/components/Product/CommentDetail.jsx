@@ -4,8 +4,15 @@ import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 import * as Yup from 'yup';
 import { Formik, Form } from "formik";
 import TextField from "../Connexion/TextField";
+import apiBackEnd from "../../api/backend/api.Backend";
+import { URL_BACK_CREATE_COMMENT } from "../../constants/urls/urlBackEnd";
+import { useSelector } from "react-redux";
+import { selectToken, selectUser } from "../../redux-store/authenticationSlice";
 
 const CommentDetail = ({ product }) => {
+  const token = useSelector(selectToken);
+  const user = useSelector(selectUser);
+  const [error, setError] = useState();
   const validate = Yup.object({
     title: Yup.string().required('Required'),
     body: Yup.string().required('Required'),
@@ -24,7 +31,25 @@ const CommentDetail = ({ product }) => {
   }
 
   const onSubmit = (values) => {
-    console.log(values)
+    values.person_id = user.id;
+    apiBackEnd.post(URL_BACK_CREATE_COMMENT(product.id), values, {headers: {Authorization: `Bearer ${token}`}})
+            .then((response) => {
+                if (response.status === 201) {
+                }
+            })
+            .catch((error) => {
+                if (error.response) {
+                    if (error.response.status === 400) {
+                        setError('Une erreur inattendue s\'est produite. Veuillez changer d\'email.');
+                    } else {
+                        setError('Une erreur inattendue s\'est produite.');
+                    }
+                } else if (error.request) {
+                    setError('Pas de réponse du serveur.');
+                } else {
+                    setError('Une erreur inattendue s\'est produite.');
+                }
+            });
   }
 
   return (
@@ -60,8 +85,7 @@ const CommentDetail = ({ product }) => {
             {isAdded &&
               <Form className="flex flex-col gap-4">
                 <TextField label="Titre :" name="title" type="text" />
-                <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor="body">Message :</label>
-                <textarea className="block w-full p-2 text-gray-900 border border-gray-300 rounded-xl sm:text-md" name="body" id="body" rows="5"></textarea>
+                <TextField label="Message :" type="text" name="body" />
                 <TextField label="Note :" name="rate" type="number" />
 
                 <button className="self-center btn btn-primary" type="submit">Envoyer</button>
