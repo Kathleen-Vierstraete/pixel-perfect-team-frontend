@@ -1,47 +1,16 @@
 import { FiThumbsUp, FiThumbsDown } from "react-icons/fi";
-import { FaArrowLeft, FaArrowRight, FaStar } from "react-icons/fa";
+import { FaStar } from "react-icons/fa";
 import { URL_BACK_COMMENTS } from "../../constants/urls/urlBackEnd";
 import apiBackEnd from "../../api/backend/api.Backend";
 import StarCount from "./StarCount";
 import { convertDate } from "../../services/stringifyService";
-import { useState } from "react";
 
 const CommentDetail = ({ comments, setComments, token }) => {
-
-  const [paginationSize, setPaginationSize] = useState(6);
-  const [visibleComments, setVisibleComments] = useState(paginationSize);
-  const [currentPage, setCurrentPage] = useState(1);
-
-
-  const totalPages = Math.ceil(comments.length / paginationSize);
-
-  const loadCommentsForPage = (page) => {
-    const start = (page - 1) * paginationSize;
-    const end = start + paginationSize;
-    return comments.slice(start, end);
-  };
-
-  const loadNextPage = () => {
-    if (currentPage < totalPages) {
-      setCurrentPage((prevPage) => prevPage + 1);
-    }
-  };
-
-  const loadPreviousPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage((prevPage) => prevPage - 1);
-    }
-  };
-
-  const changePaginationSize = (newSize) => {
-    setPaginationSize(newSize);
-    setCurrentPage(1); // Reset to the first page when changing pagination size
-  };
   const average =
     Math.round(
       (comments.map((comment) => comment.rate).reduce((a, b) => a + b) /
         comments.length) *
-      2
+        2
     ) / 2;
   const voteButton = (com, val) => {
     apiBackEnd
@@ -112,7 +81,7 @@ const CommentDetail = ({ comments, setComments, token }) => {
           <div className="text-4xl lg:text-5xl font-bold text-primary">
             {average}/5
           </div>
-          <StarCount className="text-2xl lg:text-3xl" count={average} />
+          <StarCount className="text-2xl lg:text-3xl" count={average}/>
         </div>
         <div className="flex flex-col gap-3  w-[45%]">
           <div>Details :</div>
@@ -130,7 +99,7 @@ const CommentDetail = ({ comments, setComments, token }) => {
         </div>
       </div>
       <div className="flex flex-col lg:flex-row lg:flex-wrap lg:justify-between">
-        {loadCommentsForPage(currentPage).map((comment, index) => (
+        {comments.map((comment, index) => (
           <div
             className="flex flex-col lg:w-[48%] h-fit gap-4 p-5 my-4 bg-primary text-white rounded-lg"
             key={index}
