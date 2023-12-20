@@ -12,10 +12,16 @@ const ProductSingleView = () => {
     const [product, setProduct] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     let picture = "";
-    
+
     useEffect(() => {
         apiBackEnd.get(URL_PRODUCT_BY_ID(id))
             .then(response => {
+                response.data.product.comments.sort((a, b) => {
+                    if (a.rate === b.rate) {
+                        return b.vote - a.vote;
+                    }
+                    return b.rate - a.rate;
+                });
                 setProduct(response.data);
                 setIsLoading(false);
             })
@@ -33,7 +39,7 @@ const ProductSingleView = () => {
     return (
         <div className=''>
             {isLoading ? (
-                <Spinner message="Chargement du produit..." redirect404={false}/>
+                <Spinner message="Chargement du produit..." redirect404={false} />
             ) : (
                 <div className='relative'>
                     <div className="grid grid-cols-1 grid-rows-products gap-6 px-10 items-start lg:grid-cols-3 lg:grid-rows-lgProducts">
