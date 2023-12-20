@@ -51,7 +51,6 @@ export const cartSlice = createSlice({
         },
         setPurchase: (state, action) => {
             state.purchaseId = action.payload.id;
-            console.log("purchase id",state.purchaseId);
         }
     },
 });

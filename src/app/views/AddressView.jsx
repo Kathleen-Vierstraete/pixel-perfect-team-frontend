@@ -9,7 +9,7 @@ import TextField from "../components/Connexion/TextField"
 import { setHearderToken } from "../services/tokenServices"
 import { FaCheck } from "react-icons/fa"
 import { selectPurchaseId, selectTotalCost, selectTotalQuantity } from "../redux-store/cartSlice"
-import { URL_CHECKOUT, URL_CONNEXION } from "../constants/urls/urlFrontEnd"
+import { URL_CHECKOUT, URL_CONNEXION, URL_PICK } from "../constants/urls/urlFrontEnd"
 import { useNavigate } from "react-router-dom"
 
 export const AddressView = () => {
@@ -35,6 +35,7 @@ export const AddressView = () => {
     const [selectedAddress, setSelectedAddress] = useState(0);
     const [isAdded, setIsAdded] = useState(false);
     const [newAddress, setNewAddress] = useState(false);
+    const [error,setError] = useState("")
     const toggle = () => {
         setIsAdded(!isAdded)
     }
@@ -60,6 +61,13 @@ export const AddressView = () => {
     }
 
     const checkout = async () => {
+        if(selectedAddress === 0 ){
+            setError("Vous devez selectionner une addresse")
+            return
+        }
+        if(purchaseId === 0){
+            navigate(URL_PICK)
+        }
         try {
             await apiBackEnd.put(URL_BACK_SET_PURCHASE_ADDRESS(purchaseId, selectedAddress), {}, setHearderToken(token))
             navigate(URL_CHECKOUT)
@@ -149,7 +157,8 @@ export const AddressView = () => {
                     <span>{totalPrice / 100}€</span>
 
                 </div>
-                <span onClick={checkout} className="btn-primary-outline self-center px-5 text-xl">Continuer pour payer</span>
+                {error.length>0&& <span className="text-red-500 self-center font-bold text-xl">{error}</span>}
+                <span onClick={checkout} className={`btn-primary-outline self-center px-5 text-xl ${selectedAddress === 0 ? 'cursor-not-allowed' : ''}`}>Continuer pour payer</span>
             </div>
         </div>
     )
