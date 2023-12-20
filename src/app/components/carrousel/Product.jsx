@@ -25,9 +25,15 @@ const ProductForCarrousel = ({ product }) => {
     }
 
     return (
+<<<<<<< HEAD
         <div className="p-4 flex flex-col gap-4">
             <div className="drop-shadow-lg rounded-xl  h-80 w-full flex items-baseline justify-center  hover:cursor-pointer" onClick={() => navigateProduct(product.id)}>
                 <img loading="lazy" src={picture} alt={product.name} className="w-full h-full object-cover rounded-xl" />
+=======
+        <div className="p-4 flex flex-col gap-4 h-[28em] justify-between">
+            <div className="drop-shadow-lg  rounded-xl flex items-center justify-center hover:cursor-pointer" onClick={() => navigateProduct(product.id)}>
+                <img src={picture} alt={product.name} className="w-full " />
+>>>>>>> feat/comment
             </div>
             <div className="flex justify-between items-center">
                 <div className="flex flex-col hover:cursor-pointer" onClick={() => navigateProduct(product.id)}>

@@ -19,3 +19,4 @@ export const URL_BACK_GET_PICK = (id) => { return `/picks/${id}` }
 export const URL_BACK_SET_PURCHASE_STATUS = (id) => { return `/purchases/${id}/status` }
 export const URL_BACK_GET_ADDRESS = (id)=>{return `/persons/${id}/addresses`}
 export const URL_BACK_SET_PURCHASE_ADDRESS = (idPurchase,idAddress) =>{ return `/purchases/${idPurchase}/addresses/${idAddress}`}
+export const URL_BACK_CREATE_COMMENT = (id) => {return `/products/${id}/comments`}

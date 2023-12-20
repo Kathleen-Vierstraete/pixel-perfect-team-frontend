@@ -74,6 +74,7 @@ export const DescriptionDetailProduct = ({ product, token, comments, setComments
         <div className="flex flex-col">
           <h3 className="underline">Commentaires</h3>
           <div className="my-4">Aucun commentaire.</div>
+          <div>FORMIK</div>
         </div>
       )}
     </>
