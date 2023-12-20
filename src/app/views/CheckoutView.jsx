@@ -8,10 +8,12 @@ import { selectTotalCost } from "../redux-store/cartSlice";
 import { URL_BACK_STRIPE } from '../constants/urls/urlBackEnd';
 import apiBackEnd from '../api/backend/api.Backend';
 import { clientKey } from '../constants/stripeConstants';
+import { selectToken } from '../redux-store/authenticationSlice';
 
 
 const Checkout = () => {
     const [isLoading, setIsLoading] = useState(true);
+    const token = useSelector(selectToken);
 
     //init stripe client key
     const stripePromise = loadStripe(
@@ -53,7 +55,7 @@ const Checkout = () => {
             <Spinner message="Chargement" />
         ) : (
           <Elements stripe={stripePromise} options={options}>
-              <CheckoutForm />
+              <CheckoutForm token={token} />
           </Elements>
         )
     )

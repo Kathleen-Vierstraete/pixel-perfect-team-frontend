@@ -59,7 +59,7 @@ const MyAccountView = () => {
         ) : (
           searchParams.get("purchase") ?
             (
-              <DetailPurchaseSection purchase={userInfo.purchases.find(purchase => purchase.reference === searchParams.get("purchase"))}/>
+              <DetailPurchaseSection purchase={userInfo.purchases.find(purchase => purchase.reference === searchParams.get("purchase"))} />
             ) : (
               <PurchaseSection purchases={userInfo.purchases} />
             )

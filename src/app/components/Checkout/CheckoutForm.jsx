@@ -1,25 +1,29 @@
-import {useStripe, useElements, PaymentElement} from '@stripe/react-stripe-js';
+import { useStripe, useElements, PaymentElement } from '@stripe/react-stripe-js';
 import { useEffect, useState } from 'react';
 import { clearCart } from '../../redux-store/cartSlice';
-import { useDispatch } from 'react-redux';
-
-const CheckoutForm = () => {
+import { useDispatch, useSelector } from 'react-redux';
+import { selectPurchaseId } from "../../redux-store/cartSlice";
+import { URL_BACK_SET_PURCHASE_STATUS } from '../../constants/urls/urlBackEnd';
+import apiBackEnd from '../../api/backend/api.Backend';
+import { setHearderToken } from '../../services/tokenServices';
+const CheckoutForm = ({ token }) => {
 
   const stripe = useStripe();
   const elements = useElements();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const purchaseId = useSelector(selectPurchaseId);
 
-  const [message, setMessage] = useState(null);    
-  
+  const [message, setMessage] = useState(null);
+
   //init for the clientSecret
   const clientSecret = new URLSearchParams(window.location.search).get(
-      "payment_intent_client_secret"
-      
-    );
+    "payment_intent_client_secret"
+
+  );
 
   const paymentElementOptions = {
-      layout: "tabs"
-    }
+    layout: "tabs"
+  }
 
   //behavior if stripe isn't found
   useEffect(() => {
@@ -27,12 +31,12 @@ const CheckoutForm = () => {
       return;
     }
 
-  //default behavior if the clientSecret isn't found
-  if (!clientSecret) {
-    return;
-  }
+    //default behavior if the clientSecret isn't found
+    if (!clientSecret) {
+      return;
+    }
 
-  //managing stripe payment intent
+    //managing stripe payment intent
     stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
       switch (paymentIntent.status) {
         case "succeeded":
@@ -64,6 +68,10 @@ const CheckoutForm = () => {
 
     //const to be able to clear cart and redirect
     const returnHome = () => {
+      apiBackEnd.get(URL_BACK_SET_PURCHASE_STATUS(purchaseId), setHearderToken(token))
+        .catch(error => {
+          console.error("Error update purchase : ", error)
+        })
       dispatch(clearCart())
       return "http://localhost:5173/account"
     }
@@ -75,9 +83,9 @@ const CheckoutForm = () => {
         // Make sure to change this to your payment completion page
         return_url: returnHome(),
       },
-    
+
     })
-    
+
     // This point will only be reached if there is an immediate error when
     // confirming the payment. Otherwise, your customer will be redirected to
     // your `return_url`. For some payment methods like iDEAL, your customer will
@@ -93,10 +101,10 @@ const CheckoutForm = () => {
   return (
     <div className='flex justify-center'>
       <form onSubmit={handleSubmit} className='flex flex-col justify-center text-red-600'>
-        <PaymentElement id="payment-element" options={paymentElementOptions}/>
+        <PaymentElement id="payment-element" options={paymentElementOptions} />
         <button className="block w-1/4 py-2 text-center text-white m-auto mt-2 rounded-lg bg-primary-light hover:bg-primary-dark">Payer</button>
-              {/* Show any error or success messages */}
-      {message && <div className='mt-5 text-xl font-semibold justify-center'>{message}</div>}
+        {/* Show any error or success messages */}
+        {message && <div className='mt-5 text-xl font-semibold justify-center'>{message}</div>}
       </form>
     </div>
   );
