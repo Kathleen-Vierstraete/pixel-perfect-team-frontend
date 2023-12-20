@@ -9,7 +9,7 @@ import { ProductPick } from "../components/pick/ProductPick";
 import { Spinner } from "../components/animation/Spinner";
 import { IoIosArrowBack } from "react-icons/io";
 import { Link } from "react-router-dom";
-import { URL_CHECKOUT, URL_CONNEXION, URL_HOME } from "../constants/urls/urlFrontEnd";
+import { URL_CHECKOUT, URL_CONNEXION, URL_CREATEACCOUNT, URL_HOME } from "../constants/urls/urlFrontEnd";
 import { selectIsLogged } from "../redux-store/authenticationSlice";
 
 
@@ -75,13 +75,18 @@ export const PickView = () => {
                   )}
                 </div>
                 <hr className="h-px  my-8 border-1 border-slate-600 lg:hidden" />
-                <div className="flex flex-col lg:order-first">
                 {!isAuthenticated ? (
-                  <Link to={URL_CONNEXION} className="btn-primary-outline self-center w-11/12 text-xl">Continuer pour payer</Link> )
+                <div className="flex flex-col lg:order-first">
+
+                  <Link to={URL_CONNEXION} className="btn-primary-outline self-center w-11/12 text-xl">Continuer pour payer</Link> 
+                  <span className="text-center">Pour une meilleur experience, <Link to={URL_CREATEACCOUNT} className="underline">créez un compte.</Link></span>
+                  
+                  </div>)
                   : (
-                  <Link to={URL_CHECKOUT} className="btn-primary-outline self-center w-11/12 text-xl">Continuer pour payer</Link> )}
-                  <span className="text-center">Pour une meilleur experience, <a className="underline">créer un compte.</a></span>
-                </div> 
+                  <div className="flex flex-col lg:order-first">
+                  <Link to={URL_CHECKOUT} className="btn-primary-outline self-center w-11/12 text-xl">Continuer pour payer</Link>
+                  <span className="text-center">Encore une étape pour finaliser votre achat</span>
+                </div> )}
               </>
             </div>
           }
