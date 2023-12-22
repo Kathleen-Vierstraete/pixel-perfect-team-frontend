@@ -1,6 +1,6 @@
 # Template React Project
 
-This project is a template of React Project.
+This project is a template of React Project. Hi
 
 It has:
 
